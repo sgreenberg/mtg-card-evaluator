@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Card Evaluator - Tarkir Dragonstorm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark gray-blue background */
+            color: #e2e8f0; /* Light gray text */
+        }
+        .card-image-container {
+            width: 265px; /* Standard MTG card width */
+            height: 370px; /* Standard MTG card height */
+            background-color: #2d3748; /* Slightly lighter card background */
+            border-radius: 12px; /* Rounded corners for card */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden; /* Ensure image stays within rounded borders */
+        }
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .btn {
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        /* Custom styling for select dropdown arrow */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CBD5E0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 0.65em auto;
+            padding-right: 2.5rem; /* Make space for the arrow */
+        }
+        .feedback-correct { background-color: #2f855a; color: white; } /* Green */
+        .feedback-close { background-color: #dd6b20; color: white; } /* Orange */
+        .feedback-off { background-color: #c53030; color: white; }   /* Red */
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-sky-500 selection:text-white">
+
+    <div class="bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md">
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-sky-400">MTG Card Evaluator</h1>
+            <p class="text-slate-400">Tarkir Dragonstorm Edition</p>
+        </header>
+
+        <main>
+            <div id="cardDisplay" class="mb-6 flex flex-col items-center">
+                <div class="card-image-container mb-2">
+                    <img id="cardImage" src="https://placehold.co/265x370/2D3748/E2E8F0?text=Loading+Card...&font=lora" alt="Magic Card" class="card-image">
+                </div>
+                <p id="cardName" class="text-xl font-semibold text-slate-200">Card Name</p>
+            </div>
+
+            <div id="gradeInputArea" class="mb-6 space-y-3">
+                <label for="gradeSelect" class="block text-sm font-medium text-slate-300">Your Grade:</label>
+                <select id="gradeSelect" class="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-slate-200 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    </select>
+                <button id="submitGradeBtn" class="btn w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-3 px-4 rounded-lg shadow-md">
+                    Submit Grade
+                </button>
+            </div>
+
+            <div id="resultArea" class="text-center mb-6 hidden p-4 rounded-lg">
+                <p id="userGuessText" class="text-md font-medium"></p>
+                <p id="trueGradeText" class="text-lg font-bold"></p>
+                <p id="feedbackText" class="text-sm"></p>
+            </div>
+
+            <button id="nextCardBtn" class="btn w-full bg-slate-600 hover:bg-slate-500 text-slate-200 font-semibold py-3 px-4 rounded-lg shadow-md hidden">
+                Next Card
+            </button>
+        </main>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const fictionalCardData = [
+            { name: "Azure Skytyrant", imageUrl: "https://placehold.co/265x370/5A8FBA/FFFFFF?text=Azure+Skytyrant&font=lora", trueGrade: "A-" },
+            { name: "Crimson Hellmaw", imageUrl: "https://placehold.co/265x370/C0392B/FFFFFF?text=Crimson+Hellmaw&font=lora", trueGrade: "B+" },
+            { name: "Verdant Earthshaker", imageUrl: "https://placehold.co/265x370/27AE60/FFFFFF?text=Verdant+Earthshaker&font=lora", trueGrade: "A" },
+            { name: "Sunken Scrollkeeper", imageUrl: "https://placehold.co/265x370/2980B9/FFFFFF?text=Sunken+Scrollkeeper&font=lora", trueGrade: "C+" },
+            { name: "Gravewhisper Ghoul", imageUrl: "https://placehold.co/265x370/8E44AD/FFFFFF?text=Gravewhisper+Ghoul&font=lora", trueGrade: "B" },
+            { name: "Stonefist Recruiter", imageUrl: "https://placehold.co/265x370/D35400/FFFFFF?text=Stonefist+Recruiter&font=lora", trueGrade: "C" },
+            { name: "Mystic Windcaller", imageUrl: "https://placehold.co/265x370/1ABC9C/FFFFFF?text=Mystic+Windcaller&font=lora", trueGrade: "B-" },
+            { name: "Forgotten Sentinel", imageUrl: "https://placehold.co/265x370/7F8C8D/FFFFFF?text=Forgotten+Sentinel&font=lora", trueGrade: "D+" },
+            { name: "Dragon's Hoard Raider", imageUrl: "https://placehold.co/265x370/F1C40F/000000?text=Dragon's+Hoard+Raider&font=lora", trueGrade: "A+" },
+            { name: "Shadowfen Ambusher", imageUrl: "https://placehold.co/265x370/34495E/FFFFFF?text=Shadowfen+Ambusher&font=lora", trueGrade: "C-" }
+        ];
+
+        const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
+        const gradeValues = {};
+        grades.forEach((grade, index) => gradeValues[grade] = index);
+
+        // --- DOM Elements ---
+        const cardImageEl = document.getElementById('cardImage');
+        const cardNameEl = document.getElementById('cardName');
+        const gradeSelectEl = document.getElementById('gradeSelect');
+        const submitGradeBtn = document.getElementById('submitGradeBtn');
+        const resultAreaEl = document.getElementById('resultArea');
+        const userGuessTextEl = document.getElementById('userGuessText');
+        const trueGradeTextEl = document.getElementById('trueGradeText');
+        const feedbackTextEl = document.getElementById('feedbackText');
+        const nextCardBtn = document.getElementById('nextCardBtn');
+        const gradeInputAreaEl = document.getElementById('gradeInputArea');
+
+        // --- State ---
+        let currentCard = null;
+        let evaluatedCardIndices = []; // To keep track of cards already shown in this session
+
+        // --- Functions ---
+
+        /**
+         * Populates the grade select dropdown.
+         */
+        function populateGradeOptions() {
+            grades.forEach(grade => {
+                const option = document.createElement('option');
+                option.value = grade;
+                option.textContent = grade;
+                gradeSelectEl.appendChild(option);
+            });
+            // Set a default middle grade
+            gradeSelectEl.value = "C";
+        }
+
+        /**
+         * Loads and displays a new random card.
+         * Ensures a card isn't shown twice until all cards have been seen once.
+         */
+        function loadRandomCard() {
+            if (evaluatedCardIndices.length === fictionalCardData.length) {
+                // All cards have been evaluated, reset for a new cycle or show a message
+                // For now, let's just reset and allow repeats.
+                // A more advanced version could prevent repeats until all cards are seen.
+                // Or simply disable further evaluation if all cards are done.
+                 evaluatedCardIndices = []; // Reset to allow repeats
+                 // Alternatively, you could display a "all cards evaluated" message.
+            }
+
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * fictionalCardData.length);
+            } while (evaluatedCardIndices.includes(randomIndex) && fictionalCardData.length > evaluatedCardIndices.length)
+            // This loop ensures we try to pick an unevaluated card if possible.
+            // If all cards are evaluated and we reset, this check won't prevent picking any card.
+
+            currentCard = fictionalCardData[randomIndex];
+            evaluatedCardIndices.push(randomIndex);
+
+            cardImageEl.src = currentCard.imageUrl;
+            cardImageEl.alt = currentCard.name;
+            cardNameEl.textContent = currentCard.name;
+
+            // Reset UI for new card
+            resultAreaEl.classList.add('hidden');
+            gradeInputAreaEl.classList.remove('hidden');
+            submitGradeBtn.disabled = false;
+            submitGradeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            nextCardBtn.classList.add('hidden');
+            gradeSelectEl.value = "C"; // Reset to default grade
+        }
+
+        /**
+         * Handles the submission of the user's grade.
+         */
+        function handleSubmitGrade() {
+            if (!currentCard) return;
+
+            const userGrade = gradeSelectEl.value;
+            const trueGrade = currentCard.trueGrade;
+
+            userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
+            trueGradeTextEl.textContent = `True Grade: ${trueGrade}`;
+
+            // Provide feedback
+            const userGradeVal = gradeValues[userGrade];
+            const trueGradeVal = gradeValues[trueGrade];
+
+            let feedback = "";
+            let feedbackClass = "";
+
+            if (userGradeVal === trueGradeVal) {
+                feedback = "Spot on! Perfect evaluation!";
+                feedbackClass = "feedback-correct";
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 1) {
+                feedback = "Very close! Good eye!";
+                feedbackClass = "feedback-close";
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) {
+                feedback = "Getting there! A bit off.";
+                feedbackClass = "feedback-close"; // Still using 'close' for up to 2 steps
+            } else {
+                feedback = "Quite a bit off. Keep practicing!";
+                feedbackClass = "feedback-off";
+            }
+            feedbackTextEl.textContent = feedback;
+
+            // Update result area styling
+            resultAreaEl.className = 'text-center mb-6 p-4 rounded-lg'; // Reset classes
+            resultAreaEl.classList.add(feedbackClass); // Add new feedback class
+            resultAreaEl.classList.remove('hidden');
+
+
+            // Disable further grading for this card and show next card button
+            gradeInputAreaEl.classList.add('hidden');
+            submitGradeBtn.disabled = true;
+            submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            nextCardBtn.classList.remove('hidden');
+        }
+
+        // --- Event Listeners ---
+        submitGradeBtn.addEventListener('click', handleSubmitGrade);
+        nextCardBtn.addEventListener('click', loadRandomCard);
+
+        // --- Initialization ---
+        window.onload = () => {
+            populateGradeOptions();
+            loadRandomCard();
+        };
+    </script>
+</body>
+</html>
