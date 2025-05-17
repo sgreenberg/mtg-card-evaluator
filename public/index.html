@@ -88,20 +88,11 @@
         </main>
     </div>
 
+    <script src="card-data.js"></script> 
+
     <script>
-        // --- Configuration ---
-        const fictionalCardData = [
-            { name: "Azure Skytyrant", imageUrl: "https://placehold.co/265x370/5A8FBA/FFFFFF?text=Azure+Skytyrant&font=lora", trueGrade: "A-" },
-            { name: "Crimson Hellmaw", imageUrl: "https://placehold.co/265x370/C0392B/FFFFFF?text=Crimson+Hellmaw&font=lora", trueGrade: "B+" },
-            { name: "Verdant Earthshaker", imageUrl: "https://placehold.co/265x370/27AE60/FFFFFF?text=Verdant+Earthshaker&font=lora", trueGrade: "A" },
-            { name: "Sunken Scrollkeeper", imageUrl: "https://placehold.co/265x370/2980B9/FFFFFF?text=Sunken+Scrollkeeper&font=lora", trueGrade: "C+" },
-            { name: "Gravewhisper Ghoul", imageUrl: "https://placehold.co/265x370/8E44AD/FFFFFF?text=Gravewhisper+Ghoul&font=lora", trueGrade: "B" },
-            { name: "Stonefist Recruiter", imageUrl: "https://placehold.co/265x370/D35400/FFFFFF?text=Stonefist+Recruiter&font=lora", trueGrade: "C" },
-            { name: "Mystic Windcaller", imageUrl: "https://placehold.co/265x370/1ABC9C/FFFFFF?text=Mystic+Windcaller&font=lora", trueGrade: "B-" },
-            { name: "Forgotten Sentinel", imageUrl: "https://placehold.co/265x370/7F8C8D/FFFFFF?text=Forgotten+Sentinel&font=lora", trueGrade: "D+" },
-            { name: "Dragon's Hoard Raider", imageUrl: "https://placehold.co/265x370/F1C40F/000000?text=Dragon's+Hoard+Raider&font=lora", trueGrade: "A+" },
-            { name: "Shadowfen Ambusher", imageUrl: "https://placehold.co/265x370/34495E/FFFFFF?text=Shadowfen+Ambusher&font=lora", trueGrade: "C-" }
-        ];
+        // --- Configuration (grades and gradeValues remain here) ---
+        // 'fictionalCardData' is now loaded from 'card-data.js'
 
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
         const gradeValues = {};
@@ -142,15 +133,27 @@
         /**
          * Loads and displays a new random card.
          * Ensures a card isn't shown twice until all cards have been seen once.
+         * Assumes 'fictionalCardData' is available globally from 'card-data.js'.
          */
         function loadRandomCard() {
+            // Check if fictionalCardData is loaded and is an array with items
+            if (typeof fictionalCardData === 'undefined' || !Array.isArray(fictionalCardData) || fictionalCardData.length === 0) {
+                console.error("Card data not loaded, is not an array, or is empty!");
+                // Display an error message to the user on the page
+                cardNameEl.textContent = "Error: Card data missing or invalid.";
+                cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Error+Loading+Data&font=lora";
+                cardImageEl.alt = "Error loading card data";
+                // Disable buttons if data is missing
+                submitGradeBtn.disabled = true;
+                submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                nextCardBtn.classList.add('hidden'); // Ensure next card button is also hidden/disabled
+                gradeInputAreaEl.classList.add('hidden'); // Hide grading area
+                return;
+            }
+
             if (evaluatedCardIndices.length === fictionalCardData.length) {
-                // All cards have been evaluated, reset for a new cycle or show a message
-                // For now, let's just reset and allow repeats.
-                // A more advanced version could prevent repeats until all cards are seen.
-                // Or simply disable further evaluation if all cards are done.
-                 evaluatedCardIndices = []; // Reset to allow repeats
-                 // Alternatively, you could display a "all cards evaluated" message.
+                // All cards have been evaluated, reset for a new cycle.
+                 evaluatedCardIndices = []; 
             }
 
             let randomIndex;
@@ -158,13 +161,12 @@
                 randomIndex = Math.floor(Math.random() * fictionalCardData.length);
             } while (evaluatedCardIndices.includes(randomIndex) && fictionalCardData.length > evaluatedCardIndices.length)
             // This loop ensures we try to pick an unevaluated card if possible.
-            // If all cards are evaluated and we reset, this check won't prevent picking any card.
-
+            
             currentCard = fictionalCardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
             cardImageEl.src = currentCard.imageUrl;
-            cardImageEl.alt = currentCard.name;
+            cardImageEl.alt = currentCard.name; // Set alt text for accessibility
             cardNameEl.textContent = currentCard.name;
 
             // Reset UI for new card
@@ -230,7 +232,7 @@
         // --- Initialization ---
         window.onload = () => {
             populateGradeOptions();
-            loadRandomCard();
+            loadRandomCard(); // This function now relies on 'fictionalCardData' from 'card-data.js'
         };
     </script>
 </body>
