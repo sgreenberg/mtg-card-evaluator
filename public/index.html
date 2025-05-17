@@ -92,7 +92,7 @@
 
     <script>
         // --- Configuration (grades and gradeValues remain here) ---
-        // 'cardData' is now loaded from 'card-data.js'
+        // 'cardData' is loaded from 'card-data.js' via initializeCardData()
 
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
         const gradeValues = {};
@@ -133,12 +133,12 @@
         /**
          * Loads and displays a new random card.
          * Ensures a card isn't shown twice until all cards have been seen once.
-         * Assumes 'cardData' is available globally from 'card-data.js'.
+         * Assumes 'cardData' is available globally from 'card-data.js' after initialization.
          */
         function loadRandomCard() {
             // Check if cardData is loaded and is an array with items
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
-                console.error("Card data not loaded, is not an array, or is empty!");
+                console.error("Card data not loaded, is not an array, or is empty! Check CSV loading.");
                 // Display an error message to the user on the page
                 cardNameEl.textContent = "Error: Card data missing or invalid.";
                 cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Error+Loading+Data&font=lora";
@@ -154,6 +154,7 @@
             if (evaluatedCardIndices.length === cardData.length) {
                 // All cards have been evaluated, reset for a new cycle.
                  evaluatedCardIndices = []; 
+                 // console.log("All cards evaluated. Resetting cycle."); // Optional: for debugging
             }
 
             let randomIndex;
@@ -197,7 +198,10 @@
             let feedback = "";
             let feedbackClass = "";
 
-            if (userGradeVal === trueGradeVal) {
+            if (trueGrade === "N/A") { // Handle cases where true grade might be N/A from CSV processing
+                feedback = "True grade for this card is not available.";
+                feedbackClass = "bg-slate-500 text-white"; // Neutral feedback color
+            } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackClass = "feedback-correct";
             } else if (Math.abs(userGradeVal - trueGradeVal) <= 1) {
@@ -230,21 +234,15 @@
         nextCardBtn.addEventListener('click', loadRandomCard);
 
         // --- Initialization ---
-        window.onload = () => {
-            populateGradeOptions();
-            loadRandomCard(); // This function now relies on 'cardData' from 'card-data.js'
-        };
-        // --- Initialization ---
         window.onload = async () => {
             // First, load and process the card data from the CSV
-            await initializeCardData(); // This function is defined in card-data.js and populates cardData
+            // This function is defined in card-data.js and populates the global 'cardData' array
+            await initializeCardData(); 
 
             // After data is loaded (or if loading failed, cardData might be empty), proceed with UI setup
             populateGradeOptions();
             loadRandomCard(); // This will now use the dynamically loaded (or empty) cardData
         };
-
-
-</script>
+    </script>
 </body>
 </html>
