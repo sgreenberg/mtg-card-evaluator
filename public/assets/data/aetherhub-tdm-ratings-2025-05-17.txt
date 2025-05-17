@@ -1,0 +1,553 @@
+Card	Pro Rating	AI Rating	APA	Picked	ALSA	Seen
+  Ugin, Eye of the Storms
+5	5	1.00	10	1.00	10
+  Anafenza, Unyielding Lineage
+5	5	1.00	2	1.00	2
+  Sage of the Skies
+5	5	1.00	1	1.00	1
+  Dragonologist
+3.5	5	1.00	1	1.00	1
+  Marang River Regent
+5	5	1.00	2	1.00	2
+  Taigam, Master Opportunist
+2.5	5	1.00	1	1.00	1
+  Sinkhole Surveyor
+5	5	1.00	1	1.50	2
+  Stadium Headliner
+3.5	5	1.00	2	1.25	4
+  Tersa Lightshatter
+4	5	1.00	1	1.67	3
+  Bloomvine Regent
+4.5	5	1.00	3	1.00	4
+  Lasyd Prowler
+4.5	5	1.00	1	1.00	1
+  Barrensteppe Siege
+4.5	5	1.00	1	1.00	1
+  Eshki Dragonclaw
+3.5	5	1.00	1	1.00	1
+  Inevitable Defeat
+3.5	5	1.00	1	2.50	2
+  Revival of the Ancestors
+4	5	1.00	1	5.33	4
+  Teval, Arbiter of Virtue
+4	5	1.00	1	1.00	2
+  Windcrag Siege
+4.5	5	1.00	2	1.00	2
+  Elspeth, Storm Slayer
+5	4.9	1.18	11	1.18	11
+  Ambling Stormshell
+4.5	4.9	1.33	3	1.50	4
+  Cori-Steel Cutter
+4	4.8	1.50	2	2.00	2
+  Sarkhan, Dragon Ascendant
+4	4.8	1.60	5	1.50	6
+  Craterhoof Behemoth
+3.5	4.8	1.50	4	1.50	7
+  Herd Heirloom
+4	4.8	1.50	2	1.50	2
+  Warden of the Grove
+5	4.8	1.67	3	1.67	3
+  Dragonback Assault
+5	4.8	1.53	15	1.62	15
+  Jeskai Revelation
+5	4.8	1.59	17	2.32	23
+  Shiko, Paragon of the Way
+5	4.8	1.60	10	1.54	13
+  Ureni, the Song Unending
+4.5	4.8	1.50	10	1.45	11
+  Stormscale Scion
+3	4.7	1.93	14	1.81	21
+  Betor, Kin to All
+5	4.7	1.77	13	1.80	21
+  Clarion Conqueror
+3	4.6	2.00	3	2.00	3
+  Smile at Death
+1.5	4.6	2.25	4	1.59	17
+  Voice of Victory
+3	4.6	2.00	1	2.00	2
+  Avenger of the Fallen
+4	4.6	2.00	2	2.00	3
+  Qarsi Revenant
+5	4.6	2.00	1	1.50	2
+  Magmatic Hellkite
+4	4.6	2.00	1	2.00	1
+  Mardu Siegebreaker
+4	4.6	2.00	2	2.00	3
+  Dragonfire Blade
+3	4.6	2.00	1	2.67	3
+  Naga Fleshcrafter
+4.5	4.5	2.52	21	2.35	32
+  Thunder of Unity
+3	4.5	2.50	2	3.00	5
+  Twinmaw Stormbrood
+4.5	2.28	39	2.13	78
+  Perennation
+4	4.4	2.62	8	3.13	16
+  Roar of Endless Song
+5	4.4	2.58	19	2.44	29
+  Molten Exhale
+4	4.3	2.96	104	3.35	314
+  Traveling Botanist
+3.5	4.3	3.02	43	2.96	122
+  Disruptive Stormbrood
+3.5	4.3	2.85	39	2.33	87
+  Hollowmurk Siege
+5	4.3	3.00	1	2.67	3
+  Sonic Shrieker
+4	4.3	3.05	60	3.17	121
+  Dalkovan Packbeasts
+3	4.2	3.38	40	3.54	126
+  Static Snare
+3.5	4.2	3.18	45	2.77	120
+  Rot-Curse Rakshasa
+3	4.2	3.12	8	2.96	24
+  All-Out Assault
+4	4.2	3.25	8	2.87	15
+  Flamehold Grappler
+3.5	4.2	3.22	18	3.83	66
+  Purging Stormbrood
+3.5	4.1	3.64	42	2.84	129
+  Temur Battlecrier
+3	4.1	3.39	18	3.07	66
+  Evolving Wilds
+3	4.1	3.50	4	3.50	25
+  Teeming Dragonstorm
+3	4	3.71	38	2.97	120
+  Roiling Dragonstorm
+2.5	4	3.93	29	3.79	121
+  Caustic Exhale
+4	4	3.73	120	4.05	375
+  Shocking Sharpshooter
+3.5	4	3.80	35	3.79	123
+  Karakyk Guardian
+3	4	3.91	35	3.29	119
+  Sunset Strikemaster
+4	3.9	4.17	48	3.67	129
+  Dragon Sniper
+3	3.9	4.00	35	3.38	150
+  Knockout Maneuver
+3	3.9	4.21	38	3.70	126
+  Songcrafter Mage
+4	3.9	4.11	19	3.89	65
+  Whirlwing Stormbrood
+3.9	4.08	25	3.65	144
+  Yathan Roadwatcher
+4.5	3.9	4.00	1	3.50	2
+  Rally the Monastery
+3	3.8	4.44	32	3.75	125
+  Starry-Eyed Skyrider
+2.5	3.8	4.30	33	3.99	161
+  Sunpearl Kirin
+4	3.8	4.32	37	3.79	126
+  Wingblade Disciple
+3.5	3.8	4.38	42	3.98	146
+  Inspirited Vanguard
+4	3.8	4.42	33	4.08	142
+  Cori Mountain Stalwart
+3	3.8	4.46	26	3.83	143
+  Glacial Dragonhunt
+3	3.8	4.30	37	3.68	147
+  Kishla Skimmer
+3.5	3.8	4.28	39	4.15	130
+  Zurgo, Thunder's Decree
+4	3.8	4.50	2	5.67	3
+  Opulent Palace
+3.5	3.8	4.28	40	4.16	174
+  Descendant of Storms
+3	3.7	4.52	33	3.70	146
+  Stormplain Detainment
+3	3.7	4.60	5	4.80	30
+  Dragon's Prey
+3	3.7	4.75	4	4.46	23
+  Sidisi, Regent of the Mire
+1.5	3.7	4.71	7	4.02	78
+  Host of the Hereafter
+3.5	3.7	4.75	32	4.00	192
+  Jeskai Shrinekeeper
+3	3.7	4.56	43	3.76	157
+  Marshal of the Lost
+3	3.7	4.55	33	4.28	169
+  Runescale Stormbrood
+3	3.7	4.63	30	3.87	145
+  Great Arashin City
+3.5	3.7	4.63	27	4.24	106
+  Salt Road Skirmish
+3	3.6	4.94	34	4.01	151
+  Armament Dragon
+4	3.6	4.85	39	4.20	178
+  Kin-Tree Severance
+3.5	3.6	5.00	43	3.81	172
+  Mammoth Bellow
+4	3.6	4.97	36	3.57	149
+  Dragonstorm Globe
+1	3.6	5.00	4	6.07	36
+  Cori Mountain Monastery
+3.5	3.6	4.82	11	3.84	74
+  Dalkovan Encampment
+3.5	3.6	5.05	21	4.06	88
+  Nomad Outpost
+3.5	3.6	4.91	33	3.75	163
+  Salt Road Packbeast
+4	3.5	5.29	7	5.75	28
+  Channeled Dragonfire
+3.5	3.5	5.31	36	4.30	191
+  Overwhelming Surge
+3	3.5	5.22	37	4.41	180
+  Piercing Exhale
+3.5	3.5	5.26	90	5.23	459
+  Sage of the Fang
+3	3.5	5.18	39	3.96	173
+  Frontier Bivouac
+3.5	3.5	5.15	41	3.97	166
+  Mystic Monastery
+3.5	3.5	5.26	38	4.19	193
+  Sandsteppe Citadel
+3.5	3.5	5.18	44	4.11	171
+  Dispelling Exhale
+2.5	3.4	5.50	6	6.81	45
+  Kishla Trawlers
+2.5	3.4	5.46	37	4.27	187
+  Defibrillating Current
+3.5	3.4	5.39	33	4.49	197
+  Kheru Goldkeeper
+3.5	3.4	5.47	34	4.72	198
+  Lie in Wait
+4	3.4	5.51	35	4.65	167
+  Lotuslight Dancers
+4	3.4	5.53	17	4.19	74
+  Narset, Jeskai Waymaster
+3	3.4	5.35	17	4.07	69
+  New Way Forward
+1	3.4	5.59	17	3.81	68
+  Stalwart Successor
+3	3.4	5.44	25	4.56	168
+  Duty Beyond Death
+1.5 // 3.0	3.3	5.81	31	4.81	205
+  Osseous Exhale
+3	3.3	5.67	6	5.23	27
+  Venerated Stormsinger
+3	3.3	5.88	34	4.10	166
+  Equilibrium Adept
+4	3.3	5.63	54	5.21	230
+  Shock Brigade
+2.5	3.3	5.62	8	6.47	39
+  Synchronized Charge
+3	3.3	5.87	30	4.98	178
+  Bone-Cairn Butcher
+4	3.3	5.74	39	4.44	158
+  Frontline Rush
+3.5	3.3	5.87	38	4.44	169
+  Maelstrom of the Spirit Dragon
+1.5	3.3	5.86	14	5.17	114
+  Bearer of Glory
+2.5	3.2	6.00	4	6.60	22
+  Fortress Kin-Guard
+3.5	3.2	6.00	8	6.50	31
+  Wayspeaker Bodyguard
+2.5	3.2	6.09	22	5.06	208
+  Alchemist's Assistant
+3	3.2	6.13	23	4.77	176
+  War Effort
+2	3.2	6.05	20	4.44	176
+  Rakshasa's Bargain
+3	3.2	6.06	32	5.34	199
+  Severance Priest
+3	3.2	6.17	6	4.05	82
+  Mardu Monument
+3	3.2	6.00	4	6.70	21
+  Temur Monument
+3	3.2	6.09	35	5.09	237
+  Fresh Start
+1.5	3.1	6.42	26	4.62	190
+  Sibsig Appraiser
+4	3.1	6.29	7	6.21	37
+  Gurmag Rakshasa
+4	3.1	6.26	57	6.00	260
+  Nature's Rhythm
+1.5	3.1	6.31	13	5.73	110
+  Furious Forebear
+2.5	3	6.68	25	4.79	180
+  Loxodon Battle Priest
+3.5	3	6.56	45	4.95	197
+  Riling Dawnbreaker
+3	3	6.50	6	5.50	32
+  Constrictor Sage
+3	3	6.57	28	4.86	207
+  Kin-Tree Nurturer
+3.5	3	6.67	6	7.57	47
+  Strategic Betrayal
+3	3	6.55	47	5.80	217
+  Underfoot Underdogs
+2.5	3	6.67	6	9.21	50
+  Zurgo's Vanguard
+2.5	3	6.72	32	4.94	173
+  Encroaching Dragonstorm
+2.5	3	6.69	29	5.22	227
+  Formation Breaker
+3	3	6.67	33	5.18	216
+  Hardened Tactician
+4	3	6.47	45	4.81	202
+  Kishla Village
+3	3	6.61	18	5.24	105
+  Wind-Scarred Crag
+3	3	6.50	4	5.13	24
+  Dragonback Lancer
+2	2.9	6.80	5	7.86	35
+  Dirgur Island Dragon
+2.5	2.9	7.00	4	6.93	48
+  Yathan Tombguard
+3	2.9	6.77	26	5.36	214
+  Dragonbroods' Relic
+1.5 // 3.5	2.9	6.87	23	4.86	164
+  Sultai Devotee
+2.5	2.9	7.00	1	6.73	24
+  Dragonclaw Strike
+3.5	2.9	6.84	37	6.16	228
+  Kotis, the Fangkeeper
+3	2.9	7.00	1	4.00	2
+  Skirmish Rhino
+3	2.9	6.94	32	5.27	231
+  Dismal Backwater
+3	2.9	7.00	2	6.44	30
+  Swiftwater Cliffs
+3	2.9	7.00	1	6.20	32
+  Ureni's Rebuff
+2.5	2.8	7.07	30	5.36	207
+  Krumar Initiate
+3	2.8	7.14	28	5.72	187
+  Fleeting Effigy
+1.5	2.8	7.25	16	5.84	221
+  Sultai Monument
+3	2.8	7.22	40	6.00	233
+  United Battlefront
+0	2.7	7.53	15	5.84	130
+  Bewildering Blizzard
+2.5	2.7	7.31	35	5.33	245
+  Veteran Ice Climber
+3.5	2.7	7.36	42	6.03	254
+  Narset's Rebuke
+2	2.7	7.50	4	7.27	46
+  Unsparing Boltcaster
+3	2.7	7.45	33	5.91	247
+  Attuned Hunter
+3	2.7	7.32	34	5.48	216
+  Thornwood Falls
+3	2.7	7.40	5	6.85	25
+  Coordinated Maneuver
+2.5	2.6	7.83	6	7.08	32
+  Sagu Wildling
+3	2.6	7.60	5	5.25	26
+  Jeskai Monument
+3	2.6	7.68	47	6.11	246
+  Aegis Sculptor
+3	2.5	8.03	31	6.11	254
+  Hundred-Battle Veteran
+4	2.5	8.11	44	6.40	273
+  Dracogenesis
+0	2.5	7.90	10	5.31	65
+  Fire-Rim Form
+1.5	2.5	8.00	1	8.29	39
+  Ainok Wayfarer
+2.5	2.5	8.00	8	6.00	38
+  Sagu Pummeler
+2.5	2.5	8.00	1	7.00	36
+  Wail of War
+2.5	2.4	8.25	4	6.77	26
+  Breaching Dragonstorm
+1.5	2.4	8.24	21	6.21	273
+  Iridescent Tiger
+2	2.4	8.25	4	6.91	22
+  Glacierwood Siege
+1	2.4	8.25	8	4.74	84
+  Jeskai Brushmaster
+4	2.4	8.26	38	6.63	289
+  Abzan Monument
+3	2.4	8.27	33	5.76	273
+  Spectral Denial
+3	2.3	8.44	36	6.12	299
+  Abzan Devotee
+2.5	2.3	8.67	3	7.21	37
+  Desperate Measures
+1.5 // 3.5	2.3	8.46	35	6.86	279
+  Champion of Dusan
+2.5	2.3	8.67	6	7.43	48
+  Snakeskin Veil
+3	2.3	8.50	6	7.42	41
+  Trade Route Envoy
+3.5	2.3	8.43	7	7.12	43
+  Effortless Master
+3	2.3	8.45	33	5.88	240
+  Temur Tawnyback
+3	2.3	8.50	8	7.50	29
+  Rugged Highlands
+3	2.3	8.60	5	7.21	32
+  Tranquil Cove
+3	2.3	8.67	3	6.25	32
+  Meticulous Artisan
+2	2.2	8.75	4	9.71	55
+  Riverwheel Sweep
+2	2.2	8.72	25	5.65	257
+  Corroding Dragonstorm
+2.5	2.1	9.09	23	6.07	264
+  Rainveil Rejuvenator
+2.5	2.1	9.07	27	5.93	269
+  Auroral Procession
+2	2.1	9.04	26	6.54	275
+  Stormbeacon Blade
+1.5	2	9.32	31	6.98	278
+  Dragonstorm Forecaster
+0.0 / 1.5	2	9.27	26	6.95	274
+  Focus the Mind
+2.5	2	9.50	4	8.42	45
+  Feral Deathgorger
+2.5	2	9.33	3	7.56	26
+  The Sibsig Ceremony
+0	2	9.27	22	7.02	161
+  Worthy Cost
+2.0 // 3.5	2	9.33	3	7.46	35
+  Reigning Victor
+2.5	2	9.46	13	8.40	42
+  Blossoming Sands
+3	2	9.33	3	6.87	34
+  Mistrise Village
+1	2	9.46	13	6.75	132
+  Scoured Barrens
+3	2	9.50	4	6.53	35
+  Unrooted Ancestor
+3	1.9	9.64	39	6.78	284
+  Boulderborn Dragon
+1.5	1.9	9.67	3	8.33	44
+  Rebellious Strike
+1.5 // 2.5	1.8	10.00	3	8.73	51
+  Agent of Kotis
+2	1.8	10.00	3	9.20	49
+  Twin Bolt
+3	1.8	10.00	7	8.67	36
+  Call the Spirit Dragons
+0	1.8	10.00	1	10.00	2
+  Mardu Devotee
+3	1.7	10.12	8	6.13	36
+  Unending Whisper
+2.5	1.7	10.25	4	7.31	35
+  Dusyut Earthcarver
+3	1.7	10.17	6	9.54	44
+  Rite of Renewal
+2	1.7	10.10	30	7.94	328
+  Stillness in Motion
+0	1.6	10.40	15	7.40	146
+  Nightblade Brigade
+2.5	1.6	10.57	7	8.80	48
+  Lightfoot Technique
+2.5	1.5	10.80	5	9.13	60
+  Essence Anchor
+1.5 / 3.5	1.5	10.76	33	7.38	291
+  Iceridge Serpent
+2.5	1.5	10.67	6	9.19	54
+  Bloodfell Caves
+3	1.5	10.67	3	7.79	33
+  Snowmelt Stag
+1.5	1.4	11.00	2	10.00	49
+  Aggressive Negotiations
+1.5	1.4	11.00	5	8.87	50
+  Delta Bloodflies
+2	1.4	11.00	4	9.25	63
+  Rescue Leopard
+2	1.4	11.12	8	9.25	59
+  Summit Intimidator
+2	1.4	11.00	6	10.00	46
+  Jungle Hollow
+3	1.4	11.00	1	6.53	30
+  Jeskai Devotee
+2.5	1.3	11.40	5	9.31	49
+  Reverberating Summons
+1.5	1.3	11.26	27	8.02	331
+  Roamer's Routine
+2.5	1.3	11.25	4	7.53	43
+  Tempest Hawk
+1.5	1.2	11.56	9	8.56	57
+  Riverwalk Technique
+3	1.2	11.75	4	9.31	49
+  Adorned Crocodile
+3	1.2	11.50	2	9.38	51
+  Cruel Truths
+2	1.2	11.67	3	10.00	47
+  Devoted Duelist
+1.5	1.2	11.50	4	8.38	35
+  Undergrowth Leopard
+2	1.2	11.67	3	8.86	48
+  Alesha's Legacy
+2.5	1.1	12.00	2	8.60	42
+  Sandskitter Outrider
+3.5	1.1	11.86	7	8.67	43
+  Heritage Reclamation
+2	1.1	12.00	4	9.18	47
+  Gurmag Nightwatch
+2	1.1	12.00	4	10.54	51
+  Reputable Merchant
+2.5	1.1	12.00	4	8.67	55
+  Watcher of the Wayside
+1.5	1.1	12.00	3	9.00	50
+  Arashin Sunshield
+2	1	12.33	3	9.31	42
+  Seize Opportunity
+2.5	1	12.25	4	10.36	60
+  Wild Ride
+1	1	12.25	4	10.19	57
+  Krotiq Nestguard
+1.5	1	12.20	5	10.92	54
+  Embermouth Sentinel
+2.5	1	12.33	3	9.43	47
+  Monastery Messenger
+2	0.9	12.50	2	8.93	37
+  Jade-Cast Sentinel
+1	0.8	12.75	4	10.73	66
+  Humbling Elder
+3	0.7	13.00	3	10.29	59
+  Unburied Earthcarver
+2	0.7	13.00	2	7.77	36
+  Sarkhan's Resolve
+2	0.7	13.00	1	8.42	29
+  Highspire Bell-Ringer
+2.5	0.6	13.40	5	10.21	39
+  Wingspan Stride
+1.5	0.5	13.50	2	10.46	47
+  Ringing Strike Mastery
+2	0.4	14.00	2	10.58	39
+  Plains
+0.4	14.00	19	10.82	197
+  Island
+0.4	14.00	16	10.41	219
+  Mountain
+0.4	14.00	8	10.63	228
+  Swamp
+0.3	14.08	12	10.67	204
+  Forest
+0.3	14.06	16	10.48	181
+  Poised Practitioner
+1.5	-0	15.00	0	6.19	42
+  Temur Devotee
+2.5	-0	15.00	0	9.54	55
+  Winternight Stories
+2.5	-0	15.00	0	1.00	1
+  Scavenger Regent
+5	-0	15.00	0	1.00	1
+  Stormshriek Feral
+2.5	-0	15.00	0	5.00	28
+  Surrak, Elusive Hunter
+4	-0	15.00	0	1.00	2
+  Awaken the Honored Dead
+4	-0	15.00	0	2.00	4
+  Death Begets Life
+2	-0	15.00	0	2.00	1
+  Fangkeeper's Familiar
+4	-0	15.00	0	2.00	1
+  Felothar, Dawn of the Abzan
+3.5	-0	15.00	0	2.67	3
+  Frostcliff Siege
+3	-0	15.00	0	4.00	4
+  Neriv, Heart of the Storm
+4	-0	15.00	0	3.00	1
+  Rediscover the Way
+3	-0	15.00	0	1.00	1
+  Mox Jasper
+0	-0	15.00	0	3.75	4
