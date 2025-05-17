@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Grade - Tarkir Dragonstorm</title> <script src="https://cdn.tailwindcss.com"></script>
+    <title>Guess the Grade - Tarkir Dragonstorm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif; /* Default font for the body */
+            font-family: 'Inter', sans-serif;
             background-color: #1a202c;
             color: #e2e8f0;
+            overscroll-behavior: none; 
         }
-        /* Apply Cinzel Decorative font to the main heading */
         h1 {
-            font-family: 'Cinzel Decorative', serif; /* Changed to Cinzel Decorative */
+            font-family: 'Cinzel Decorative', serif;
         }
         .card-image-container {
             width: 265px;
@@ -22,6 +23,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             overflow: hidden;
+            margin-bottom: 0.5rem; /* Added margin below image */
         }
         .card-image {
             width: 100%;
@@ -37,20 +39,80 @@
         .btn:active {
             transform: scale(0.98);
         }
-        select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CBD5E0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-            background-repeat: no-repeat;
-            background-position: right 0.7rem center;
-            background-size: 0.65em auto;
-            padding-right: 2.5rem;
-        }
         .feedback-correct { background-color: #2f855a; color: white; }
         .feedback-close { background-color: #dd6b20; color: white; }
         .feedback-off { background-color: #c53030; color: white; }
 
+        .grade-slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 10px 0;
+        }
+        #gradeSliderDisplay {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #60a5fa;
+            margin-bottom: 10px;
+            min-height: 1.5em;
+            text-align: center;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 90%;
+            max-width: 300px;
+            height: 12px;
+            background: #4a5568;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #3b82f6;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #2563eb;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        input[type="range"]::-moz-range-thumb:hover {
+            background: #2563eb;
+        }
+        /* Styles for card details in result area */
+        .card-details-text {
+            font-size: 0.9em;
+            color: #cbd5e1; /* Lighter slate color */
+            margin-top: 4px;
+            text-align: left; /* Align details to the left for readability */
+        }
+        .card-description {
+            font-size: 0.85em;
+            color: #94a3b8; /* Even lighter slate for description */
+            margin-top: 8px;
+            text-align: left;
+            line-height: 1.4;
+            max-height: 100px; /* Limit height and make scrollable if needed */
+            overflow-y: auto; /* Add scroll if description is long */
+            border-top: 1px solid #374151; /* Separator line */
+            padding-top: 8px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 selection:bg-sky-500 selection:text-white">
@@ -63,7 +125,7 @@
 
         <main>
             <div id="cardDisplay" class="mb-6 flex flex-col items-center">
-                <div class="card-image-container mb-2">
+                <div class="card-image-container">
                     <img id="cardImage" 
                          src="https://placehold.co/265x370/2D3748/E2E8F0?text=Loading+Card...&font=lora" 
                          alt="Magic Card" 
@@ -73,19 +135,20 @@
                 <p id="cardName" class="text-xl font-semibold text-slate-200">Card Name</p>
             </div>
 
-            <div id="gradeInputArea" class="mb-6 space-y-3">
-                <label for="gradeSelect" class="block text-sm font-medium text-slate-300">Your Grade:</label>
-                <select id="gradeSelect" class="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-slate-200 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
-                </select>
-                <button id="submitGradeBtn" class="btn w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-3 px-4 rounded-lg shadow-md">
-                    Submit Grade
-                </button>
+            <div id="gradeInputArea" class="mb-6 space-y-3 grade-slider-container">
+                <label for="gradeSlider" class="block text-sm font-medium text-slate-300 mb-2">Your Grade:</label>
+                <div id="gradeSliderDisplay" class="text-2xl font-bold text-sky-400 mb-2">C</div>
+                <input type="range" id="gradeSlider" min="0" max="12" step="1" value="5" class="w-full">
             </div>
 
             <div id="resultArea" class="text-center mb-6 hidden p-4 rounded-lg">
                 <p id="userGuessText" class="text-md font-medium"></p>
                 <p id="trueGradeText" class="text-lg font-bold"></p>
-                <p id="feedbackText" class="text-sm"></p>
+                <p id="feedbackText" class="text-sm mb-3"></p> <div id="cardDetailsContainer" class="mt-3 pt-3 border-t border-slate-700">
+                    <p id="proRatingDisplay" class="card-details-text"></p>
+                    <p id="aiRatingDisplay" class="card-details-text"></p>
+                    <p id="cardDescription" class="card-description"></p>
+                </div>
             </div>
 
             <button id="nextCardBtn" class="btn w-full bg-slate-600 hover:bg-slate-500 text-slate-200 font-semibold py-3 px-4 rounded-lg shadow-md hidden">
@@ -97,16 +160,15 @@
     <script src="card-data.js"></script> 
 
     <script>
-        // --- Configuration (grades and gradeValues remain here) ---
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
         const gradeValues = {};
         grades.forEach((grade, index) => gradeValues[grade] = index);
+        const defaultGradeIndex = grades.indexOf("C");
 
-        // --- DOM Elements ---
         const cardImageEl = document.getElementById('cardImage');
         const cardNameEl = document.getElementById('cardName');
-        const gradeSelectEl = document.getElementById('gradeSelect');
-        const submitGradeBtn = document.getElementById('submitGradeBtn');
+        const gradeSliderEl = document.getElementById('gradeSlider');
+        const gradeSliderDisplayEl = document.getElementById('gradeSliderDisplay');
         const resultAreaEl = document.getElementById('resultArea');
         const userGuessTextEl = document.getElementById('userGuessText');
         const trueGradeTextEl = document.getElementById('trueGradeText');
@@ -114,19 +176,21 @@
         const nextCardBtn = document.getElementById('nextCardBtn');
         const gradeInputAreaEl = document.getElementById('gradeInputArea');
 
-        // --- State ---
+        // New DOM elements for card details
+        const proRatingDisplayEl = document.getElementById('proRatingDisplay');
+        const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');
+        const cardDescriptionEl = document.getElementById('cardDescription');
+        const cardDetailsContainerEl = document.getElementById('cardDetailsContainer');
+
+
         let currentCard = null;
         let evaluatedCardIndices = [];
-
-        // --- Functions ---
-        function populateGradeOptions() {
-            grades.forEach(grade => {
-                const option = document.createElement('option');
-                option.value = grade;
-                option.textContent = grade;
-                gradeSelectEl.appendChild(option);
-            });
-            gradeSelectEl.value = "C";
+        
+        function updateSliderGradeDisplay() {
+            const sliderValue = parseInt(gradeSliderEl.value);
+            if (sliderValue >= 0 && sliderValue < grades.length) {
+                gradeSliderDisplayEl.textContent = grades[sliderValue];
+            }
         }
 
         function loadRandomCard() {
@@ -135,10 +199,8 @@
                 cardNameEl.textContent = "Error: Card data missing or invalid.";
                 cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Error+Loading+Data&font=lora";
                 cardImageEl.alt = "Error loading card data";
-                submitGradeBtn.disabled = true;
-                submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                gradeInputAreaEl.classList.add('hidden'); 
                 nextCardBtn.classList.add('hidden');
-                gradeInputAreaEl.classList.add('hidden');
                 return;
             }
 
@@ -149,7 +211,7 @@
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * cardData.length);
-            } while (evaluatedCardIndices.includes(randomIndex) && cardData.length > evaluatedCardIndices.length)
+            } while (evaluatedCardIndices.includes(randomIndex) && cardData.length > evaluatedCardIndices.length);
             
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
@@ -164,17 +226,18 @@
             cardNameEl.textContent = currentCard.name;
 
             resultAreaEl.classList.add('hidden');
-            gradeInputAreaEl.classList.remove('hidden');
-            submitGradeBtn.disabled = false;
-            submitGradeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            gradeInputAreaEl.classList.remove('hidden'); 
+            gradeSliderEl.disabled = false; 
+            gradeSliderEl.value = defaultGradeIndex; 
+            updateSliderGradeDisplay(); 
             nextCardBtn.classList.add('hidden');
-            gradeSelectEl.value = "C";
         }
 
         function handleSubmitGrade() {
             if (!currentCard) return;
 
-            const userGrade = gradeSelectEl.value;
+            const userGradeIndex = parseInt(gradeSliderEl.value);
+            const userGrade = grades[userGradeIndex];
             const trueGrade = currentCard.trueGrade;
 
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
@@ -204,24 +267,57 @@
             }
             feedbackTextEl.textContent = feedback;
 
+            // Populate card details
+            if (currentCard.proRatingDisplay) {
+                proRatingDisplayEl.textContent = currentCard.proRatingDisplay;
+                proRatingDisplayEl.classList.remove('hidden');
+            } else {
+                proRatingDisplayEl.textContent = '';
+                proRatingDisplayEl.classList.add('hidden');
+            }
+
+            if (currentCard.aiRatingDisplay) {
+                aiRatingDisplayEl.textContent = currentCard.aiRatingDisplay;
+                aiRatingDisplayEl.classList.remove('hidden');
+            } else {
+                aiRatingDisplayEl.textContent = '';
+                aiRatingDisplayEl.classList.add('hidden');
+            }
+            
+            if (currentCard.description) {
+                cardDescriptionEl.textContent = currentCard.description;
+                cardDescriptionEl.classList.remove('hidden');
+            } else {
+                cardDescriptionEl.textContent = '';
+                cardDescriptionEl.classList.add('hidden');
+            }
+            // Show the details container if any detail is present
+            if(currentCard.proRatingDisplay || currentCard.aiRatingDisplay || currentCard.description){
+                cardDetailsContainerEl.classList.remove('hidden');
+            } else {
+                cardDetailsContainerEl.classList.add('hidden');
+            }
+
+
             resultAreaEl.className = 'text-center mb-6 p-4 rounded-lg';
             resultAreaEl.classList.add(feedbackClass); 
             resultAreaEl.classList.remove('hidden');
 
-            gradeInputAreaEl.classList.add('hidden');
-            submitGradeBtn.disabled = true;
-            submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            gradeInputAreaEl.classList.add('hidden'); 
+            gradeSliderEl.disabled = true; 
             nextCardBtn.classList.remove('hidden');
         }
 
-        // --- Event Listeners ---
-        submitGradeBtn.addEventListener('click', handleSubmitGrade);
+        gradeSliderEl.addEventListener('input', updateSliderGradeDisplay);
+        gradeSliderEl.addEventListener('change', handleSubmitGrade); 
         nextCardBtn.addEventListener('click', loadRandomCard);
 
-        // --- Initialization ---
         window.onload = async () => {
             await initializeCardData(); 
-            populateGradeOptions();
+            gradeSliderEl.min = 0;
+            gradeSliderEl.max = grades.length - 1;
+            gradeSliderEl.value = defaultGradeIndex; 
+            updateSliderGradeDisplay(); 
             loadRandomCard();
         };
     </script>

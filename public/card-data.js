@@ -4,8 +4,8 @@
 let cardData = [];
 
 // --- CONFIGURATION: Select your data source ---
-// Options: "17LANDS_CSV", "AETHERHUB_TXT_FILE"
-const SELECTED_DATA_SOURCE = "AETHERHUB_TXT_FILE"; // Change this to switch data source
+// Options: "17LANDS_CSV", "AETHERHUB_RATINGS_TXT_FILE", "AETHERHUB_DETAILS_TXT_FILE"
+const SELECTED_DATA_SOURCE = "AETHERHUB_DETAILS_TXT_FILE"; // Ensure this is set to use the details parser
 
 // --- Common Grade Scale (used by 17Lands normal distribution) ---
 const GRADE_SCALE = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
@@ -16,12 +16,6 @@ const STD_DEV_BAND_SIZE = 0.33; // For 17Lands normal distribution grading
 const BASIC_LAND_NAMES = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 
 // --- Helper: Generic CSV Line Parser (used by 17Lands) ---
-/**
- * Parses a single line of CSV text into an array of strings.
- * Handles values enclosed in double quotes, including escaped quotes ("").
- * @param {string} line - A single line from a CSV file.
- * @returns {string[]} An array of string values.
- */
 function parseCsvLine(line) {
     const values = [];
     let currentVal = '';
@@ -53,14 +47,6 @@ function parseCsvLine(line) {
 let meanGihWr17Lands = 0;
 let stdDevGihWr17Lands = 1;
 
-/**
- * Converts a 17Lands "GIH WR" (float percentage) to a letter grade
- * based on a normal distribution.
- * @param {number} winRateFloat - The card's win rate as a float (e.g., 55.3 for 55.3%).
- * @param {number} mean - The mean win rate of all cards from 17Lands.
- * @param {number} stdDev - The standard deviation of win rates from 17Lands.
- * @returns {string} The corresponding letter grade (F to A+).
- */
 function getGradeFrom17LandsNormalDist(winRateFloat, mean, stdDev) {
     if (isNaN(winRateFloat)) return "N/A";
     if (stdDev === 0 || isNaN(stdDev)) return GRADE_SCALE[CENTER_GRADE_INDEX];
@@ -74,9 +60,6 @@ function getGradeFrom17LandsNormalDist(winRateFloat, mean, stdDev) {
     return GRADE_SCALE[gradeIndex];
 }
 
-/**
- * Initializes cardData from a 17Lands CSV file.
- */
 async function initialize17LandsData() {
     console.log("Initializing card data from 17Lands CSV...");
     const csvFilePath17Lands = './assets/data/17lands-TDM-card-ratings-2025-05-17.csv';
@@ -92,7 +75,7 @@ async function initialize17LandsData() {
             cardData = []; return;
         }
 
-        const headerLine = lines.shift(); // Remove header line and store it
+        const headerLine = lines.shift(); 
         const header = parseCsvLine(headerLine);
         const nameIndex = header.indexOf("Name");
         const gihWrIndex = header.indexOf("GIH WR");
@@ -104,11 +87,10 @@ async function initialize17LandsData() {
 
         const allGihWrValues = [];
         const rawCardObjects = [];
-        for (const line of lines) { // Iterate over remaining data lines
+        for (const line of lines) { 
             const values = parseCsvLine(line);
             if (values.length > Math.max(nameIndex, gihWrIndex)) {
                 const cardName = values[nameIndex];
-                // Skip basic lands for 17Lands data as well
                 if (BASIC_LAND_NAMES.includes(cardName.trim())) {
                     console.log(`17Lands CSV: Skipping basic land: ${cardName.trim()}`);
                     continue;
@@ -138,7 +120,10 @@ async function initialize17LandsData() {
         cardData = rawCardObjects.map(rawCard => ({
             name: rawCard.name,
             imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(rawCard.name)}`,
-            trueGrade: getGradeFrom17LandsNormalDist(rawCard.gihWrFloat, meanGihWr17Lands, stdDevGihWr17Lands)
+            trueGrade: getGradeFrom17LandsNormalDist(rawCard.gihWrFloat, meanGihWr17Lands, stdDevGihWr17Lands),
+            description: "", // 17Lands data doesn't have descriptions
+            aiRatingDisplay: "", // No AI Rating from this source
+            proRatingDisplay: "" // No Pro Rating display string from this source
         }));
         
         console.log(`Successfully processed ${cardData.length} cards from 17Lands CSV.`);
@@ -150,14 +135,8 @@ async function initialize17LandsData() {
 }
 
 // =================================================================================
-// --- AETHERHUB (from .TXT File) Specific Logic ---
+// --- AETHERHUB (from .TXT File - Ratings Only) Specific Logic ---
 // =================================================================================
-
-/**
- * Converts an Aetherhub numerical rating (0.0-5.0) to a letter grade.
- * @param {number} numericalRating - The Aetherhub rating (e.g., 4.5).
- * @returns {string} The corresponding letter grade (F to A+).
- */
 function getGradeFromAetherhubRating(numericalRating) {
     if (typeof numericalRating !== 'number' || isNaN(numericalRating)) {
         console.warn(`Invalid numericalRating for Aetherhub: ${numericalRating}`);
@@ -178,42 +157,39 @@ function getGradeFromAetherhubRating(numericalRating) {
     return "F";
 }
 
-/**
- * Initializes cardData by fetching and parsing a .txt file with Aetherhub data.
- */
-async function initializeAetherhubTxtFileData() {
-    console.log("Initializing card data from Aetherhub TXT file using Pro Ratings...");
-    const aetherhubTxtFilePath = './assets/data/aetherhub-tdm-ratings-2025-05-17.txt'; 
-    const AETHERHUB_HEADER = "Card\tPro Rating\tAI Rating\tAPA\tPicked\tALSA\tSeen";
+async function initializeAetherhubRatingsTxtFileData() {
+    console.log("Initializing card data from Aetherhub RATINGS TXT file using Pro Ratings...");
+    const aetherhubRatingsTxtFilePath = './assets/data/aetherhub-tdm-ratings-2025-05-17.txt'; 
+    const AETHERHUB_RATINGS_HEADER = "Card\tPro Rating\tAI Rating\tAPA\tPicked\tALSA\tSeen";
     
     try {
-        const response = await fetch(aetherhubTxtFilePath);
+        const response = await fetch(aetherhubRatingsTxtFilePath);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status} while fetching ${aetherhubTxtFilePath}`);
+            throw new Error(`HTTP error! status: ${response.status} while fetching ${aetherhubRatingsTxtFilePath}`);
         }
         const rawTextData = await response.text();
         let lines = rawTextData.trim().split(/\r?\n/);
         const processedCards = [];
 
         if (lines.length === 0 || (lines.length === 1 && lines[0].trim() === '')) {
-            console.log("Aetherhub TXT file: File is effectively empty.");
+            console.log("Aetherhub RATINGS TXT file: File is effectively empty.");
             cardData = []; return;
         }
 
-        if (lines[0].trim() === AETHERHUB_HEADER.trim()) {
+        if (lines[0].trim() === AETHERHUB_RATINGS_HEADER.trim()) {
             lines.shift(); 
-            console.log("Aetherhub TXT: Header row detected and skipped.");
+            console.log("Aetherhub RATINGS TXT: Header row detected and skipped.");
         }
         
         if (lines.length < 2 && !(lines.length === 1 && lines[0].trim() === '')) {
-            console.warn("Aetherhub TXT file: File has insufficient data rows after potentially skipping header.");
+            console.warn("Aetherhub RATINGS TXT file: File has insufficient data rows after potentially skipping header.");
             cardData = []; return;
         }
 
         for (let i = 0; i < lines.length; i += 2) {
             if (i + 1 >= lines.length) {
                 if (lines[i].trim() !== "") {
-                    console.warn(`Aetherhub TXT: Skipping card name at end, missing ratings: "${lines[i]}"`);
+                    console.warn(`Aetherhub RATINGS TXT: Skipping card name at end, missing ratings: "${lines[i]}"`);
                 }
                 continue;
             }
@@ -223,69 +199,166 @@ async function initializeAetherhubTxtFileData() {
 
             if (!cardNameLine) {
                 if (ratingsLine) {
-                    console.warn(`Aetherhub TXT: Skipping empty card name at index ${i}. Next line was: "${ratingsLine}"`);
+                    console.warn(`Aetherhub RATINGS TXT: Skipping empty card name at index ${i}. Next line was: "${ratingsLine}"`);
                 }
                 continue;
             }
 
-            // Skip basic lands
             if (BASIC_LAND_NAMES.includes(cardNameLine)) {
-                console.log(`Aetherhub TXT: Skipping basic land: ${cardNameLine}`);
+                console.log(`Aetherhub RATINGS TXT: Skipping basic land: ${cardNameLine}`);
                 continue;
             }
             
             const ratingValues = ratingsLine.split(/\s+/); 
-            
-            // Expecting: ProRating AI Rating APA Picked ALSA Seen
-            // Pro Rating is ratingValues[0]
-            if (ratingValues.length >= 1) { // Need at least Pro Rating
+            if (ratingValues.length >= 1) { 
                 let proRatingString = ratingValues[0]; 
-                
-                // Handle "X // Y" format, take the first part
+                let aiRatingDisplayString = ratingValues.length >= 2 ? `AI Rating: ${ratingValues[1]}` : "AI Rating: N/A";
+
                 if (proRatingString.includes("//")) {
                     proRatingString = proRatingString.split("//")[0].trim();
                 }
-
                 const proRatingFloat = parseFloat(proRatingString);
 
                 if (!isNaN(proRatingFloat)) {
                     processedCards.push({
                         name: cardNameLine,
                         imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(cardNameLine)}`,
-                        trueGrade: getGradeFromAetherhubRating(proRatingFloat) // Use Pro Rating
+                        trueGrade: getGradeFromAetherhubRating(proRatingFloat),
+                        description: "", // This format doesn't have descriptions
+                        aiRatingDisplay: aiRatingDisplayString,
+                        proRatingDisplay: `Pro Rating: ${ratingValues[0]}` // Store the original string for display
                     });
                 } else {
-                    console.warn(`Aetherhub TXT: Could not parse Pro Rating for "${cardNameLine}". Original rating string: "${ratingValues[0]}", Processed string: "${proRatingString}"`);
+                    console.warn(`Aetherhub RATINGS TXT: Could not parse Pro Rating for "${cardNameLine}". Original: "${ratingValues[0]}", Processed: "${proRatingString}"`);
                 }
             } else {
-                console.warn(`Aetherhub TXT: Could not parse ratings for "${cardNameLine}". Line: "${ratingsLine}", Split values: [${ratingValues.join(', ')}]`);
+                console.warn(`Aetherhub RATINGS TXT: Could not parse ratings for "${cardNameLine}". Line: "${ratingsLine}"`);
             }
         }
         cardData = processedCards;
-        console.log(`Successfully processed ${cardData.length} cards from Aetherhub TXT file (using Pro Ratings).`);
+        console.log(`Successfully processed ${cardData.length} cards from Aetherhub RATINGS TXT file (using Pro Ratings).`);
         if (cardData.length === 0 && lines.length >=2 && !(lines.length === 1 && lines[0].trim() === '') ) {
-            console.error("Aetherhub TXT: All entries invalid or unparsable. Check data format in the .txt file and parser logic.");
+            console.error("Aetherhub RATINGS TXT: All entries invalid or unparsable. Check data format and parser.");
         }
 
     } catch (error) {
-        console.error("Failed to load/process Aetherhub TXT data:", error);
+        console.error("Failed to load/process Aetherhub RATINGS TXT data:", error);
         cardData = [];
     }
 }
 
 // =================================================================================
+// --- AETHERHUB (from .TXT File - Card Details with Descriptions) Specific Logic ---
+// =================================================================================
+async function initializeAetherhubDetailsTxtFileData() {
+    console.log("Initializing card data from Aetherhub DETAILS TXT file using Pro Ratings...");
+    const aetherhubDetailsTxtFilePath = './assets/data/aetherhub-tdm-details-2025-05-17.txt'; 
+    
+    try {
+        const response = await fetch(aetherhubDetailsTxtFilePath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status} while fetching ${aetherhubDetailsTxtFilePath}`);
+        }
+        const rawTextData = await response.text();
+        const cardBlocks = rawTextData.split(/\n?image\n/).filter(block => block.trim() !== "");
+        const processedCards = [];
+
+        if (cardBlocks.length === 0) {
+            console.log("Aetherhub DETAILS TXT file: No card blocks found after splitting by 'image'.");
+            cardData = []; return;
+        }
+
+        for (const block of cardBlocks) {
+            const lines = block.trim().split(/\r?\n/);
+            if (lines.length < 3) { 
+                console.warn(`Aetherhub DETAILS TXT: Skipping block, too few lines: "${block.substring(0, 50)}..."`);
+                continue;
+            }
+
+            const cardName = lines[0].trim();
+            if (!cardName) {
+                console.warn(`Aetherhub DETAILS TXT: Skipping block, empty card name. Block: "${block.substring(0,50)}..."`);
+                continue;
+            }
+
+            if (BASIC_LAND_NAMES.includes(cardName)) {
+                console.log(`Aetherhub DETAILS TXT: Skipping basic land: ${cardName}`);
+                continue;
+            }
+
+            let proRatingStringRaw = null; // Store the full "Pro Rating: X // Y" string
+            let proRatingValueForGrade = null; // Store the first part for grading
+            let aiRatingDisplayString = null; // Store the full "AI Rating: X" string
+            let descriptionLines = [];
+            let proRatingLineFound = false;
+
+            for (let j = 1; j < lines.length; j++) {
+                const currentLine = lines[j].trim();
+                if (currentLine.startsWith("Pro Rating:")) {
+                    proRatingStringRaw = currentLine; // e.g., "Pro Rating: 1.5 // 3.0"
+                    let tempProRating = currentLine.substring("Pro Rating:".length).trim();
+                    if (tempProRating.includes("//")) {
+                        proRatingValueForGrade = tempProRating.split("//")[0].trim();
+                    } else {
+                        proRatingValueForGrade = tempProRating;
+                    }
+                    proRatingLineFound = true;
+                } else if (currentLine.startsWith("AI Rating:")) {
+                    aiRatingDisplayString = currentLine; // e.g., "AI Rating: 5"
+                } else if (proRatingLineFound || aiRatingDisplayString) { 
+                    // If we've already found Pro or AI Rating, subsequent lines are part of the description
+                    descriptionLines.push(currentLine);
+                } else if (j > 2 && !proRatingLineFound && !aiRatingDisplayString) { 
+                    // Fallback for description if ratings are not found quickly
+                    descriptionLines.push(currentLine);
+                }
+            }
+            
+            if (!proRatingValueForGrade) { // Check if we got a value to parse for grading
+                console.warn(`Aetherhub DETAILS TXT: Could not find or parse "Pro Rating:" value for card "${cardName}". Raw Pro Rating line: "${proRatingStringRaw}"`);
+                continue; 
+            }
+
+            const proRatingFloat = parseFloat(proRatingValueForGrade);
+
+            if (!isNaN(proRatingFloat)) {
+                processedCards.push({
+                    name: cardName,
+                    imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(cardName)}`,
+                    trueGrade: getGradeFromAetherhubRating(proRatingFloat),
+                    description: descriptionLines.join(" ").trim(),
+                    aiRatingDisplay: aiRatingDisplayString || "AI Rating: N/A", // Store the full string or default
+                    proRatingDisplay: proRatingStringRaw || `Pro Rating: ${proRatingValueForGrade}` // Store the full string or reconstructed
+                });
+            } else {
+                console.warn(`Aetherhub DETAILS TXT: Could not parse Pro Rating float for "${cardName}". Value used for parsing: "${proRatingValueForGrade}"`);
+            }
+        }
+
+        cardData = processedCards;
+        console.log(`Successfully processed ${cardData.length} cards from Aetherhub DETAILS TXT file.`);
+        if (cardData.length === 0 && cardBlocks.length > 0 ) {
+            console.error("Aetherhub DETAILS TXT: All card blocks invalid or unparsable. Check data format and parser logic.");
+        }
+
+    } catch (error) {
+        console.error("Failed to load/process Aetherhub DETAILS TXT data:", error);
+        cardData = [];
+    }
+}
+
+
+// =================================================================================
 // --- Main Initializer ---
 // =================================================================================
-/**
- * Main function to initialize card data based on the SELECTED_DATA_SOURCE.
- * This is called by index.html on window.onload.
- */
 async function initializeCardData() {
     console.log(`Selected data source: ${SELECTED_DATA_SOURCE}`);
     if (SELECTED_DATA_SOURCE === "17LANDS_CSV") {
         await initialize17LandsData();
-    } else if (SELECTED_DATA_SOURCE === "AETHERHUB_TXT_FILE") {
-        await initializeAetherhubTxtFileData();
+    } else if (SELECTED_DATA_SOURCE === "AETHERHUB_RATINGS_TXT_FILE") { 
+        await initializeAetherhubRatingsTxtFileData();
+    } else if (SELECTED_DATA_SOURCE === "AETHERHUB_DETAILS_TXT_FILE") {
+        await initializeAetherhubDetailsTxtFileData();
     } else {
         console.error("Invalid data source selected in card-data.js:", SELECTED_DATA_SOURCE);
         cardData = [];
