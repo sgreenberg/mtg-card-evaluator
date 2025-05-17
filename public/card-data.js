@@ -3,33 +3,52 @@
 // This array will be populated dynamically from the CSV file.
 let cardData = [];
 
+// Statistics for GIH WR, to be calculated from the CSV data.
+let meanGihWr = 0;
+let stdDevGihWr = 1; // Default to 1 to prevent division by zero if calculation fails.
+
+// Grade scale configuration
+const GRADE_SCALE = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
+const CENTER_GRADE_INDEX = GRADE_SCALE.indexOf("C"); // Should be 5
+const STD_DEV_BAND_SIZE = 0.33;
+
 /**
- * Converts a win rate (as a string like "70.3%") to a letter grade.
- * @param {string} winRateString - The win rate string (e.g., "70.3%").
+ * Calculates the grade based on a normal distribution of win rates.
+ * @param {number} winRateFloat - The card's win rate as a float (e.g., 55.3 for 55.3%).
+ * @param {number} mean - The mean win rate of all cards.
+ * @param {number} stdDev - The standard deviation of win rates of all cards.
  * @returns {string} The corresponding letter grade (F to A+).
  */
-function getGradeFromWinRate(winRateString) {
-    if (!winRateString || typeof winRateString !== 'string' || !winRateString.includes('%')) {
-        return "N/A";
-    }
-    const wr = parseFloat(winRateString);
-    if (isNaN(wr)) {
-        return "N/A";
+function getGradeFromWinRate(winRateFloat, mean, stdDev) {
+    if (isNaN(winRateFloat)) {
+        return "N/A"; // Not a Number
     }
 
-    if (wr >= 68) return "A+";
-    if (wr >= 65) return "A";
-    if (wr >= 62) return "A-";
-    if (wr >= 60) return "B+";
-    if (wr >= 58) return "B";
-    if (wr >= 56) return "B-";
-    if (wr >= 54) return "C+";
-    if (wr >= 52) return "C";
-    if (wr >= 50) return "C-";
-    if (wr >= 48) return "D+";
-    if (wr >= 46) return "D";
-    if (wr >= 44) return "D-";
-    return "F";
+    // Handle edge case where standard deviation is zero (e.g., all cards have same WR, or only one card)
+    if (stdDev === 0 || isNaN(stdDev)) {
+        if (winRateFloat === mean) return GRADE_SCALE[CENTER_GRADE_INDEX]; // 'C'
+        // If stdDev is 0 but WR differs from mean (shouldn't happen if calculated correctly),
+        // it's hard to grade. Could return 'C' or 'N/A'.
+        return GRADE_SCALE[CENTER_GRADE_INDEX]; // Default to 'C' if stdDev is 0
+    }
+
+    // Calculate how many 0.33 standard deviation bands the card is away from the mean.
+    // A positive value means above average, negative means below.
+    const deviationBands = (winRateFloat - mean) / (STD_DEV_BAND_SIZE * stdDev);
+
+    // Map the deviationBands to an index in our GRADE_SCALE array.
+    // Math.floor(deviationBands + 0.5) effectively rounds to the nearest band.
+    // Then add to the center grade index.
+    let gradeIndex = Math.floor(deviationBands + 0.5) + CENTER_GRADE_INDEX;
+
+    // Clamp the index to the valid range of the GRADE_SCALE array.
+    if (gradeIndex < 0) {
+        gradeIndex = 0; // F
+    } else if (gradeIndex >= GRADE_SCALE.length) {
+        gradeIndex = GRADE_SCALE.length - 1; // A+
+    }
+
+    return GRADE_SCALE[gradeIndex];
 }
 
 /**
@@ -63,11 +82,11 @@ function parseCsvLine(line) {
 
 /**
  * Asynchronously fetches card data from a CSV file, processes it,
- * and populates the `cardData` array.
+ * calculates statistics, assigns grades, and populates the `cardData` array.
  */
 async function initializeCardData() {
     const csvFilePath = './assets/data/17lands-TDM-card-ratings-2025-05-17.csv';
-    console.log(`Initializing card data from: ${csvFilePath}`); // Log path
+    console.log(`Initializing card data from: ${csvFilePath}`);
     try {
         const response = await fetch(csvFilePath);
         if (!response.ok) {
@@ -93,31 +112,67 @@ async function initializeCardData() {
             return;
         }
 
-        const processedCards = [];
+        // --- First pass: Parse CSV and collect all GIH WR values for statistics ---
+        const allGihWrValues = [];
+        const rawCardObjects = []; // To store initially parsed data
+
         for (let i = 1; i < lines.length; i++) { // Start from 1 to skip header row
             const values = parseCsvLine(lines[i]);
             if (values.length > Math.max(nameIndex, gihWrIndex)) {
                 const cardNameValue = values[nameIndex];
                 const gihWrString = values[gihWrIndex];
 
-                if (cardNameValue && typeof cardNameValue === 'string' && cardNameValue.trim() !== "" && gihWrString) {
-                    const trimmedCardName = cardNameValue.trim();
-                    const newCardObject = { // Create the object
-                        name: trimmedCardName,
-                        imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(trimmedCardName)}`,
-                        trueGrade: getGradeFromWinRate(gihWrString)
-                    };
-                    processedCards.push(newCardObject);
+                if (cardNameValue && typeof cardNameValue === 'string' && cardNameValue.trim() !== "" && gihWrString && gihWrString.includes('%')) {
+                    const gihWrFloat = parseFloat(gihWrString);
+                    if (!isNaN(gihWrFloat)) {
+                        allGihWrValues.push(gihWrFloat);
+                        rawCardObjects.push({
+                            name: cardNameValue.trim(),
+                            gihWrFloat: gihWrFloat // Store the float for grading
+                        });
+                    }
                 }
             }
         }
+
+        if (allGihWrValues.length === 0) {
+            console.error("No valid GIH WR values found in CSV to calculate statistics.");
+            cardData = [];
+            return;
+        }
+
+        // --- Calculate Mean and Standard Deviation ---
+        const n = allGihWrValues.length;
+        const sum = allGihWrValues.reduce((acc, val) => acc + val, 0);
+        meanGihWr = sum / n;
+
+        const sumOfSquaredDifferences = allGihWrValues.reduce((acc, val) => acc + Math.pow(val - meanGihWr, 2), 0);
+        // Use (n - 1) for sample standard deviation if n > 1, otherwise stdDev is 0 or not well-defined.
+        stdDevGihWr = n > 1 ? Math.sqrt(sumOfSquaredDifferences / (n - 1)) : 0;
+
+        console.log(`Calculated GIH WR Stats: Mean = ${meanGihWr.toFixed(2)}%, StdDev = ${stdDevGihWr.toFixed(2)}% from ${n} cards.`);
+        if (stdDevGihWr === 0 && n > 1) {
+            console.warn("Standard deviation is 0. All cards might receive the same grade or 'N/A'. This usually means all cards have the exact same GIH WR.");
+        }
+
+
+        // --- Second pass: Assign grades and populate the final cardData array ---
+        const processedCards = [];
+        for (const rawCard of rawCardObjects) {
+            const finalGrade = getGradeFromWinRate(rawCard.gihWrFloat, meanGihWr, stdDevGihWr);
+            processedCards.push({
+                name: rawCard.name,
+                imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(rawCard.name)}`,
+                trueGrade: finalGrade
+            });
+        }
+        
         cardData = processedCards;
-        console.log(`Successfully loaded and processed ${cardData.length} cards from CSV.`);
+        console.log(`Successfully loaded, processed, and graded ${cardData.length} cards.`);
 
     } catch (error) {
         console.error("Failed to load or process card data:", error);
         cardData = []; // Ensure it's empty on error
-        // Optionally, display an error message to the user in the UI
         if (document.getElementById('cardName')) {
              document.getElementById('cardName').textContent = "Error loading card data!";
         }
