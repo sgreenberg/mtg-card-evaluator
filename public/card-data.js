@@ -67,6 +67,7 @@ function parseCsvLine(line) {
  */
 async function initializeCardData() {
     const csvFilePath = './assets/data/17lands-TDM-card-ratings-2025-05-17.csv';
+    console.log(`Initializing card data from: ${csvFilePath}`); // Log path
     try {
         const response = await fetch(csvFilePath);
         if (!response.ok) {
@@ -87,13 +88,13 @@ async function initializeCardData() {
         const gihWrIndex = header.indexOf("GIH WR");
 
         if (nameIndex === -1 || gihWrIndex === -1) {
-            console.error("CSV header is missing 'Name' or 'GIH WR' column.");
+            console.error("CSV header is missing 'Name' or 'GIH WR' column. Found headers:", header);
             cardData = [];
             return;
         }
 
         const processedCards = [];
-        for (let i = 1; i < lines.length; i++) {
+        for (let i = 1; i < lines.length; i++) { // Start from 1 to skip header row
             const values = parseCsvLine(lines[i]);
             if (values.length > Math.max(nameIndex, gihWrIndex)) {
                 const cardNameValue = values[nameIndex];
@@ -101,12 +102,12 @@ async function initializeCardData() {
 
                 if (cardNameValue && typeof cardNameValue === 'string' && cardNameValue.trim() !== "" && gihWrString) {
                     const trimmedCardName = cardNameValue.trim();
-                    processedCards.push({
+                    const newCardObject = { // Create the object
                         name: trimmedCardName,
-                        // Use Scryfall API to fetch images by card name
                         imageUrl: `https://api.scryfall.com/cards/named?format=image&version=normal&fuzzy=${encodeURIComponent(trimmedCardName)}`,
                         trueGrade: getGradeFromWinRate(gihWrString)
-                    });
+                    };
+                    processedCards.push(newCardObject);
                 }
             }
         }
@@ -115,7 +116,8 @@ async function initializeCardData() {
 
     } catch (error) {
         console.error("Failed to load or process card data:", error);
-        cardData = [];
+        cardData = []; // Ensure it's empty on error
+        // Optionally, display an error message to the user in the UI
         if (document.getElementById('cardName')) {
              document.getElementById('cardName').textContent = "Error loading card data!";
         }
