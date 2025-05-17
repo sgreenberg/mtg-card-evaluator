@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTG Card Evaluator - Tarkir Dragonstorm</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Guess the Grade - Tarkir Dragonstorm</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark gray-blue background */
-            color: #e2e8f0; /* Light gray text */
+            font-family: 'Inter', sans-serif; /* Default font for the body */
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        /* Apply Cinzel Decorative font to the main heading */
+        h1 {
+            font-family: 'Cinzel Decorative', serif; /* Changed to Cinzel Decorative */
         }
         .card-image-container {
-            width: 265px; /* Standard MTG card width */
-            height: 370px; /* Standard MTG card height */
-            background-color: #2d3748; /* Slightly lighter card background */
-            border-radius: 12px; /* Rounded corners for card */
+            width: 265px;
+            height: 370px;
+            background-color: #2d3748;
+            border-radius: 12px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            overflow: hidden; /* Ensure image stays within rounded borders */
+            overflow: hidden;
         }
         .card-image {
             width: 100%;
@@ -34,7 +37,6 @@
         .btn:active {
             transform: scale(0.98);
         }
-        /* Custom styling for select dropdown arrow */
         select {
             appearance: none;
             -webkit-appearance: none;
@@ -43,11 +45,11 @@
             background-repeat: no-repeat;
             background-position: right 0.7rem center;
             background-size: 0.65em auto;
-            padding-right: 2.5rem; /* Make space for the arrow */
+            padding-right: 2.5rem;
         }
-        .feedback-correct { background-color: #2f855a; color: white; } /* Green */
-        .feedback-close { background-color: #dd6b20; color: white; } /* Orange */
-        .feedback-off { background-color: #c53030; color: white; }   /* Red */
+        .feedback-correct { background-color: #2f855a; color: white; }
+        .feedback-close { background-color: #dd6b20; color: white; }
+        .feedback-off { background-color: #c53030; color: white; }
 
     </style>
 </head>
@@ -55,7 +57,7 @@
 
     <div class="bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md">
         <header class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-sky-400">MTG Card Evaluator</h1>
+            <h1 class="text-3xl font-bold text-sky-400">Guess the Grade</h1>
             <p class="text-slate-400">Tarkir Dragonstorm Edition</p>
         </header>
 
@@ -74,7 +76,7 @@
             <div id="gradeInputArea" class="mb-6 space-y-3">
                 <label for="gradeSelect" class="block text-sm font-medium text-slate-300">Your Grade:</label>
                 <select id="gradeSelect" class="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-slate-200 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
-                    </select>
+                </select>
                 <button id="submitGradeBtn" class="btn w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-3 px-4 rounded-lg shadow-md">
                     Submit Grade
                 </button>
@@ -96,8 +98,6 @@
 
     <script>
         // --- Configuration (grades and gradeValues remain here) ---
-        // 'cardData' is loaded from 'card-data.js' via initializeCardData()
-
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
         const gradeValues = {};
         grades.forEach((grade, index) => gradeValues[grade] = index);
@@ -116,13 +116,9 @@
 
         // --- State ---
         let currentCard = null;
-        let evaluatedCardIndices = []; // To keep track of cards already shown in this session
+        let evaluatedCardIndices = [];
 
         // --- Functions ---
-
-        /**
-         * Populates the grade select dropdown.
-         */
         function populateGradeOptions() {
             grades.forEach(grade => {
                 const option = document.createElement('option');
@@ -130,69 +126,51 @@
                 option.textContent = grade;
                 gradeSelectEl.appendChild(option);
             });
-            // Set a default middle grade
             gradeSelectEl.value = "C";
         }
 
-        /**
-         * Loads and displays a new random card.
-         * Ensures a card isn't shown twice until all cards have been seen once.
-         * Assumes 'cardData' is available globally from 'card-data.js' after initialization.
-         */
         function loadRandomCard() {
-            // Check if cardData is loaded and is an array with items
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
                 console.error("Card data not loaded, is not an array, or is empty! Check CSV loading.");
-                // Display an error message to the user on the page
                 cardNameEl.textContent = "Error: Card data missing or invalid.";
                 cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Error+Loading+Data&font=lora";
                 cardImageEl.alt = "Error loading card data";
-                // Disable buttons if data is missing
                 submitGradeBtn.disabled = true;
                 submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                nextCardBtn.classList.add('hidden'); // Ensure next card button is also hidden/disabled
-                gradeInputAreaEl.classList.add('hidden'); // Hide grading area
+                nextCardBtn.classList.add('hidden');
+                gradeInputAreaEl.classList.add('hidden');
                 return;
             }
 
             if (evaluatedCardIndices.length === cardData.length) {
-                // All cards have been evaluated, reset for a new cycle.
                  evaluatedCardIndices = []; 
-                 // console.log("All cards evaluated. Resetting cycle."); // Optional: for debugging
             }
 
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * cardData.length);
             } while (evaluatedCardIndices.includes(randomIndex) && cardData.length > evaluatedCardIndices.length)
-            // This loop ensures we try to pick an unevaluated card if possible.
             
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
-            // Reset onerror for the new image attempt and set the new image source
-            // This ensures the fallback works for each new card image
             cardImageEl.onerror = function() {
-                this.onerror=null; // Prevent infinite loop if placeholder also fails
+                this.onerror=null;
                 this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
                 console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
             };
-            cardImageEl.src = currentCard.imageUrl; // Attempt to load Scryfall image
-            cardImageEl.alt = currentCard.name; // Set alt text for accessibility
+            cardImageEl.src = currentCard.imageUrl;
+            cardImageEl.alt = currentCard.name; 
             cardNameEl.textContent = currentCard.name;
 
-            // Reset UI for new card
             resultAreaEl.classList.add('hidden');
             gradeInputAreaEl.classList.remove('hidden');
             submitGradeBtn.disabled = false;
             submitGradeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             nextCardBtn.classList.add('hidden');
-            gradeSelectEl.value = "C"; // Reset to default grade
+            gradeSelectEl.value = "C";
         }
 
-        /**
-         * Handles the submission of the user's grade.
-         */
         function handleSubmitGrade() {
             if (!currentCard) return;
 
@@ -202,16 +180,15 @@
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
             trueGradeTextEl.textContent = `True Grade: ${trueGrade}`;
 
-            // Provide feedback
             const userGradeVal = gradeValues[userGrade];
             const trueGradeVal = gradeValues[trueGrade];
 
             let feedback = "";
             let feedbackClass = "";
 
-            if (trueGrade === "N/A") { // Handle cases where true grade might be N/A from CSV processing
+            if (trueGrade === "N/A") {
                 feedback = "True grade for this card is not available.";
-                feedbackClass = "bg-slate-500 text-white"; // Neutral feedback color
+                feedbackClass = "bg-slate-500 text-white";
             } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackClass = "feedback-correct";
@@ -220,20 +197,17 @@
                 feedbackClass = "feedback-close";
             } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) {
                 feedback = "Getting there! A bit off.";
-                feedbackClass = "feedback-close"; // Still using 'close' for up to 2 steps
+                feedbackClass = "feedback-close";
             } else {
                 feedback = "Quite a bit off. Keep practicing!";
                 feedbackClass = "feedback-off";
             }
             feedbackTextEl.textContent = feedback;
 
-            // Update result area styling
-            resultAreaEl.className = 'text-center mb-6 p-4 rounded-lg'; // Reset classes
-            resultAreaEl.classList.add(feedbackClass); // Add new feedback class
+            resultAreaEl.className = 'text-center mb-6 p-4 rounded-lg';
+            resultAreaEl.classList.add(feedbackClass); 
             resultAreaEl.classList.remove('hidden');
 
-
-            // Disable further grading for this card and show next card button
             gradeInputAreaEl.classList.add('hidden');
             submitGradeBtn.disabled = true;
             submitGradeBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -246,13 +220,9 @@
 
         // --- Initialization ---
         window.onload = async () => {
-            // First, load and process the card data from the CSV
-            // This function is defined in card-data.js and populates the global 'cardData' array
             await initializeCardData(); 
-
-            // After data is loaded (or if loading failed, cardData might be empty), proceed with UI setup
             populateGradeOptions();
-            loadRandomCard(); // This will now use the dynamically loaded (or empty) cardData
+            loadRandomCard();
         };
     </script>
 </body>
