@@ -62,7 +62,11 @@
         <main>
             <div id="cardDisplay" class="mb-6 flex flex-col items-center">
                 <div class="card-image-container mb-2">
-                    <img id="cardImage" src="https://placehold.co/265x370/2D3748/E2E8F0?text=Loading+Card...&font=lora" alt="Magic Card" class="card-image">
+                    <img id="cardImage" 
+                         src="https://placehold.co/265x370/2D3748/E2E8F0?text=Loading+Card...&font=lora" 
+                         alt="Magic Card" 
+                         class="card-image"
+                         onerror="this.onerror=null; this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';">
                 </div>
                 <p id="cardName" class="text-xl font-semibold text-slate-200">Card Name</p>
             </div>
@@ -166,7 +170,14 @@
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
-            cardImageEl.src = currentCard.imageUrl;
+            // Reset onerror for the new image attempt and set the new image source
+            // This ensures the fallback works for each new card image
+            cardImageEl.onerror = function() {
+                this.onerror=null; // Prevent infinite loop if placeholder also fails
+                this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
+                console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
+            };
+            cardImageEl.src = currentCard.imageUrl; // Attempt to load Scryfall image
             cardImageEl.alt = currentCard.name; // Set alt text for accessibility
             cardNameEl.textContent = currentCard.name;
 
