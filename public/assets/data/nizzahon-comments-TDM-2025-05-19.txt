@@ -1,0 +1,495 @@
+Colorless:
+
+1 - Ugin, Eye of the Storms - A
+
+7 mana’s a lot, but at a minimum Ugin is going to exile pretty much any nonland permanent, draw you a card, and gain you 3 life. Then, he has the potential to do way more than that because his loyalty is massive – and his removal effect will have made it easier to keep him around, too. Exiling more permanents with him is a little tough, but not impossible – and you’re certainly going to be incentivized to play some more colorless stuff if you have this powerful Planeswalker. I think the whole package here is an A. He’s pretty close to a 3-for-1 up front, and gets more ridiculous from there. I’m giving him an A.
+
+
+
+
+White:
+
+
+2 - Anafenza, Unyielding Lineage - A
+
+A three mana 2/2 flash first striker is pretty good at coming down and killing an X/2, and is a card I’d feel fine about playing. So, throw in “endures” and you have an absolute powerhouse. I love the modality, because if you need more bodies you can go that route, but if you need a bigger creature, you can do that instead. Because Anafenza has Flash, it’s not hard to set this up to trigger at least once, at which point you’re already going to feel great. I mean, it’s not impossible for this 3-drop to create a 3-for-1 by killing something when it flashes in and then making a 2/2 on your next turn – and if it sticks around the value will be endless. This is definitely a bomb – and a super cheap one. I’m giving it an A. 
+
+4 - Bearer of Glory - C
+
+Now, we did just see a two drop that has first strike on your turn really underwhelm in Limited, but Aetherdrift was a weird set. Usually, that style of creature is a nice aggressive two drop – and this one has a nice late game effect too since it can buff the board. I’m giving it a C.
+
+7 - Dalkovan Packbeasts - C
+
+This is a cool design. A three mana 0/4 is awful, but one that spits out three attacking 1/1s every time it swings? That seems pretty nice to me. A 0/4 can attack without dying on lots of boards, so those 1/1s are going to show up and do some damage and/or be good sacrifice fodder pretty often. Now, there are definitely boards where you can’t take advantage of Mobilize, in which case you’re going to feel like this card is terrible – but I think it’s a C.
+
+8 - Descendant of Storms - C
+
+If you play this on one, and you don’t have a two drop, this sort of fills both slots for you, which is pretty nice – and even in the late game it can be a reasonably relevant attacker because of Endure. Still, it does have diminishing returns for sure. It’s great on one, and pretty meh the rest of the game. I’m giving it a C.
+
+9 - Dragonback Lancer - C-
+
+4-mana 3/3 flyers aren’t what they once were. They often die to common two mana removal and in a format with this many big flyers, it isn’t even close to a guarantee that you can get an attack in and get a temporary token. I’m giving this a C-.
+
+10 - Duty Beyond Death - C
+
+White does have an unusual number of expendable bodies to sacrifice in this format, especially the temporary 1/1 tokens. But…I’m still not loving this. It’s a very situational effect that you need mana up and an expendable creature for at the right time, and while this can certainly produce blowouts, there are also times where the effect just doesn’t do enough. Going down a creature and then buffing your whole board is super awkward, too! This just seems very swing, so it’s hard to go above a C. If this format didn’t have a few different ways to have expendable bodies it would be much worse.
+
+11 - Elspeth, Storm Slayer - A+
+
+Because of her non-loyalty ability, her +1 is going to create two 1/1s – and that’s already an amazing planeswalker. Two bodies go a long way towards protecting her and/or making sure you get value right away, and then she comes with two other incredible abilities. Her 0 ability is going to produce lethal out of nowhere, and if you’re behind you can always use her -3. She just seems insane over all – you’re not going to lose most games when you cast this. She’s an A+.
+
+12 - Fortress Kin-Guard - C+
+
+This looks like a very good Common. We’ve seen two mana ½s that make a 1/1 before, and they are very good. That’s just an incredible rate for the mana you spend – and this has the added flexibility of sometimes putting a counter on itself. I’m giving this a C+.
+
+16 - Mardu Devotee - C+
+
+There’s a whole cycle of these, and I think this might be best, simply by virtue of being a one drop. It can fix your mana as early as turn two, and the Scry it gives you on top of that means this gives you a ton of value for a one drop. I’m giving this a C+. 
+
+21 - Rampaging Dawnbrood - C
+
+A two mana 2/2 isn’t great these days, but this is basically a decent 5-drop that can be a passable two drop when it needs to be, and I like that flexible. The buff it offers each combat isn’t the most exciting thing ever, but a 5-mana ¾ with flying and vigilance is a fine baseline. I think this is a C.
+
+23 - Salt Road Packbeast - B-
+
+Spending 4 on this will feel great – that’s a super efficient 2-for-1, and I don’t hate the idea of paying 5. Even 6 isn’t a disaster! And sometimes it’ll be way cheaper than 4. It works nicely with the token-generating clan mechanics too, so I think this has a pretty low floor and a pretty nice ceiling. I’m giving this a B-, it’s a good Common.
+
+24 - Smile at Death - D
+
+It’s pretty tough to even get full value out of one trigger from this, since you need to have two creatures with power two or less in your graveyard – and it’s also a 5-mana Enchantment that doesn’t do anything until your next turn. Between the mana cost and it being so slow, you probably need to get at least three creatures back from this before you’re getting your mana’s worth – and I’m very skeptical that this is something you’ll be able to set up consistently. I’m giving this a D.
+
+28 - Stormplain Detainment - C+
+
+Banishing Light-like effects are always very nice at the very least, and sometimes they’re great. While being Sorcery speed and three mana isn’t ideal, the flexibility to hit any nonland and exiling it helps make up for that. It’s always hard to tell whether this type of effect will merely be a nice removal spell, or a premium one – but because this set doesn’t have a massive Enchantment theme, I’m inclined to think it’s probably a C+ – and one of White’s best Commons.
+
+31 - Tempest Hawk - C-
+
+I usually like “collect ‘em all” cards, and if this searched up a copy of itself when you cast it, I’d think it was awesome – a three mana 2/2 flyer that draws you a card is pretty good! And this can definitely be that, but having to hit your opponent is substantially worse. Even when you play it on schedule it’s far from guaranteed to do what you need it to. This feels like it’s mostly a wind drake. I’m giving it a C-.
+
+32 - United Battlefront - F
+
+This just isn’t going to work well in Limited. Creatures and lands are the most common cards in your deck, and this can’t put them into play. You need a pretty high count of noncreature permanents with mana value 3 or less in your deck for this to consistently hit even one thing, much less two, and that’s just not how Limited decksa re constructed. I guess if you have like 5 Stormplain Detainments it could get interesting? Like, maybe it’s a buildaround - but it’s one that you won’t be able to make work often enough to really deserve such a grade, so this is probably just an F.
+
+33 - Voice of Victory - B-
+
+A two mana ⅓ that makes it so your opponent can’t cast spells during your turn is pretty mediocre. The effect matters a bit, but not enough to make it so that this ⅓ has a big impact on the game. The Mobilize trigger is definitely nice though. I mean, dropping this on two and then attacking on the next turn is going to feel great, and getting those two extra temporary bodies is always going to make this thing relevant as an attacker. I’m giving this a B-.
+
+Blue:
+
+
+35 - Aegis Sculptor - C
+
+A 4-mana ⅔ flyer with ward 2 is…not very good. Sure, your opponent will have a hard time efficiently killing it with removal, but will they really need to? Probably not, since it’s so understatted. So, it’s nice that this can grow to be sure – but it also feels like there are better ways to cash in cards in the graveyard for value in this format than on this thing. I’m giving it a C.
+
+36 - Agent of Kotis - C-
+
+These days, a two mana 2/1 is pretty miserable. Like, a D-. We just get more than that for two mana. And this…kind of delivers, by being capable of giving you some value out of the graveyard. It doesn’t exactly do it efficiently, but it does seem like you’ll often be able to get those counters in the late game, once you don’t have anything else to do with your mana. This is probably a C-.
+
+40 - Dirgur Island Dragon - C-
+
+6-mana for a 4/4 flyer with Ward 2 is…not a very good card. Sure it’s kind of hard to kill, but it’s still overcosted for the stat-line, and this format has plenty of sizable dragons at a similar mana value. It’s other mode is more appealing – since if you cast it as an Omen, it replaces itself and has a small effect – something Jeskai tends to like. But…we’re talking about a choice between two D-level cards, and I think that’s just enough to get it to a C-.
+
+51 - Marang River Regent - A
+
+A card that is only one side of this or the other would be a card you’re pretty happy with. Especially the creature side, as a 6-mana 6/7 that bounces two nonland permanents is going to really pull you ahead in almost all cases. But, it’s nice you can cast it as a solid card draw spell earlier in the game when you really need to. But yeah, the creature side is already a bomb – and it has additional upside. I’m giving this an A.
+
+53 - Ringing Strike Mastery - C
+
+This is a callback to a similar removal spell in original Tarkir block, and that card wasn’t especially good. Now…this is cheaper, both to cast and to untap the creature, and I do think that makes it a little better. One mana removal is just such a good deal – but the fact your opponent can start to ignore it in the late game does give it diminishing returns. I’m giving it a C.
+
+54 - Riverwalk Technique - C+
+
+I like this. The first mode is a card we see in every set these days, and it’s usually a C or a C+. It gives you a 1-for-1 trade, and being an instant opens the door to more. But this can also be the world’s worst negate, and if you happen to have mana up when using it that way matters, you’re definitely going to feel fine about firing that off, even if the first mode is the better one most of the time. I’m starting this at a C+.
+
+55 - Roiling Dragonstorm - C
+
+Two mana to draw two and discard one is pretty close to an acceptable card, and even if you just bounce this a single time, you’re going to be reasonably happy. I’m giving this a C.
+
+56 - Snowmelt Stag - D+
+
+This is kind of cool. It has an aggressive stat-line on your turn and a defensive one on your opponent’s, and in the extreme late game it can certainly close things out. Of course…I don’t love having a 4-mana card with 2 toughness half the time – it’s just way too vulnerable, and typically games don’t go so long that the Stag is going to be able to do that much late. This is probably just a D+.
+
+60 - Taigam, Master Opportunist - C+
+
+The effect here is cool but…I don’t think amazing. Basically, you get your second spell in a turn right away, but also 4 turns later. Because it gets removed from the stack and suspended, it doesn’t resolve – so it isn’t like you get the spell twice at the same time. You have to wait a while. And 4 turns is an eternity in Limited. So you have to actually trigger this – which is far from automatic – and then wait several turns to get the value. Now, when you do get that value it’ll feel great, but it’s slow enough that I’m skeptical that this is anything special in Limited. I’m giving this a C+.
+
+61 - Temur Devotee - C
+
+Defender is kind of a bummer, but it’s a decent defensive creature that can help you sort out your mana, and those things go together reasonably well. I’m giving this a C.
+
+63 - Ureni’s Rebuff - C
+
+Two mana to bounce a creature at Sorcery speed is a pretty mediocre card - like a D+ at best. It’s hard to get great tempo because it’s not an instant and a little more expensive than the effect usually is. But, the fact this does it again from the graveyard is certainly nice – and sometimes you’ll be able to do it at a pretty big discount. This is probably still just a C, though.
+
+67 - Winternight Stories - C
+
+Draw three discard two for three mana is pretty solid, and this can do it a second time from the graveyard. Now, it’s definitely true that sometimes you don’t want to discard a creature, in which case this is less impressive - but Blue has enough creatures who can do stuff from the graveyard that that’s less of a big deal. This is definitely a card that will help you outcard your opponent in longer games, and it’s cheap enough that it’s not a complete disaster to cast early, either. It is kind of clunky though, and when you really need a creature, it’s not the best card draw spell. I’m giving it a C.
+
+
+Black: 
+
+
+68 - Abzan Devotee - C
+
+This fixes your Abzan mana quite nicely and the fact it’s recursive can certainly come up in the late game. Like, sometimes you really need a body and you draw a land – but if you have one of these things hanging out, you can get it back. It also kind of means that it’s accessible fixing when you’re milling yourself. I’m giving this a C. 
+
+74 - Caustic Exhale - B
+
+Two mana for -3/-3 at instant speed is already premium removal – it makes it easy to trade up and has real 2-for-1 potential thanks to being an Instant. But this will cost only a single mana a decent chunk of the time, and when that’s true it’ll feel truly insane. I’m giving this a b. 
+
+75 - Corroding Dragonstorm - C
+
+I don’t completely hate just casting this once. The life drain makes up for it not adding to the board, and the Surveil will set you up nicely on future turns. I mean, that card’s probably a D+ or a C-, but that’s the baseline, and bouncing this at least once in a game seems very doable. I’m starting it at a C.
+
+76 - Cruel Truths - C
+
+This lets you see lots of cards and load the graveyard, both of which sound pretty appealing in a deck like Sultai, but you also usually can’t have a whole bunch of copies of a card like this, which doesn’t add to the board and can even endanger your life total at the same time! It’s just a C.
+
+78 - Desperate Measures - C-
+
+So the idea here is to use this on one of your Mobilize tokens, and that is pretty sweet. It’s nice that it has the added upside of killing an opposing X/1 or being a bad combat trick too. Still, you’re going to have many board states where this is useless, so it’s hard to go above a C.
+
+84 - Krumar Initiate - C+
+
+Man, this activated ability has some serious upside. Cranking out even a 1/1 every turn isn’t too bad, and going bigger with the token or making the initiate bigger is sweet too. It is true that the life you have to pay won’t always be safe, but I think this can generate enough tokens and counters to make it worth it – and the baseline is a two mana 2/2. I’m giving this a C+.
+
+86 - Qarsi Revenant - A-
+
+Vampire Nighthawk on steroids is pretty awesome. Even without renew this would be a very easy B, and maybe even a B+ – since it’s combination of keywords makes this into a very big threat. One that can trade for anything, is hard to block, and can gain you tons of life. So, throw in the fact that this can give those keywords to something else after it dies, and we’re really talking about a great card – that’s pretty darn close to a 2-for-1, since those keywords are such a massive upgrade. I’m giving this an A-.
+
+91 - The Sibsig Ceremony - F
+
+Yeah…this isn’t really going to work very well in Limited. First it’s triple black, and even in a format with good mana that’s a huge ask. After that, you have to hope that replacing your creatures with a 2/2 is worth the discount, but it won’t be most of the time. Like, you really need your creatures to be cheap and/or have enters or death triggers for that to be a deal worth making, and its’s tough to construct a Limited deck where you can achieve that. I think this is just an F.
+
+92 - Sidisi, Regent of the Mire - D
+
+It’s always really tough to line up this type of ability in Limited. Like, you need the right mana value, and the right card in your graveyard – and it just doesn’t happen where you can get all your ducks in a row very often. Sure, it’s a two mana ⅓ that will occasionally give you some upside, but I think even in a set with a graveyard theme that upside inaccessible enough for this to be a D. 
+
+96 - Unrooted Ancestor - C+
+
+This goes really well with Mobilize, because it gives you something to do with those tokens when a 1/1 isn’t particularly useful – a 3/2 that can become indestructible is far more likely to be useful, and with Flash in the mix you can even really ambush your opponent. The downside? There are one mana commons in the format that can kill this – including one that can ignore the indestructibility which we saw earlier in the video. Still, I think the upside is enough for a C+.
+
+97 - Venerated Stormsinger - C+
+
+Hill Giant stat-lines are ugly, but this card is nuts with Mobilize. There’s a decent chance you have some mobilize on the board when this comes down, in which case you’re likely to generate some significant value immediately, making up for the bad stat-line, and all that life drain helps off-set that problem too. I’m giving this a C+
+
+100 - Yathan Tombguard - C+
+
+Playing this on drawing a card with it that turn is going to be pretty doable, and if it sticks around it may give you a really significant card advantage. And the baseline of a three mana ⅔ with Menace is fine. I’m giving this a C+
+
+Red:
+
+
+105 - Dracogenesis - F
+
+Omniscience is an awful Limited card, and this is like a super restrictive Omniscience. Problem is, you just don’t have a stockpile of cards in your hand by the time you spend this much mana, and you’re going to be able to play every card you draw anyway. Things can get interesting with lots of card draw, but you just can’t do it in Limited. This is an F. 
+
+106 - Equilibrium Adept - B-
+
+I’m already going to play a 4-mana 2/4 that basically draws me a card – and that’s what this type of effect has essentially been, and that means it is a 2-for-1.  So, the fact it’ll have double strike sometimes – and it can of course enable double strike thanks to it’s own enters trigger – means that this is a B-.
+
+110 - Jeskai Devotee - C
+
+This whole cycle feels like solid C’s to me. They fix your mana reasonably well and have passable baselines. This one might even turn into a 3/3 out of nowhere, and the threat of activation has to be respected.
+
+111 - Magmatic Hellkite - B
+
+This is a pretty neat design for land destruction, especially in constructed! But in Limited it’s mostly a 4-mana ⅘ flyer that will occasionally destroy a dual or tri-land and keep your opponent off a land and maybe a color for a turn. But…that’s pretty good! I’m giving it a B.
+
+116 - Rescue Leopard - C-
+
+Dying to one mana removal is brutal on a three drop, but this does hit reasonably hard, and is likely to rummage from time to time. It even works with the graveyard mechanic. Still, it’s probably a C-.
+
+118 - Sarkhan, Dragon Ascendant - B+
+
+If you can behold a Dragon with Sarkhan, it’s going to feel pretty awesome – since a two mana 2/2 that makes a treasure is an incredible rate. That card is probably a B. And he even has some added dragon upside, since he’ll get buffed and smash in for damage in the air reasonably often when you have one enter. I think Red decks will have enough Dragons for you to access both parts of upside here, although certainly not all the time, but the baseline is acceptable – and I like that it pays you off for already having a Dragon and for playing future dragons.  I think Sarkhan is a B+
+
+119 - Seize Opportunity - C
+
+This is either Red divination or a combat trick, and I kind of like those being the two options. The combat trick mode is super situational, but when it’s good it’s real good, like when it lets you save a creature and do more damage, or better yet – it gives you a 2-for-1 by saving two creatures and killing opposing creatures. Meanwhile, if the game is in a state where that mode isn’t useful – which is reasonably often, well you just get to draw some cards, which is likely to help you in a big way on a board state where the combat trick mode isn’t that good.  I’m kind of tempted to give this a C+ here because I like the design so much, but it’s probably just a C.
+
+120 - Shock Brigade - C
+
+This’ll usually be able to get in when you play it on two, and if you can get in with that token as well it’s going to feel pretty good. But, it definitely gets less impressive the later the game gets. I’m giving it a C.
+
+123 -Stormscale Scion - C+
+
+There are dragons in this set for sure but most Red decks still aren’t going to have like…more than 3, so this 6-mana 4/4 flyer will not always be buffing something, so it’s still a very clunky creature. The ideal thing to do with it is play at least one spell before you cast it, because once you are paying 6 mana to get two 5/5s, we’re talking about an amazing deal. Keep in mind, Storm counts your opponents spells too – so if you go to combat and your opponent kills something with a removal spell, if you cast this in second main phase you’re still getting two drops. Still, to consistently get two dragons here, you probably need a healthy number of one drops – and I think you’ll still just get one Dragon often enough for this just be a C+.
+
+125 - Summit Intimidator - C
+
+This is a fun callback to summit prowler, a vanilla 4-mana 4/3 that was surprisingly solid in original Khans of Tarkir Limited. They added Reach and an Enters trigger here, and this is probably…solid in today’s Limited too. The enters trigger can be really good, but it can also be irrelevant – and the body isn’t anything special. It’s probably just a C.
+
+126 - Sunset Strikemaster - B-
+
+I’m already in on this card without the second ability. It’s a solid two drop and it ramps your mana quite effectively – so the fact it can turn into “Destroy target dragon” in the late game is definitely relevant, especially in this set. I’m giving it a B-. 
+
+129 - Underfoot Underdogs - C
+
+A three mana ½ that makes a 1/1 is decent, and means this makes good sacrifice fodder. It’s activated ability isn’t the most impressive thing – I can’t really think of a time where a card that had this ability actually felt good, but it’s upside on what is already a decent card. You can potentially to use it to keep a Mobilize token alive, like if you want to sacrifice it in your second main phase – and sometimes you have a small creature that can do some work when it gets in, but it’s a pretty mediocre ability overall. I think this is a C.
+
+
+Green: 
+
+
+135 - Attuned Hunter - C+
+
+This works nicely with two mechanics in the set that it overlaps into – Renew and Harmonize - so getting at least one counter on this is pretty doable, especially by the later stages of the game, and in the mean time it’s a solid creature all on it’s own. I’m giving this a C+.
+
+136 - Bloomvine Regent - B+
+
+I’m already on board with a 5-mana ⅘ flyer that gains 3 life when it enters. That’s probably a B – it is just such an efficient, real body, and the life gain gives you value no matter what. So, the fact it triggers off other dragons and can be Kodama’s Reach earlier in the game is no small thing. I think this is a B+. 
+
+138 - Craterhoof Behemoth - B-
+
+This is well-known as a super insane Magic card, but it’s not nearly as good in Limited as it is in other formats, mostly because getting down ahead of schedule is challenging – and because it asks you to have a built out board to be at it’s best. Now, to be fair, most of the time if you do cast this, it’s going to win you the game – but at 8 mana, you can’t really rely on consistently casting it – and it’s also super annoying that there are definitely situations where it doesn’t do enough to get you there. Now granted, they are few and far between, but if I’ms pending 8 mana, a card should win me the game from almost any position, and this doesn’t really get there. It’s just a B- in Limited.
+
+140 - Dragonbroods’ Relic - D+ / B-
+
+This offers since fixing and ramp. I mean, you don’t always have a creature you can tap down, but you’ll be able to use this a decent chunk of the time. And with the fixing in the format, especially in green, getting a huge creature token out of this in the late game is not a pipe dream – especially because the Relic can produce mana for it’s own ability! This probably needs a bit of a build around grade, but it looks like a legit 5-color build around for me, since the payoff is a token that can break the game wide open, and the baseline is a solid mana rock. I think this is probably a D+ in Green decks that aren’t really capable of producing all 5 colors, but a B- or even a B when you get there.
+
+141 - Dusyut Earthcarver - C+
+
+A 6-mana 4/4 with Reach that makes a 3/3 is a quality 6-drop – and while that’s usually where you want to go, since it gives you a 2-for-1, sometimes you just need one big body – in which case this is a 6-mana 7/7 with Reach. That modality is awesome, and makes this a quality 6 drop. I’m giving it a C+
+
+153 - Rite of Renewal - C
+
+Graveyard nonsense is alive and well in this format, and Rite of Renewal is going to be a card you’re happy to have one in your Green decks – and especially in Sultai, as it will give you the late-game value to win a game. That said, it’s definitely clunky, and you don’t ever want more than one. So it’s probably just a C.
+
+154 - Roamer’s Routine - C
+
+Three mana to grab a land and put it into play tapped doesn’t tend to be good in Limited. You don’t add to the board and the mana boost is often negligible. Harmonize definitely helps upgrade this thing, as it turns into a 2-for-1, albeit a clunky one that only adds lands to the board. But this definitely offers nice fixing in a format where that will undoubtedly matter. I’m starting it at a C.
+
+157 - Sagu Wildling - C
+
+This is a nice design. In the early game, it can grab you the land you need – and fixing is important in this format, and when you get it later you can slam a decent dragon on the board. And the stat-line is rough, don’t get me wrong – but it adds a body to the board and gains you life, and that’s often what green decks need to make it later in the game. It’s probably still just a C, but I think they did a nice job designing this into two very different cards that are solid at their respective time.
+
+158 - Sarkhan’s Resolve - C-
+
+Plummet is usually a little bit narrow to make the cut, but this is Plummet or an okay combat trick, so I imagine you’ll play it in your main deck if you’re in the market for a trick, as aggressive green decks often will be. I’m giving it a C-.
+
+160 - Sultai Devotee - C
+
+Mana filtering isn’t super exciting, but it certainly makes it easier for you to cast Sultai spells when that’s what you need – and this can trade for anything when it needs to. As with the other Devotees, sometimes these are even useful outside of the obvious three-color deck. I’m giving it a C. 
+
+161 - Surrak, Elusive Hunter - B+
+
+Surrak counts himself, so your opponent is very unlikely to ever be able to get anything but a 2-for-1 against him. And in the meantime, he’s got high power for the cost and can rumble pretty well. There are going to be times where your board is outmatched, in which case the card draw when your opponent removes stuff doesn’t matter – because your opponent doesn’t have to remove anything – so sometimes he can’t really get you there from far behind, but in most situations you’re going to feel great about casting this. I’m giving this a B+.
+
+165 - Undergrowth Leopard - C
+
+We pretty much saw this card in Thunder Junction, and it was a solid two drop. Feels fine attacking or blocking, and has some added utility in some games. It’s a C.
+
+
+
+Multicolored:
+
+167 - All-Out Assault -B+
+
+This buff + death touch is pretty nice, as it makes any creature you have in play a real pain – both as an attacker and a blocker. The extra combat phase is nice too – and having bigger death touch creatures is likely to help you take advantage of that phase a little more than that type of effect usually allows – after all, creatures are hitting harder and kill anything that blocks. Usually that kind of effect isn’t that great since you already need good attacks for it be worth it, but this buff is likely to move the needle in that direction. All that said, it still asks you to have a significant board state or it’s pretty mediocre – so I think I’m starting this at a B+.
+
+169 - Auroral Procession - C-
+
+An instant-speed Simic Regrowth doesn’t seem all that good in Limited. Sure, getting any card back is nice and flexible, but you’re also just spinning your wheels. This is a card that can be a nice support card for getting back your best cards, but when you’re not in those situations it feels pretty bad. I think it’s a C-. 
+
+170 - Awaken the Honored Dead - B
+
+Most of the value here comes from Chapter I, which can efficiently deal with a nonland, so it’s pretty great that you get some very real additional value out of this on subsequent turns. Milling three isn’t amazing, but you have a reasonable chance at taking advantage of it in Sultai – like with the Chapter III ability, which lets you get a creature or land back. I’m giving this a B.
+
+171 - Barrensteppe Siege - A-
+
+It’s great that both of these are end step triggers, so you do get something the turn this comes down. The modality is nice too, since they tend to be good in different situations. I mean, I think most of the time you’ll go with Abzan – but if your opponent only has one creature and you can turn this into a removal spell that is likely to trigger on future turns too, you’re going to go that route. That said, if you just have like one creature in play and didn’t lose anything the turn you play the Siege, it will certainly feel underwhelming. Still, both modes have a way of snowballing in a big way, and you get value the turn you play it, so I think this is an A-.
+
+172 - Betor, Kin to All - A
+
+Because this add 7 toughness to the board on it’s own, drawing a card the first turn you play it is very doable – in which case this is a 5-mana 5/7 with Flying that draws you a card up front, and I’m pretty sold on that. I wouldn’t count too much on unlocking the other two effects, but drawing a card is plenty for this to be a great value engine and win condition. It’s a bomb, I’m giving it an A.
+
+178 - Disruptive Stormbrood - B-
+
+The removal mode on this is what’s going to be the best, but when you have a target for the Dragon, it’s going to feel amazing. I think if this was just Petty Revenge, it would probably be a C+, since it can kill so much so efficiently, but it does have some limitations. And if it was just the stormrbood, it’d probably be a C-, since the format doesn’t have enough targets for it go wild. But I think both together is enough for this to be a B-. Having a choice is a big deal.
+
+179 - Dragonback Assault - A
+
+This is very strong. It can come down and wipe away everything small, and then start spitting out 4/4s. Basically it’s a sweeper and win condition all in one! The enters trigger isn’t always something you can make sure hurts you more than your opponent of course, but you can get away with it being sort of equal or even you being a little behind, since you’re the one who is going to generate 4/4 flyers. Even getting one of this looks really good, and it can do far better than that. I think this is a bomb. I’m giving it an A.
+
+182 - Eshki Dragonclaw -  B+
+
+That trigger is really great, but even in Temur it’s not going to be super easy to both cast a creature and a noncreature in a turn. It’s doable, don’t get me wrong – and if you trigger it only once you’re going to be really happy, but don’t count on doing with regularity either. Triggering it once is probably the ceiling in most games, although the extra card draw might help you pull it off again. It also starts with nice stats to begin with, and that whole package makes this a good card. I’m giving it a B+.
+
+183 - Fangkeeper’s Familiar - B+
+
+I’m a huge fan of Mystic Snake and similar cards, and this is like the best Mystic Snake ever in a lot of ways. Sure, it can’t counter any type of spell – but the fact it has two other modes makes up for that in a big way! If you leave up mana for this you’ll fire it off to counter a spell if you can – or destroy an Enchantment – but the fail-case here is that you gain 3 and surveil 3, which is pretty good. Sometimes you might also ambush something! 2-for-1s are very doable, and a 3-for-1 isn’t entirely off the table. I’m giving this a B+. 
+
+187 - Frostcliff Siege - B
+
+I don’t love that both of these buffs are really only good when you’re already ahead and have a decent board presence. I mean, it is true that this is going to upgrade your board one way or another, but I’d be happier with this if it had two effects that are good in different situations, instead of two that are good in the same situation. If you’re behind, this won’t do a ton – buf it’ll certainly be good if you’re at parity or ahead. I’m giving it a B.
+
+189 - Glacierwood Siege - D
+
+This Siege is pretty underwhelming. The Sultai part just doesn’t matter very much in Limited, even if you’re good at loading your graveyard, and the Temur side has the potential to mill your opponent out — but it’s narrow enough that I’m not really feeling that either. This kind of looks like a dud to me. I’m giving it a D.
+
+190 - Gurmag Nightwatch - C
+
+This is a nice way to add to the board while improving your next draw and loading up your graveyard for shenanigans. I do think you need to be spending three on this for it to feel worth playing, though – beyond that, we’re talking about an understated creature that doesn’t give you enough value to make up for it. I’m giving this a C.
+
+
+194 - Inevitable Defeat - B+
+
+4 mana to exile a nonland isn’t an amazing deal – buut draining 3 life on top of that is pretty amazing. It helps make up for the fact that it may take awhile for you to get the mana to cast this, and you might also be overpaying – and sometimes you’ll even get a good deal in terms of mana. This is great removal. I’m giving it a B+
+
+202 - Kotis, the Fangkeeper - B-
+
+Being indestructible is nice – but being this small isn’t. It’s not going to get in for combat damage on your opponent all that often since you aren’t playing it until turn 4 at the earliest in most cases. Obviously buffin this is where things get interesting, but mostly this just looks like a hard-to-kill 2/1, and that’s not exactly intimidating. I’m giving this a B-
+
+203 - Lie in Wait - B
+
+So, you do need a card in the graveyard to do this, but even if you just back like… a 2/2, and kill their 2/2 for three mana, you’re going to feel really happy about what just happened. And in Sultai you’re likely to have a well stocked enough graveyard to get back something more substantial that can kill more of your opponent’s creatures. This is going to be a very strong 2-for-1 that powers a lot of Sultai decks to victory. I’m giving it a B.
+
+207 - Marshal of the Lost - C+
+
+I love that this is just an attack trigger – not a “when this creature attacks” trigger. So, the turn this comes down you can give +1/+1 to something at a minimum. That said, I don’t like the Hill Giant stat-line, even when it comes with Deathtouch. Sure, it can trade for anything thanks to that keyword, but it isn’t like that’s a huge deal when you spent 4 mana on this thing. It does mean that if you can give it a big buff, double blocking this thing without getting 2-for-1’d is hard though. Still, I think this is a C+. 
+
+209 - Narset, Jeskai Waymaster - B-
+
+If this was a three mana ¾ that let you loot at your end step every turn it’d be a really good card – it’s not quite that, but there will be lots of turns where you do manage to loot with this, and sometimes you’ll loot more than once. This also increases your chances of casting spells on future turns. I’m giving this a B-.
+
+210 - Neriv, Heart of the Storm - B-
+
+This effect is pretty underwhelming in Limited. It only doubles the damage dealt by creatures that have entered that turn, so unless a creature has Haste and/or an “enters” trigger, it isn’t going to do anything. You’re still getting an efficient flyer, and the ability isn’t entirely useless, but this thing is probably just a B-. 
+
+211 - The New Way - D
+
+This has some impressive potential, but also seems way too reactive and conditional for Limited. There just aren’t always turns where this can do something – and I mean, letting a 2/2 through and paying 5 to do 2 to them and draw 2 isn’t exactly a good deal. The ceiling is high to be sure, but I think it’s a D since there are way too many awkward situations with it.
+
+212 - Perennation -C+
+
+It’s tough to make reanimation work in Limited, because you often can’t get something back that’s worth the mana. However, Perennation does a lot of stuff to make sure you don’t feel that way – as a hexproof and indestructibility counter makes whatever you reanimate into at least a relevant body on the board. I mean, even if you have to reanimate a 2/2 with it, it’s not a complete disaster – though it certainly isn’t good either.
+
+That said, as long as you do reanimate something that is even decent, this is going to feel really good, and sometimes it’ll be insane. It does still take set up that simply doesn’t always line up in Limited, though. I’m giving it a C+
+
+213 - Purging Stormbrood - C+
+
+The combat trick mode here is quite potent – the kind of trick that can not only let a creature win all kinds of combats while also gaining you life, but it can also blank removal. In the early game, you’ll be pretty happy to fire that side off. Then, later in the game, this gives you a pretty real body – one that might even make one of your opponent’s creatures substantially worse. This looks like two C-level cards stapled together, and I think that’s a C+.
+
+214 - Rakshasa’s Bargain - C+
+
+If you can always pay three mana for this, it’s a pretty sweet card draw/card selection spell – and it even loads the graveyard! It gets worse if you’re paying 4, but it still isn’t too shabby at that cost, and I think casting it for 3 or 4 will be the norm in this format. I’m giving it a C+.
+
+215 - Rediscover the Way - C+
+
+This is ultimately three mana to draw two cards and probably give one thing double strike for a turn – although that last part isn’t even in guaranteed. The card selection for the first two chapters is nice for sure, and I don’t imagine you’ll ever cut this from a Jeskai deck – but it’s also not really pulling you into the color, or even going to be a card you’re super excited about. And then there’s the fact that it doesn’t add to the board. I’m giving this a C+.
+
+216 - Reigning Victor - C
+
+Man, we’ve seen this “enters” trigger before and it is surprisingly underwhelming. I mean, it often gives you a free attack of sorts, but you can’t always take advantage. You need to be casting this for three consistently to really feel fine about playing it, but if you can, I think it’s a C.
+
+221 - Runescale Stormlord - C
+
+The Omen side is a super narrow counter spell, and the creature side is a kind of underwhelming – but serviceable creature. Obviously, you’ll fire off Chilling Screech early if you have to, but running this out as a creature is the option that you’ll be happier with more often. I’m giving this a C.
+
+223 - Shiko, Paragon of the Way - A
+
+This has really great stats that allow it to be relevant during every combat thanks to Vigilance – and most of the time you’ll get to cast a spell for free from your graveyard. It’s great that it’s not particularly picky about the type of the spell – so it’ll be pretty hard for you not to have something to cast when you play this, and that will give you a 2-for-1 up front and a creature that is a massive threat beyond that. This is a bomb, I’m giving it an A. 
+
+233 - Ureni, the Song Unending - A-
+
+8 mana is a lot but this gives you what you deserve for the cost. It’ll often come down and just wipe out everything relevant your opponent has – and you’re left with a 10/10 that is entirely immune to a bunch of removal and very hard to block. This is a legit win condition and one that makes it well worth ramping in to. Still, at 8 mana it’s hard to give this up a straight up A, though if the format is slow enough it very well could be. I’m starting it at an A-. 
+
+224 - Skirmish Rhino - B-
+
+This baby Siege Rhino is pretty sweet. Draining life is nice on an enters trigger – opening up a 4-point life difference right away and then getting a creature that is certainly relevant on pretty much any board is pretty good. Even with good mana you won’t always be able to drop this on three, though. I’m giving this a B-. 
+
+227 - Stalwart Successor - C
+
+A three mana 3/2 Menace is fine – I don’t love that there are a couple of one mana ways to take it down at lower rarity, but still. Augmenting token effects certainly matters in this format too, though I don’t love that sometimes this will just feel like a french vanilla. This probably doesn’t pull you into Black-Green in a big way, but it’ll usually make the cut. I’m giving it a C.
+
+228 - Temur Battlecrier - B 
+
+So on it’s own this decreases the cost of spells by one generic, which is pretty nice. It’s worth remembering, though, that this type of effect often has diminishing returns as the game goes on. Like, if you drop this on three that ability is likely to make a difference. But if you drop it on 7? Well, decreasing the mana of your spells isn’t that relevant. However, it is still a 4/3, and that certainly matters on most boards. I’m giving it a B.
+
+230 - Teval, Arbiter of Vritue - A-
+
+Delve is super strong, and this is a big flying lifelinker – and that lifelink fact really matters, since once Teval is in play, you start losing life for casting spells. Sometimes that’s going to be too big of a hurdle, but I think this will allow you to cast spells from your graveyard and gain you enough life for it to really turn a game in your favor most of the time. There will be the times where it kills you of course – kind of like The Speed Demon in the last set – but there will be more times where it wins you the game. I’m giving this an A-. 
+
+234 - Whirlwind Stormbrood - C+
+
+You’ll have turns where casting this as a Sorcery really lets you do something impressive – like when your opponent is tapped out and you have a creature that they just can’t block effective after the buff. And a 5-mana 4/3 flyer with Flash that can give Flash to other stuff is pretty nice too. It can ambush block sometimes, and setting up your other Dragons to do the same thing is pretty nice. I think this is a C+.
+
+237 - Zurgo, THunder’s Decree - B
+
+Well, this is sweet. Even if Zurgo didn’t prevent the Mobilize tokens from being sacrificed, he’d be pretty good – but making it so that ability makes permanent 1/1s is way, way better. I love that they made it so they only can’t be sacrificed in the end step too, because you can still sacrifice them for value. I’m giving Zurgo a B.
+
+Artifact:
+
+
+238 - Abzan Monument - C+
+
+Each of the Clans has one of these, and I think this might be the best of the bunch. Fixing your mana in the early game with it is great, and getting a body out of this later in the game is pretty awesome, especially because the ceiling on that body can be pretty high! I mean, it does mean that you don’t get anything if you don’t have a creature, but setting this up to make like a 4/4 doesn’t seem like a big ask. And that’s definitely a 2-for-1. I’m giving this a C+
+
+239 - Boulderbourn Dragon - D+
+
+This is kind of alright at 5 mana, and gives you a Common dragon for all the Behold stuff that works in any deck. But it’s still pretty understated and underwhelming on most boards. It’s probably a D+.
+
+242 - Embermouth Sentinel - C
+
+So, the two mana 2/1 artifact creature that puts a land on top is like a D-level card most of the time. It fixes your mana poorly and it has an understated body, so you play it when you’re really desperate for fixing and/or a two drop – but the Dragon upside here is legit. It turns into straight up ramp and a 2-for-1 when you have a Dragon. It’s a little sad that they didn’t make this have Behold, but if it did, it’d probably be pretty busted. Now…most dragons in the set are at least somewhat expensive, and by that time ramp might not be massively important – but it’s still some pretty real value to turn this into a 2/1 + rampant growth for 2. I think it’s a C.
+
+243 - Jade-Cast Sentinel - D-
+
+It’s pretty rare that the defensive artifact creature that lets you put cards from a graveyard on the bottom of a library is worth it. I mean sure, you can use it to disrupt an opposing graveyard or to keep yourself from milling out – and you can even choose what to draw every turn when your library is empty! But those things are irrelevant enough, and the ability is expensive enough, that you rarely find a time where any of that matters. And a 4-mana ⅕ with Reach doesn’t move the needle. I’m giving this a D-. 
+
+244 - Jeskai Monument - C+
+
+This fixes your mana in a big way, and getting two flyers out of it later is pretty nice. Each of those is usually worth about a card, so this is going to feel like a 3-for-1 sometimes. I’m giving this a C+. 
+
+245 - Mardu Monument - C
+
+This is great fixing in Mardu and those bodies it gives you late can really alter combat. I’m giving this a C. 
+
+
+246 - Mox Jasper - F
+
+Yeah, going down a card for a super conditional mana rock – even a free one – isn’t worth it in Limited. This will often do nothing, and by the time you have a dragon around you probably aren’t especially desperate for mana. It’s an F. 
+
+247 - Sultai Monument - C
+
+As with the other monuments, it fixes your mana well and then gives you an effect that adds to the board later. Hard not to want to play one of these. I’m giving it a C. 
+
+248 - Temur Monument - C
+
+This is pretty good at setting up your mana how you want it, and I like that you get a body that adds to the board out of it later in the game too. Really, this generates a 2-for-1, albeit one that takes awhile for you to access. Still, I feel like you’re going to play one of these when you can get one in all your Temur decks. I’m giving it a C. 
+
+249 - Watcher of the Wayside - C-
+
+I don’t hate this. It adds an okay body, gains you some life, and helps you load your graveyard. Now, you can choose to mill your opponent of course, but that’s not a great idea in this format, which features two graveyard mechanics and lots of other graveyard stuff. I’m giving this a C-.
+
+
+Land:
+
+252 - Cori Mountain Monastery - B
+
+Having a land that can basically draw you cards in the late game is pretty sweet. Sure, it costs 4, but when you have nothing else going on the fact that this land that gives you mana like all lands do early turns into a card advantage engine is pretty sweet. This is a land that can win you games of Limited when the game goes long, and there aren’t lots of lands that can make that claim. And this’ll even enter untapped a huge chunk of the time! I’m giving this a B.
+
+253 - Dalkovan Encampment - B-
+
+This basically lets you pay three mana for Mobilize 2, and that can certainly alter combat in a big way and/or give you some nice sacrifice fodder. This is another utility land that can really alter a game in your favor. I’m giving it a B-. 
+
+257 - Great Arashin City - B
+
+You won’t always have stuff in your graveyard, but by the part of the game when you’re wanting to use activated abilities on your lands, you probably have a few bodies in their that you’d love to turn into 1/1s. Churning them out at instant speed is great too. This just looks like a value engine, and it’s a freaking land! I’m giving it a B.
+
+259 - Kishla Village - C+
+
+Surveil isn’t quite as good as straight up drawing cards, or Mobilizing, or turning creatures in your graveyard into tokens, but it’s certainly nice value to have in the late game – you can use this to really improve your draws and even load the graveyard. I’m giving it a C+.
+
+260 - Maelstrom of the Spirit Dragon - C-
+
+Even in a set with a decent number of dragons, this is mostly going to produce colorless and mostly be a tax on your mana base. It is nice that you can cash it in to tutor up a dragon later in the game, but this still doesn’t look like a land you always want to play. It’s just such a big problem to have a land that is this limited when it comes to producing mana in Limited. I’m giving this a C-.
+
+261 - Mistrise Village - D+
+
+Well…this one really pales in comparison to the other 4 in Limited, which s kind of funny because in 60-card formats it might just be the best! But making stuff unable to be countered has negligible usefulness in Limited. It’ll probably come up like…one or two spells per draft, and you have to have this at the right time for that to matter. So mostly, this is an island with some downside and only very occasional upside. It’s probably a D+.
+
+263 - Triland Cycle - B-
+
+I’m going to value these pretty highly to start the format, as other times we’ve had trilands and formats built around three color combinations, they’ve been great. There are just so many reasons to play three colors in a set like this, and this offers the best fixing possible. I’m starting these at a B-.

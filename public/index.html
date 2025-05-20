@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perplexing Test - Tarkir Dragonstorm</title> <script src="https://cdn.tailwindcss.com"></script>
+    <title>Perplexing Test - Tarkir Dragonstorm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #1a202c; /* Dark slate background */
             color: #e2e8f0; /* Light slate text */
-            overscroll-behavior: none; 
+            overscroll-behavior: none;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,25 +30,25 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
             width: 100%;
             max-width: 28rem; /* max-w-md */
-            position: relative; /* For modal positioning context if needed */
-            overflow: hidden; /* To contain the modal if it overflows weirdly */
+            position: relative;
+            overflow: hidden;
         }
         .card-image-container {
-            width: 265px;
+            width: 265px; /* Standard Magic card aspect ratio for height 370px */
             height: 370px;
             background-color: #1f2937; /* Even darker for card placeholder bg */
-            border-radius: 12px;
+            border-radius: 12px; /* Rounded corners for the card image */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            margin-bottom: 0.5rem; 
+            overflow: hidden; /* Ensures image stays within rounded bounds */
+            margin-bottom: 0.5rem; /* Space below image before name */
         }
         .card-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Cover ensures the image fills the container, might crop */
         }
         
-        /* Slider Styles (from previous version, largely unchanged) */
+        /* Slider Styles */
         .grade-slider-container {
             display: flex;
             flex-direction: column;
@@ -57,11 +58,11 @@
             margin-bottom: 1.5rem; /* mb-6 */
         }
         #gradeSliderDisplay {
-            font-size: 1.5em; 
+            font-size: 1.5em; /* Larger text for the selected grade */
             font-weight: bold;
-            color: #60a5fa; /* sky-400 */
+            color: #60a5fa; /* sky-400 for visibility */
             margin-bottom: 10px;
-            min-height: 1.5em; 
+            min-height: 1.5em; /* Prevent layout shift */
             text-align: center;
         }
         input[type="range"] {
@@ -86,8 +87,8 @@
 
         /* Modal Styles */
         #resultModal {
-            position: fixed;
-            bottom: 0;
+            position: fixed; /* Fixed position to overlay content */
+            bottom: 0; /* Stick to the bottom */
             left: 0;
             right: 0;
             background-color: #374151; /* gray-700 - Modal background */
@@ -95,15 +96,16 @@
             border-top: 4px solid transparent; /* For feedback color */
             padding: 1.5rem; /* p-6 */
             box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-            transform: translateY(100%);
+            transform: translateY(100%); /* Start off-screen */
             transition: transform 0.3s ease-out;
             z-index: 1000;
             max-height: 70vh; /* Limit modal height */
             overflow-y: auto; /* Allow scrolling within modal if content is tall */
         }
         #resultModal.visible {
-            transform: translateY(0);
+            transform: translateY(0); /* Slide in */
         }
+        /* Feedback border colors for the modal */
         .modal-feedback-correct { border-top-color: #22c55e !important; } /* green-500 */
         .modal-feedback-close   { border-top-color: #f97316 !important; } /* orange-500 */
         .modal-feedback-off     { border-top-color: #ef4444 !important; } /* red-500 */
@@ -114,13 +116,13 @@
             margin-top: 0.25rem; /* mt-1 */
             text-align: left;
         }
-        .card-description {
+        .card-description { /* Nizzahon's comment will go here */
             font-size: 0.85em;
             color: #9ca3af; /* gray-400 */
             margin-top: 0.75rem; /* mt-3 */
             text-align: left;
             line-height: 1.4;
-            max-height: 120px; 
+            max-height: 120px; /* Limit height and allow scroll */
             overflow-y: auto;
             border-top: 1px solid #4b5563; /* gray-600 */
             padding-top: 0.75rem; /* pt-3 */
@@ -166,26 +168,26 @@
     <div id="resultModal"> 
         <div class="text-center"> 
             <p id="userGuessText" class="text-md font-medium"></p>
-            <p id="trueGradeText" class="text-lg font-bold"></p>
-            <p id="feedbackText" class="text-sm mb-3"></p>
+            <p id="trueGradeText" class="text-lg font-bold"></p> <p id="feedbackText" class="text-sm mb-3"></p>
         </div>
         <div id="cardDetailsContainer" class="mt-3 pt-3 border-t border-slate-600"> 
-            <p id="proRatingDisplay" class="card-details-text"></p>
-            <p id="aiRatingDisplay" class="card-details-text"></p>
-            <p id="cardDescription" class="card-description"></p>
-        </div>
+            <p id="proRatingDisplay" class="card-details-text hidden"></p> 
+            <p id="aiRatingDisplay" class="card-details-text hidden"></p>
+            <p id="gihWRDisplay" class="card-details-text"></p> <p id="cardDescription" class="card-description"></p> </div>
         <p class="tap-to-continue">Tap to continue</p>
     </div>
 
     <script src="card-data.js"></script> 
 
     <script>
+        // Grade scale definitions
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
-        const gradeValues = {};
+        const gradeValues = {}; // To map grades to numerical values for comparison
         grades.forEach((grade, index) => gradeValues[grade] = index);
-        const defaultGradeIndex = grades.indexOf("C");
+        const defaultGradeIndex = grades.indexOf("C"); // Default slider position
         const loadingCardPlaceholder = "https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora";
 
+        // DOM Element References
         const cardImageEl = document.getElementById('cardImage');
         const cardNameEl = document.getElementById('cardName');
         const gradeSliderEl = document.getElementById('gradeSlider');
@@ -197,14 +199,17 @@
         const feedbackTextEl = document.getElementById('feedbackText');
         const gradeInputAreaEl = document.getElementById('gradeInputArea');
 
-        const proRatingDisplayEl = document.getElementById('proRatingDisplay');
-        const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');
-        const cardDescriptionEl = document.getElementById('cardDescription');
+        // Card details elements in the modal
+        const proRatingDisplayEl = document.getElementById('proRatingDisplay'); // Will be hidden
+        const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');   // Will be hidden
+        const gihWRDisplayEl = document.getElementById('gihWRDisplay');       // New: For 17Lands GIH WR
+        const cardDescriptionEl = document.getElementById('cardDescription'); // For Nizzahon's comment
         const cardDetailsContainerEl = document.getElementById('cardDetailsContainer');
 
-        let currentCard = null;
-        let evaluatedCardIndices = [];
+        let currentCard = null; // Holds the currently displayed card object
+        let evaluatedCardIndices = []; // To track cards already shown in this session
         
+        // Updates the displayed grade as the slider moves
         function updateSliderGradeDisplay() {
             const sliderValue = parseInt(gradeSliderEl.value);
             if (sliderValue >= 0 && sliderValue < grades.length) {
@@ -212,23 +217,28 @@
             }
         }
 
+        // Loads a new random card into the display
         function loadRandomCard() {
             cardImageEl.src = loadingCardPlaceholder;
             cardNameEl.textContent = "Loading...";
-            resultModalEl.classList.remove('visible');
+            resultModalEl.classList.remove('visible'); // Hide modal if it was open
 
+            // Check if cardData is loaded (from card-data.js)
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
                 console.error("Card data not loaded or empty!");
                 cardNameEl.textContent = "Error: Card data missing.";
                 cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Data+Error&font=lora";
-                gradeInputAreaEl.classList.add('hidden'); 
+                gradeInputAreaEl.classList.add('hidden'); // Hide grading area if no data
                 return;
             }
 
+            // Reset evaluated list if all cards have been seen
             if (evaluatedCardIndices.length === cardData.length) {
                  evaluatedCardIndices = []; 
+                 // Optionally, notify user they've seen all cards and are restarting
             }
 
+            // Select a random card that hasn't been evaluated yet
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * cardData.length);
@@ -237,8 +247,9 @@
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
-            cardImageEl.onerror = function() {
-                this.onerror=null;
+            // Set card image and name
+            cardImageEl.onerror = function() { // Fallback for broken image links
+                this.onerror=null; // Prevent infinite loop if placeholder also fails
                 this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
                 console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
             };
@@ -246,21 +257,24 @@
             cardImageEl.alt = currentCard.name; 
             cardNameEl.textContent = currentCard.name; 
 
+            // Reset and show grading area
             gradeInputAreaEl.classList.remove('hidden'); 
             gradeSliderEl.disabled = false; 
             gradeSliderEl.value = defaultGradeIndex; 
             updateSliderGradeDisplay(); 
         }
 
+        // Handles the submission of a grade (when slider 'change' event fires)
         function handleSubmitGrade() {
-            if (!currentCard) return;
+            if (!currentCard) return; // Should not happen if card is loaded
 
             const userGradeIndex = parseInt(gradeSliderEl.value);
             const userGrade = grades[userGradeIndex];
-            const trueGrade = currentCard.trueGrade;
+            // trueGrade now comes from Nizzahon's data via cardData.js
+            const trueGrade = currentCard.trueGrade; 
 
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
-            trueGradeTextEl.textContent = `True Grade: ${trueGrade}`;
+            trueGradeTextEl.textContent = `True Grade (Nizzahon): ${trueGrade}`; // Indicate source
 
             const userGradeVal = gradeValues[userGrade];
             const trueGradeVal = gradeValues[trueGrade];
@@ -268,56 +282,78 @@
             let feedback = "";
             let feedbackBorderClass = ""; 
 
-            if (trueGrade === "N/A") {
-                feedback = "True grade for this card is not available.";
-                feedbackBorderClass = "border-slate-500"; 
+            // Determine feedback based on how close the user's guess is
+            if (trueGrade === "N/A" || typeof trueGradeVal === 'undefined') { // Handle cases where Nizzahon grade might be missing/invalid
+                feedback = "True grade for this card is not available or not in the scale.";
+                feedbackBorderClass = "border-slate-500"; // Neutral border
             } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackBorderClass = "modal-feedback-correct";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 1) {
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 1) { // Within one step
                 feedback = "Very close! Good eye!";
                 feedbackBorderClass = "modal-feedback-close";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) {
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { // Within two steps
                 feedback = "Getting there! A bit off.";
-                feedbackBorderClass = "modal-feedback-close";
+                feedbackBorderClass = "modal-feedback-close"; // Still using 'close' for up to 2 steps
             } else {
                 feedback = "Quite a bit off. Keep practicing!";
                 feedbackBorderClass = "modal-feedback-off";
             }
             feedbackTextEl.textContent = feedback;
 
-            proRatingDisplayEl.textContent = currentCard.proRatingDisplay || "";
-            aiRatingDisplayEl.textContent = currentCard.aiRatingDisplay || "";
-            cardDescriptionEl.textContent = currentCard.description || "";
+            // Populate card details in the modal
+            // Nizzahon's comment goes into cardDescriptionEl
+            cardDescriptionEl.textContent = currentCard.description || "Nizzahon's comment not available.";
+            // 17Lands GIH WR goes into gihWRDisplayEl
+            gihWRDisplayEl.textContent = currentCard.gihWR || "17Lands GIH WR: N/A";
 
-            proRatingDisplayEl.classList.toggle('hidden', !currentCard.proRatingDisplay);
-            aiRatingDisplayEl.classList.toggle('hidden', !currentCard.aiRatingDisplay);
+            // Hide the old pro/AI rating fields explicitly
+            proRatingDisplayEl.textContent = "";
+            proRatingDisplayEl.classList.add('hidden');
+            aiRatingDisplayEl.textContent = "";
+            aiRatingDisplayEl.classList.add('hidden');
+
+            // Show/hide details based on availability
+            gihWRDisplayEl.classList.toggle('hidden', !currentCard.gihWR);
             cardDescriptionEl.classList.toggle('hidden', !currentCard.description);
-            cardDetailsContainerEl.classList.toggle('hidden', !(currentCard.proRatingDisplay || currentCard.aiRatingDisplay || currentCard.description));
             
-            resultModalEl.className = ''; 
-            resultModalEl.classList.add(feedbackBorderClass);
+            // Determine if the details container itself should be visible
+            const hasDetailsToShow = currentCard.gihWR || currentCard.description;
+            cardDetailsContainerEl.classList.toggle('hidden', !hasDetailsToShow);
+            
+            // Show the result modal with appropriate feedback color
+            resultModalEl.className = ''; // Clear existing feedback classes
+            resultModalEl.classList.add(feedbackBorderClass); // Add new feedback border class
             resultModalEl.classList.add('visible'); 
 
+            // Hide grading area and disable slider until next card
             gradeInputAreaEl.classList.add('hidden'); 
             gradeSliderEl.disabled = true; 
         }
 
+        // Event listener for clicking the modal (to continue to the next card)
         resultModalEl.addEventListener('click', () => {
             resultModalEl.classList.remove('visible'); 
             loadRandomCard(); 
         });
 
-        gradeSliderEl.addEventListener('input', updateSliderGradeDisplay);
-        gradeSliderEl.addEventListener('change', handleSubmitGrade); 
+        // Event listeners for the grade slider
+        gradeSliderEl.addEventListener('input', updateSliderGradeDisplay); // Update display on drag
+        gradeSliderEl.addEventListener('change', handleSubmitGrade); // Submit on release
         
+        // Initial setup when the window loads
         window.onload = async () => {
+            // Initialize card data (this function is in card-data.js)
+            // It will now call initializeNizzahonAnd17LandsData based on SELECTED_DATA_SOURCE
             await initializeCardData(); 
+            
+            // Configure the slider
             gradeSliderEl.min = 0;
             gradeSliderEl.max = grades.length - 1;
             gradeSliderEl.value = defaultGradeIndex; 
-            updateSliderGradeDisplay(); 
-            loadRandomCard();
+            updateSliderGradeDisplay(); // Set initial display for slider
+
+            loadRandomCard(); // Load the first card
         };
     </script>
 </body>
