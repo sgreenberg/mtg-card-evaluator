@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Grade - Tarkir Dragonstorm</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Perplexing Test - Tarkir Dragonstorm</title> <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -138,9 +137,10 @@
 
     </style>
 </head>
-<body> <div class="app-container">
+<body> 
+    <div class="app-container">
         <header class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-sky-400">Guess the Grade</h1>
+            <h1 class="text-3xl font-bold text-sky-400">Perplexing Test</h1>
             <p class="text-slate-400">Tarkir Dragonstorm Edition</p>
         </header>
 
@@ -163,11 +163,14 @@
         </main>
     </div>
 
-    <div id="resultModal"> <div class="text-center"> <p id="userGuessText" class="text-md font-medium"></p>
+    <div id="resultModal"> 
+        <div class="text-center"> 
+            <p id="userGuessText" class="text-md font-medium"></p>
             <p id="trueGradeText" class="text-lg font-bold"></p>
             <p id="feedbackText" class="text-sm mb-3"></p>
         </div>
-        <div id="cardDetailsContainer" class="mt-3 pt-3 border-t border-slate-600"> <p id="proRatingDisplay" class="card-details-text"></p>
+        <div id="cardDetailsContainer" class="mt-3 pt-3 border-t border-slate-600"> 
+            <p id="proRatingDisplay" class="card-details-text"></p>
             <p id="aiRatingDisplay" class="card-details-text"></p>
             <p id="cardDescription" class="card-description"></p>
         </div>
@@ -181,14 +184,14 @@
         const gradeValues = {};
         grades.forEach((grade, index) => gradeValues[grade] = index);
         const defaultGradeIndex = grades.indexOf("C");
-        const loadingCardPlaceholder = "https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora"; // Darker placeholder
+        const loadingCardPlaceholder = "https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora";
 
         const cardImageEl = document.getElementById('cardImage');
         const cardNameEl = document.getElementById('cardName');
         const gradeSliderEl = document.getElementById('gradeSlider');
         const gradeSliderDisplayEl = document.getElementById('gradeSliderDisplay');
         
-        const resultModalEl = document.getElementById('resultModal'); // Renamed from resultAreaEl
+        const resultModalEl = document.getElementById('resultModal');
         const userGuessTextEl = document.getElementById('userGuessText');
         const trueGradeTextEl = document.getElementById('trueGradeText');
         const feedbackTextEl = document.getElementById('feedbackText');
@@ -210,11 +213,8 @@
         }
 
         function loadRandomCard() {
-            // 1. Set loading placeholder for image
             cardImageEl.src = loadingCardPlaceholder;
             cardNameEl.textContent = "Loading...";
-
-            // Hide modal if it was visible
             resultModalEl.classList.remove('visible');
 
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
@@ -242,9 +242,9 @@
                 this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
                 console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
             };
-            cardImageEl.src = currentCard.imageUrl; // This will trigger loading of the actual image
+            cardImageEl.src = currentCard.imageUrl; 
             cardImageEl.alt = currentCard.name; 
-            cardNameEl.textContent = currentCard.name; // Update name once currentCard is set
+            cardNameEl.textContent = currentCard.name; 
 
             gradeInputAreaEl.classList.remove('hidden'); 
             gradeSliderEl.disabled = false; 
@@ -266,12 +266,11 @@
             const trueGradeVal = gradeValues[trueGrade];
 
             let feedback = "";
-            let feedbackBorderClass = ""; // For border color
+            let feedbackBorderClass = ""; 
 
             if (trueGrade === "N/A") {
                 feedback = "True grade for this card is not available.";
-                // No specific border color, or a neutral one
-                feedbackBorderClass = "border-slate-500"; // Example neutral border
+                feedbackBorderClass = "border-slate-500"; 
             } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackBorderClass = "modal-feedback-correct";
@@ -287,36 +286,31 @@
             }
             feedbackTextEl.textContent = feedback;
 
-            // Populate card details
             proRatingDisplayEl.textContent = currentCard.proRatingDisplay || "";
             aiRatingDisplayEl.textContent = currentCard.aiRatingDisplay || "";
             cardDescriptionEl.textContent = currentCard.description || "";
 
-            // Show/hide detail elements based on content
             proRatingDisplayEl.classList.toggle('hidden', !currentCard.proRatingDisplay);
             aiRatingDisplayEl.classList.toggle('hidden', !currentCard.aiRatingDisplay);
             cardDescriptionEl.classList.toggle('hidden', !currentCard.description);
             cardDetailsContainerEl.classList.toggle('hidden', !(currentCard.proRatingDisplay || currentCard.aiRatingDisplay || currentCard.description));
             
-            // Apply feedback border to modal
-            resultModalEl.className = ''; // Clear existing feedback classes
+            resultModalEl.className = ''; 
             resultModalEl.classList.add(feedbackBorderClass);
-            resultModalEl.classList.add('visible'); // Show modal
+            resultModalEl.classList.add('visible'); 
 
             gradeInputAreaEl.classList.add('hidden'); 
             gradeSliderEl.disabled = true; 
         }
 
-        // Event listener for the modal to act as "Next Card"
         resultModalEl.addEventListener('click', () => {
-            resultModalEl.classList.remove('visible'); // Hide modal
-            loadRandomCard(); // Load next card
+            resultModalEl.classList.remove('visible'); 
+            loadRandomCard(); 
         });
 
         gradeSliderEl.addEventListener('input', updateSliderGradeDisplay);
         gradeSliderEl.addEventListener('change', handleSubmitGrade); 
-        // Next Card button is removed, so its event listener is also removed.
-
+        
         window.onload = async () => {
             await initializeCardData(); 
             gradeSliderEl.min = 0;
