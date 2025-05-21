@@ -4,7 +4,7 @@
 let cardData = [];
 
 // --- CONFIGURATION: Select your data source ---
-// The app is now configured to use Nizzahon and 17Lands data.
+// The app is now configured to use Nizzahon ratings, Aetherhub comments, and 17Lands data.
 const SELECTED_DATA_SOURCE = "NIZZAHON_AND_17LANDS"; 
 
 // --- Common Grade Scale ---
@@ -37,14 +37,13 @@ function parseCsvLine(line) {
 }
 
 // =================================================================================
-// --- NIZZAHON & 17LANDS (TSV, TXT, CSV Files) Specific Logic ---
+// --- NIZZAHON Ratings, AETHERHUB Comments & 17LANDS (TSV, TXT, CSV Files) Specific Logic ---
 // =================================================================================
 async function initializeNizzahonAnd17LandsData() {
-    console.log("Initializing card data from Nizzahon (ratings & comments) and 17Lands (GIH WR)...");
+    console.log("Initializing card data from Nizzahon ratings, Aetherhub comments, and 17Lands (GIH WR)...");
     // Ensure these paths are correct relative to your index.html
-    // If index.html is in the root, and data files are in 'assets/data/', these paths are correct.
     const nizzahonRatingsPath = './assets/data/nizzahon-ratings-TDM-2025-05-19.tsv';
-    const nizzahonCommentsPath = './assets/data/nizzahon-comments-TDM-2025-05-19.txt';
+    const aetherhubCommentsPath = './assets/data/aetherhub-comments-TDM-2025-05-20.txt'; // Updated path for comments
     const seventeenLandsPath = './assets/data/17lands-TDM-card-ratings-2025-05-17.csv';
 
     try {
@@ -60,9 +59,9 @@ async function initializeNizzahonAnd17LandsData() {
         if (nizzahonRatingLines.length > 0) {
             nizzahonRatingLines.forEach(line => {
                 const parts = line.split('\t');
-                if (parts.length >= 2) { // Ensure there are at least two columns
-                    const cardName = parts[0].trim(); // First column
-                    const grade = parts[1].trim();    // Second column
+                if (parts.length >= 2) { 
+                    const cardName = parts[0].trim(); 
+                    const grade = parts[1].trim();    
                     if (cardName && grade) {
                         nizzahonRatings[cardName] = grade;
                     }
@@ -73,38 +72,55 @@ async function initializeNizzahonAnd17LandsData() {
         }
         console.log(`Loaded ${Object.keys(nizzahonRatings).length} ratings from Nizzahon.`);
 
-        // 2. Fetch Nizzahon Comments (TXT)
-        const nizzahonCommentsResponse = await fetch(nizzahonCommentsPath);
-        if (!nizzahonCommentsResponse.ok) throw new Error(`HTTP error! status: ${nizzahonCommentsResponse.status} fetching ${nizzahonCommentsPath}`);
-        const nizzahonCommentsText = await nizzahonCommentsResponse.text();
-        const nizzahonComments = {}; // Store as { "Card Name": "Comment" }
-        const commentLines = nizzahonCommentsText.trim().split(/\r?\n/);
+        // 2. Fetch Aetherhub Comments (TXT)
+        const aetherhubCommentsResponse = await fetch(aetherhubCommentsPath);
+        if (!aetherhubCommentsResponse.ok) throw new Error(`HTTP error! status: ${aetherhubCommentsResponse.status} fetching ${aetherhubCommentsPath}`);
+        const aetherhubCommentsText = await aetherhubCommentsResponse.text();
+        const cardComments = {}; // Stores comments, now from Aetherhub
+        const commentFileLines = aetherhubCommentsText.trim().split(/\r?\n/);
+
         let currentCardNameForComment = null;
         let currentCommentLines = [];
-        // Regex to capture "Card Name" from lines like "1 - Ugin, Eye of the Storms - A"
-        const cardHeaderRegex = /^\s*\d+\s*-\s*(.*?)\s*-\s*([A-F][+-]?(?:\s*\(.*\))?)\s*$/;
-        const sectionHeaderRegex = /^(Colorless|White|Blue|Black|Red|Green|Multicolored|Artifact|Land):/i;
+        const aiRatingRegex = /^AI Rating:/i;
+        const proRatingRegex = /^Pro Rating:/i;
 
-        for (const line of commentLines) {
-            const headerMatch = line.match(cardHeaderRegex);
-            if (headerMatch) {
-                if (currentCardNameForComment && currentCommentLines.length > 0) {
-                    nizzahonComments[currentCardNameForComment] = currentCommentLines.join(' ').trim();
+        for (const line of commentFileLines) {
+            const trimmedLine = line.trim();
+            if (!currentCardNameForComment) { // Expecting a card name
+                if (trimmedLine !== "") {
+                    currentCardNameForComment = trimmedLine;
+                    currentCommentLines = []; // Reset for new card
                 }
-                currentCardNameForComment = headerMatch[1].trim(); 
-                currentCommentLines = []; 
-            } else if (currentCardNameForComment && line.trim() !== "" && !line.match(sectionHeaderRegex)) {
-                currentCommentLines.push(line.trim());
-            } else if (line.match(sectionHeaderRegex) && currentCardNameForComment && currentCommentLines.length > 0){
-                nizzahonComments[currentCardNameForComment] = currentCommentLines.join(' ').trim();
-                currentCardNameForComment = null; 
-                currentCommentLines = []; 
+            } else { // Already have a card name
+                if (trimmedLine === "") { // Empty line signifies end of entry for currentCardNameForComment
+                    if (currentCardNameForComment) { // Check if a card name was actually set
+                        if (currentCommentLines.length > 0) {
+                            cardComments[currentCardNameForComment] = currentCommentLines.join(' ').trim();
+                        } else {
+                            // Card name was found, but no actual comment lines (could be just name, or name + ratings then empty line)
+                            cardComments[currentCardNameForComment] = "No comment available for this card."; 
+                        }
+                    }
+                    currentCardNameForComment = null; // Reset to expect new card name
+                    currentCommentLines = []; // Clear lines for the next card
+                } else if (aiRatingRegex.test(trimmedLine) || proRatingRegex.test(trimmedLine)) {
+                    // This is a rating line, ignore it for comment text
+                    continue;
+                } else {
+                    // This is a comment line
+                    currentCommentLines.push(trimmedLine);
+                }
             }
         }
-        if (currentCardNameForComment && currentCommentLines.length > 0) {
-            nizzahonComments[currentCardNameForComment] = currentCommentLines.join(' ').trim();
+        // After loop, handle any pending comment for the last card in the file
+        if (currentCardNameForComment) { // Check if a card name was pending
+             if (currentCommentLines.length > 0) {
+                cardComments[currentCardNameForComment] = currentCommentLines.join(' ').trim();
+            } else {
+                cardComments[currentCardNameForComment] = "No comment available for this card.";
+            }
         }
-        console.log(`Loaded ${Object.keys(nizzahonComments).length} comments from Nizzahon.`);
+        console.log(`Loaded ${Object.keys(cardComments).length} comments from Aetherhub.`);
 
         // 3. Fetch 17Lands Data (CSV for GIH WR)
         const seventeenLandsResponse = await fetch(seventeenLandsPath);
@@ -137,14 +153,15 @@ async function initializeNizzahonAnd17LandsData() {
 
         // 4. Merge Data
         const mergedCardData = [];
-        for (const cardName in nizzahonRatings) {
+        for (const cardName in nizzahonRatings) { // Iterate based on Nizzahon's ratings list
             if (BASIC_LAND_NAMES.includes(cardName)) { 
                 console.log(`Skipping basic land: ${cardName}`);
                 continue;
             }
             if (Object.hasOwnProperty.call(nizzahonRatings, cardName)) {
                 const trueGrade = nizzahonRatings[cardName];
-                const description = nizzahonComments[cardName] || "No comment available for this card.";
+                // Use comments from Aetherhub (cardComments object)
+                const description = cardComments[cardName] || "Comment not found for this card."; 
                 const gihWRRaw = seventeenLandsData[cardName]; 
                 const gihWR = gihWRRaw ? `17Lands GIH WR: ${gihWRRaw}` : "17Lands GIH WR: N/A";
 
@@ -160,10 +177,10 @@ async function initializeNizzahonAnd17LandsData() {
             }
         }
         cardData = mergedCardData;
-        console.log(`Successfully processed ${cardData.length} cards using Nizzahon and 17Lands data.`);
+        console.log(`Successfully processed ${cardData.length} cards using Nizzahon ratings, Aetherhub comments, and 17Lands data.`);
 
     } catch (error) {
-        console.error("Failed to load/process Nizzahon/17Lands data:", error);
+        console.error("Failed to load/process data:", error);
         cardData = []; 
     }
 }
@@ -178,7 +195,6 @@ async function initializeCardData() {
     if (SELECTED_DATA_SOURCE === "NIZZAHON_AND_17LANDS") {
         await initializeNizzahonAnd17LandsData();
     } else {
-        // This case should ideally not be reached if SELECTED_DATA_SOURCE is always NIZZAHON_AND_17LANDS
         console.error("Invalid or unsupported data source selected in card-data.js:", SELECTED_DATA_SOURCE);
         cardData = [];
     }
