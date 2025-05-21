@@ -163,7 +163,7 @@ async function initializeNizzahonAnd17LandsData() {
                 // Use comments from Aetherhub (cardComments object)
                 const description = cardComments[cardName] || "Comment not found for this card."; 
                 const gihWRRaw = seventeenLandsData[cardName]; 
-                const gihWR = gihWRRaw ? `WinRate (Ever In Hand): ${gihWRRaw}` : "17Lands GIH WR: N/A";
+                const gihWR = gihWRRaw ? `Win Rate: ${gihWRRaw}` : "Win Rate: N/A";
 
                 mergedCardData.push({
                     name: cardName,
