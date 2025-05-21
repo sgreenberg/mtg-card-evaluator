@@ -274,7 +274,7 @@
             const trueGrade = currentCard.trueGrade; 
 
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
-            trueGradeTextEl.textContent = `True Grade (Nizzahon): ${trueGrade}`; // Indicate source
+            trueGradeTextEl.textContent = `True Grade: ${trueGrade}`; // Indicate source
 
             const userGradeVal = gradeValues[userGrade];
             const trueGradeVal = gradeValues[trueGrade];
@@ -289,10 +289,10 @@
             } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackBorderClass = "modal-feedback-correct";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 1) { // Within one step
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { // Within one step
                 feedback = "Very close! Good eye!";
                 feedbackBorderClass = "modal-feedback-close";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { // Within two steps
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 4) { // Within two steps
                 feedback = "Getting there! A bit off.";
                 feedbackBorderClass = "modal-feedback-close"; // Still using 'close' for up to 2 steps
             } else {
@@ -303,9 +303,9 @@
 
             // Populate card details in the modal
             // Nizzahon's comment goes into cardDescriptionEl
-            cardDescriptionEl.textContent = currentCard.description || "Nizzahon's comment not available.";
+            cardDescriptionEl.textContent = currentCard.description || "No comments available.";
             // 17Lands GIH WR goes into gihWRDisplayEl
-            gihWRDisplayEl.textContent = currentCard.gihWR || "17Lands GIH WR: N/A";
+            gihWRDisplayEl.textContent = currentCard.gihWR || "WinRate (Ever In Hand): N/A";
 
             // Hide the old pro/AI rating fields explicitly
             proRatingDisplayEl.textContent = "";
