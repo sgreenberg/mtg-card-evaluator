@@ -9,158 +9,165 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark slate background */
-            color: #e2e8f0; /* Light slate text */
+            background-color: #1a202c; 
+            color: #e2e8f0; 
             overscroll-behavior: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center content vertically */
+            justify-content: flex-start; 
             min-height: 100vh;
             padding: 1rem;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; 
         }
         h1 {
             font-family: 'Cinzel Decorative', serif;
         }
         .app-container {
-            background-color: #2d3748; /* Slightly lighter slate for app background */
-            padding: 1.5rem; /* p-6 */
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+            background-color: #2d3748; 
+            padding: 1.5rem; 
+            border-radius: 0.75rem; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
             width: 100%;
-            max-width: 28rem; /* max-w-md */
+            max-width: 28rem; 
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         .card-image-container {
-            width: 265px; /* Standard Magic card aspect ratio for height 370px */
+            width: 265px; 
             height: 370px;
-            background-color: #1f2937; /* Even darker for card placeholder bg */
-            border-radius: 12px; /* Rounded corners for the card image */
+            background-color: #1f2937; 
+            border-radius: 12px; 
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            overflow: hidden; /* Ensures image stays within rounded bounds */
-            margin-bottom: 0.5rem; /* Space below image before name */
+            overflow: hidden; 
+            margin-bottom: 0.5rem; 
+            align-self: center; 
         }
         .card-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover ensures the image fills the container, might crop */
+            object-fit: cover; 
         }
         
-        /* Slider Styles */
-        .grade-slider-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 10px 0;
-            margin-bottom: 1.5rem; /* mb-6 */
+        #gradeButtonsContainer {
+            display: grid; /* Changed to grid */
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            grid-template-rows: repeat(3, auto);    /* 3 rows, auto height */
+            gap: 0.5rem; 
+            margin-top: 1.5rem; 
+            padding: 0.5rem;
+            border-radius: 0.5rem; 
+            background-color: #374151; 
+            width: 100%; /* Ensure it takes the width of its parent */
         }
-        #gradeSliderDisplay {
-            font-size: 1.5em; /* Larger text for the selected grade */
-            font-weight: bold;
-            color: #60a5fa; /* sky-400 for visibility */
-            margin-bottom: 10px;
-            min-height: 1.5em; /* Prevent layout shift */
+
+        .grade-button {
+            padding: 0.5rem; /* Adjusted padding for grid */
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            color: #e5e7eb; 
+            background-color: #4b5563; 
+            border: none;
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
             text-align: center;
+            display: flex; /* For centering text */
+            align-items: center;
+            justify-content: center;
+            min-height: 40px; /* Minimum height for rows */
         }
-        input[type="range"] {
-            -webkit-appearance: none; appearance: none;
-            width: 90%; max-width: 300px; height: 12px;
-            background: #4b5563; /* gray-600 */
-            border-radius: 6px; outline: none; cursor: pointer;
+        .grade-button:hover {
+            background-color: #6b7280; 
         }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none;
-            width: 24px; height: 24px; background: #3b82f6; /* blue-500 */
-            border-radius: 50%; border: 2px solid #e5e7eb; /* gray-200 */
-            cursor: pointer; transition: background-color 0.2s ease;
+        .grade-button:active {
+            background-color: #3b82f6; 
+            transform: scale(0.95);
         }
-        input[type="range"]::-webkit-slider-thumb:hover { background: #2563eb; /* blue-600 */ }
-        input[type="range"]::-moz-range-thumb {
-            width: 20px; height: 20px; background: #3b82f6;
-            border-radius: 50%; border: 2px solid #e5e7eb;
-            cursor: pointer; transition: background-color 0.2s ease;
+
+        .grade-button-f { /* Special style for the F button */
+            grid-column: 1 / 2;  /* First column */
+            grid-row: 1 / 4;     /* Span all 3 rows */
+            height: 100%;        /* Fill the vertical space */
+            font-size: 1.2rem;   /* Make F a bit larger */
         }
-        input[type="range"]::-moz-range-thumb:hover { background: #2563eb; }
+
 
         /* Modal Styles */
         #resultModal {
-            position: fixed; /* Fixed position to overlay content */
-            bottom: 0; /* Stick to the bottom */
+            position: fixed; 
+            bottom: 0; 
             left: 0;
             right: 0;
-            background-color: #374151; /* gray-700 - Modal background */
-            color: #e5e7eb; /* gray-200 - Modal text */
-            border-top: 4px solid transparent; /* For feedback color */
-            padding: 1.5rem; /* p-6 */
+            background-color: #374151; 
+            color: #e5e7eb; 
+            border-top: 4px solid transparent; 
+            padding: 1.5rem; 
             box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
-            transform: translateY(100%); /* Start off-screen */
+            transform: translateY(100%); 
             transition: transform 0.3s ease-out;
             z-index: 1000;
-            max-height: 70vh; /* Limit modal height */
-            overflow-y: auto; /* Allow scrolling within modal if content is tall */
+            max-height: 70vh; 
+            overflow-y: auto; 
         }
         #resultModal.visible {
-            transform: translateY(0); /* Slide in */
+            transform: translateY(0); 
         }
-        /* Feedback border colors for the modal */
-        .modal-feedback-correct { border-top-color: #22c55e !important; } /* green-500 */
-        .modal-feedback-close   { border-top-color: #f97316 !important; } /* orange-500 */
-        .modal-feedback-off     { border-top-color: #ef4444 !important; } /* red-500 */
+        .modal-feedback-correct { border-top-color: #22c55e !important; } 
+        .modal-feedback-close   { border-top-color: #f97316 !important; } 
+        .modal-feedback-off     { border-top-color: #ef4444 !important; } 
         
         .card-details-text {
             font-size: 0.9em;
-            color: #d1d5db; /* gray-300 */
-            margin-top: 0.25rem; /* mt-1 */
+            color: #d1d5db; 
+            margin-top: 0.25rem; 
             text-align: left;
         }
-        .card-description { /* Nizzahon's comment will go here */
+        .card-description { 
             font-size: 0.85em;
-            color: #9ca3af; /* gray-400 */
-            margin-top: 0.75rem; /* mt-3 */
+            color: #9ca3af; 
+            margin-top: 0.75rem; 
             text-align: left;
             line-height: 1.4;
-            max-height: 120px; /* Limit height and allow scroll */
+            max-height: 120px; 
             overflow-y: auto;
-            border-top: 1px solid #4b5563; /* gray-600 */
-            padding-top: 0.75rem; /* pt-3 */
+            border-top: 1px solid #4b5563; 
+            padding-top: 0.75rem; 
         }
         .tap-to-continue {
             display: block;
             text-align: center;
             font-size: 0.8rem;
-            color: #60a5fa; /* sky-400 */
-            margin-top: 1rem; /* mt-4 */
-            padding-top: 0.5rem; /* pt-2 */
-            border-top: 1px solid #4b5563; /* gray-600 */
+            color: #60a5fa; 
+            margin-top: 1rem; 
+            padding-top: 0.5rem; 
+            border-top: 1px solid #4b5563; 
         }
 
     </style>
 </head>
 <body> 
     <div class="app-container">
-        <header class="text-center mb-6">
+        <header class="text-center mb-4"> 
             <h1 class="text-3xl font-bold text-sky-400">Perplexing Test</h1>
             <p class="text-slate-400">Tarkir Dragonstorm Edition</p>
         </header>
 
-        <main>
-            <div id="cardDisplay" class="mb-6 flex flex-col items-center">
+        <main class="flex-grow flex flex-col items-center w-full">
+            <div id="cardDisplay" class="mb-4 flex flex-col items-center"> 
                 <div class="card-image-container">
                     <img id="cardImage" 
                          src="https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora" 
                          alt="Magic Card" 
                          class="card-image">
                 </div>
-                <p id="cardName" class="text-xl font-semibold text-slate-200">Card Name</p>
+                <p id="cardName" class="text-xl font-semibold text-slate-200 mt-2">Card Name</p>
             </div>
 
-            <div id="gradeInputArea" class="mb-6 space-y-3 grade-slider-container">
-                <label for="gradeSlider" class="block text-sm font-medium text-slate-300 mb-2">Your Grade:</label>
-                <div id="gradeSliderDisplay" class="text-2xl font-bold text-sky-400 mb-2">C</div>
-                <input type="range" id="gradeSlider" min="0" max="12" step="1" value="5" class="w-full">
+            <div id="gradeButtonsContainer" class="w-full max-w-xs sm:max-w-sm md:max-w-md"> 
+                {/* Buttons will be dynamically inserted here by JavaScript */}
             </div>
         </main>
     </div>
@@ -181,64 +188,96 @@
 
     <script>
         // Grade scale definitions
-        const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"];
-        const gradeValues = {}; // To map grades to numerical values for comparison
+        const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"]; // Ensure this line is active
+        const gradeValues = {}; 
         grades.forEach((grade, index) => gradeValues[grade] = index);
-        const defaultGradeIndex = grades.indexOf("C"); // Default slider position
         const loadingCardPlaceholder = "https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora";
 
         // DOM Element References
         const cardImageEl = document.getElementById('cardImage');
         const cardNameEl = document.getElementById('cardName');
-        const gradeSliderEl = document.getElementById('gradeSlider');
-        const gradeSliderDisplayEl = document.getElementById('gradeSliderDisplay');
+        const gradeButtonsContainerEl = document.getElementById('gradeButtonsContainer');
         
         const resultModalEl = document.getElementById('resultModal');
         const userGuessTextEl = document.getElementById('userGuessText');
         const trueGradeTextEl = document.getElementById('trueGradeText');
         const feedbackTextEl = document.getElementById('feedbackText');
-        const gradeInputAreaEl = document.getElementById('gradeInputArea');
-
-        // Card details elements in the modal
-        const proRatingDisplayEl = document.getElementById('proRatingDisplay'); // Will be hidden
-        const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');   // Will be hidden
-        const gihWRDisplayEl = document.getElementById('gihWRDisplay');       // New: For 17Lands GIH WR
-        const cardDescriptionEl = document.getElementById('cardDescription'); // For Nizzahon's comment
+        
+        const proRatingDisplayEl = document.getElementById('proRatingDisplay'); 
+        const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');   
+        const gihWRDisplayEl = document.getElementById('gihWRDisplay');       
+        const cardDescriptionEl = document.getElementById('cardDescription'); 
         const cardDetailsContainerEl = document.getElementById('cardDetailsContainer');
 
-        let currentCard = null; // Holds the currently displayed card object
-        let evaluatedCardIndices = []; // To track cards already shown in this session
+        let currentCard = null; 
+        let evaluatedCardIndices = []; 
         
-        // Updates the displayed grade as the slider moves
-        function updateSliderGradeDisplay() {
-            const sliderValue = parseInt(gradeSliderEl.value);
-            if (sliderValue >= 0 && sliderValue < grades.length) {
-                gradeSliderDisplayEl.textContent = grades[sliderValue];
-            }
+        function createGradeButtons() {
+            gradeButtonsContainerEl.innerHTML = ''; // Clear any existing buttons
+
+            // Desired layout order:
+            // Col 1: F (spans 3 rows)
+            // Col 2: D+ (top), D (middle), D- (bottom)
+            // Col 3: C+ (top), C (middle), C- (bottom)
+            // Col 4: B+ (top), B (middle), B- (bottom)
+            // Col 5: A+ (top), A (middle), A- (bottom)
+
+            const gradeOrderForGrid = [
+                // Grades for columns 2-5, row by row
+                'D+', 'C+', 'B+', 'A+', // Top row (after F)
+                'D',  'C',  'B',  'A',  // Middle row (after F)
+                'D-', 'C-', 'B-', 'A-'  // Bottom row (after F)
+            ];
+
+            // Create and add the "F" button first
+            const fButton = document.createElement('button');
+            fButton.textContent = 'F';
+            fButton.classList.add('grade-button', 'grade-button-f');
+            fButton.addEventListener('click', () => {
+                if (!currentCard) return;
+                handleSubmitGrade('F');
+            });
+            gradeButtonsContainerEl.appendChild(fButton);
+
+            // Create and add the rest of the buttons in the specified order
+            gradeOrderForGrid.forEach(gradeKey => {
+                // Find the grade from the main `grades` array to ensure consistency if it's ever changed
+                const gradeText = grades.includes(gradeKey) ? gradeKey : '?'; // Fallback if key not in main grades array
+                if (gradeText === '?') {
+                    console.warn(`Grade key "${gradeKey}" not found in main grades array.`);
+                }
+
+                const button = document.createElement('button');
+                button.textContent = gradeText;
+                button.classList.add('grade-button');
+                button.addEventListener('click', () => {
+                    if (!currentCard) return; 
+                    handleSubmitGrade(gradeText);
+                });
+                gradeButtonsContainerEl.appendChild(button);
+            });
         }
 
-        // Loads a new random card into the display
+
         function loadRandomCard() {
             cardImageEl.src = loadingCardPlaceholder;
             cardNameEl.textContent = "Loading...";
-            resultModalEl.classList.remove('visible'); // Hide modal if it was open
+            resultModalEl.classList.remove('visible'); 
+            gradeButtonsContainerEl.classList.add('hidden'); 
 
-            // Check if cardData is loaded (from card-data.js)
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
                 console.error("Card data not loaded or empty!");
                 cardNameEl.textContent = "Error: Card data missing.";
                 cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Data+Error&font=lora";
-                gradeInputAreaEl.classList.add('hidden'); // Hide grading area if no data
                 return;
             }
+            
+            gradeButtonsContainerEl.classList.remove('hidden'); 
 
-            // Reset evaluated list if all cards have been seen
             if (evaluatedCardIndices.length === cardData.length) {
                  evaluatedCardIndices = []; 
-                 // Optionally, notify user they've seen all cards and are restarting
             }
 
-            // Select a random card that hasn't been evaluated yet
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * cardData.length);
@@ -247,113 +286,91 @@
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
-            // Set card image and name
-            cardImageEl.onerror = function() { // Fallback for broken image links
-                this.onerror=null; // Prevent infinite loop if placeholder also fails
+            cardImageEl.onerror = function() { 
+                this.onerror=null; 
                 this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
                 console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
             };
             cardImageEl.src = currentCard.imageUrl; 
             cardImageEl.alt = currentCard.name; 
             cardNameEl.textContent = currentCard.name; 
-
-            // Reset and show grading area
-            gradeInputAreaEl.classList.remove('hidden'); 
-            gradeSliderEl.disabled = false; 
-            gradeSliderEl.value = defaultGradeIndex; 
-            updateSliderGradeDisplay(); 
         }
 
-        // Handles the submission of a grade (when slider 'change' event fires)
-        function handleSubmitGrade() {
-            if (!currentCard) return; // Should not happen if card is loaded
+        function handleSubmitGrade(userGrade) { 
+            if (!currentCard) return; 
 
-            const userGradeIndex = parseInt(gradeSliderEl.value);
-            const userGrade = grades[userGradeIndex];
-            // trueGrade now comes from Nizzahon's data via cardData.js
             const trueGrade = currentCard.trueGrade; 
 
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
-            trueGradeTextEl.textContent = `True Grade: ${trueGrade}`; // Indicate source
+            trueGradeTextEl.textContent = `True Grade: ${trueGrade}`; 
 
             const userGradeVal = gradeValues[userGrade];
             const trueGradeVal = gradeValues[trueGrade];
-
             let feedback = "";
             let feedbackBorderClass = ""; 
 
-            // Determine feedback based on how close the user's guess is
-            if (trueGrade === "N/A" || typeof trueGradeVal === 'undefined') { // Handle cases where Nizzahon grade might be missing/invalid
+            if (trueGrade === "N/A" || typeof trueGradeVal === 'undefined') { 
                 feedback = "True grade for this card is not available or not in the scale.";
-                feedbackBorderClass = "border-slate-500"; // Neutral border
+                feedbackBorderClass = "border-slate-500"; 
             } else if (userGradeVal === trueGradeVal) {
                 feedback = "Spot on! Perfect evaluation!";
                 feedbackBorderClass = "modal-feedback-correct";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { // Within one step
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { 
                 feedback = "Very close! Good eye!";
                 feedbackBorderClass = "modal-feedback-close";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 4) { // Within two steps
+            } else if (Math.abs(userGradeVal - trueGradeVal) <= 4) { 
                 feedback = "Getting there! A bit off.";
-                feedbackBorderClass = "modal-feedback-close"; // Still using 'close' for up to 2 steps
+                feedbackBorderClass = "modal-feedback-close"; 
             } else {
                 feedback = "Quite a bit off. Keep practicing!";
                 feedbackBorderClass = "modal-feedback-off";
             }
             feedbackTextEl.textContent = feedback;
 
-            // Populate card details in the modal
-            // Nizzahon's comment goes into cardDescriptionEl
             cardDescriptionEl.textContent = currentCard.description || "No comments available.";
-            // 17Lands GIH WR goes into gihWRDisplayEl
             gihWRDisplayEl.textContent = currentCard.gihWR || "WinRate (Ever In Hand): N/A";
-
-            // Hide the old pro/AI rating fields explicitly
             proRatingDisplayEl.textContent = "";
             proRatingDisplayEl.classList.add('hidden');
             aiRatingDisplayEl.textContent = "";
             aiRatingDisplayEl.classList.add('hidden');
-
-            // Show/hide details based on availability
             gihWRDisplayEl.classList.toggle('hidden', !currentCard.gihWR);
             cardDescriptionEl.classList.toggle('hidden', !currentCard.description);
-            
-            // Determine if the details container itself should be visible
             const hasDetailsToShow = currentCard.gihWR || currentCard.description;
             cardDetailsContainerEl.classList.toggle('hidden', !hasDetailsToShow);
             
-            // Show the result modal with appropriate feedback color
-            resultModalEl.className = ''; // Clear existing feedback classes
-            resultModalEl.classList.add(feedbackBorderClass); // Add new feedback border class
+            resultModalEl.className = ''; 
+            resultModalEl.classList.add(feedbackBorderClass); 
             resultModalEl.classList.add('visible'); 
 
-            // Hide grading area and disable slider until next card
-            gradeInputAreaEl.classList.add('hidden'); 
-            gradeSliderEl.disabled = true; 
+            gradeButtonsContainerEl.classList.add('hidden'); 
         }
 
-        // Event listener for clicking the modal (to continue to the next card)
         resultModalEl.addEventListener('click', () => {
+            if (!resultModalEl.classList.contains('visible')) return; 
             resultModalEl.classList.remove('visible'); 
             loadRandomCard(); 
         });
-
-        // Event listeners for the grade slider
-        gradeSliderEl.addEventListener('input', updateSliderGradeDisplay); // Update display on drag
-        gradeSliderEl.addEventListener('change', handleSubmitGrade); // Submit on release
         
-        // Initial setup when the window loads
         window.onload = async () => {
-            // Initialize card data (this function is in card-data.js)
-            // It will now call initializeNizzahonAnd17LandsData based on SELECTED_DATA_SOURCE
-            await initializeCardData(); 
-            
-            // Configure the slider
-            gradeSliderEl.min = 0;
-            gradeSliderEl.max = grades.length - 1;
-            gradeSliderEl.value = defaultGradeIndex; 
-            updateSliderGradeDisplay(); // Set initial display for slider
+            if (typeof grades === 'undefined' || grades.length === 0) {
+                console.error("Grades array not defined or empty. Cannot create buttons.");
+                gradeButtonsContainerEl.textContent = "Error: Grade data missing for buttons."; // This would show if grades is not defined
+                gradeButtonsContainerEl.classList.remove('hidden');
+                return;
+            }
+            createGradeButtons(); 
 
-            loadRandomCard(); // Load the first card
+            if (typeof initializeCardData === 'function') {
+                await initializeCardData(); 
+            } else {
+                console.error("initializeCardData function not found. Ensure card-data.js is loaded correctly.");
+                cardNameEl.textContent = "Error: Script loading issue.";
+                cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Script+Error&font=lora";
+                gradeButtonsContainerEl.classList.add('hidden');
+                return;
+            }
+            
+            loadRandomCard(); 
         };
     </script>
 </body>
