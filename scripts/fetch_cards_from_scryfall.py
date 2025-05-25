@@ -181,7 +181,7 @@ def main():
         os.makedirs(output_dir, exist_ok=True)
 
 
-    output_filename = os.path.join(output_dir, f"{set_code.lower()}_cards.csv")
+    output_filename = os.path.join(output_dir, f"scryfall_export_{set_code.lower()}.csv")
 
     print(f"\nWriting data for {len(cards)} cards to '{output_filename}'...")
 
