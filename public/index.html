@@ -20,7 +20,7 @@
             padding: 1rem;
             overflow-x: hidden; 
         }
-        h1 {
+        h1 { 
             font-family: 'Cinzel Decorative', serif;
         }
         .app-container {
@@ -31,18 +31,16 @@
             width: 100%;
             max-width: 28rem; 
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
         .card-image-container {
-            width: 265px; 
-            height: 370px;
+            width: 300px; 
+            height: 419px; 
             background-color: #1f2937; 
             border-radius: 12px; 
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             overflow: hidden; 
-            margin-bottom: 0.5rem; 
             align-self: center; 
         }
         .card-image {
@@ -94,7 +92,6 @@
             font-size: 1.2rem;   
         }
 
-        /* Modal Styles */
         #resultModal {
             position: fixed; 
             bottom: 0; 
@@ -103,12 +100,12 @@
             background-color: #374151; 
             color: #e5e7eb; 
             border-top: 4px solid transparent; 
-            padding: 1rem; /* Reduced padding slightly */
+            padding: 1rem;
             box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06);
             transform: translateY(100%); 
             transition: transform 0.3s ease-out;
-            z-index: 1000;
-            max-height: 45vh; /* Reduced max-height */
+            z-index: 1000; 
+            max-height: 45vh; 
             overflow-y: auto; 
         }
         #resultModal.visible {
@@ -127,70 +124,217 @@
         .card-description { 
             font-size: 0.85em;
             color: #9ca3af; 
-            margin-top: 0.5rem; /* Reduced margin */
+            margin-top: 0.5rem; 
             text-align: left;
             line-height: 1.4;
-            max-height: 100px; /* Adjusted max-height for description */
+            max-height: 100px; 
             overflow-y: auto;
             border-top: 1px solid #4b5563; 
-            padding-top: 0.5rem; /* Reduced padding */
+            padding-top: 0.5rem; 
         }
-        /* Removed .tap-to-continue styles as the element is removed */
+
+        .hamburger-menu-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1101; 
+        }
+        .hamburger-menu-button span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background-color: #38bdf8; 
+            margin-bottom: 5px;
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-menu-button span:last-child {
+            margin-bottom: 0;
+        }
+
+        #slideOutMenu {
+            position: fixed;
+            top: 0;
+            right: -300px; 
+            width: 280px;
+            height: 100%;
+            background-color: #1f2937; 
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            padding: 2rem 1rem;
+            transition: right 0.3s ease-in-out;
+            z-index: 1100; 
+            display: flex;
+            flex-direction: column;
+        }
+        #slideOutMenu.open {
+            right: 0; 
+        }
+        #slideOutMenu ul { list-style: none; padding: 0; margin: 0; }
+        #slideOutMenu li a {
+            display: block; padding: 1rem 0.5rem; color: #e2e8f0;
+            text-decoration: none; font-size: 1.1rem;
+            border-bottom: 1px solid #2d3748; transition: background-color 0.2s ease;
+        }
+        #slideOutMenu li a:hover { background-color: #2d3748; }
+
+        .popup-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(26, 32, 44, 0.95); 
+            display: none; align-items: center; justify-content: center;
+            z-index: 1200; padding: 1rem; box-sizing: border-box;
+        }
+        .popup-modal.visible { display: flex; }
+        .popup-modal-content {
+            background-color: #2d3748; padding: 2rem; border-radius: 0.75rem;
+            color: #e2e8f0; width: 90%; max-width: 500px; height: 80vh; 
+            display: flex; flex-direction: column; justify-content: space-between;
+            text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .popup-modal-content h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem; /* Matched to text-2xl */
+            font-weight: 700; /* Matched to font-bold */
+            color: #38bdf8; /* Matched to text-sky-400 */
+            margin-bottom: 1.5rem;
+        }
+        .popup-modal-content .popup-text-content {
+            flex-grow: 1; overflow-y: auto; font-size: 1rem; line-height: 1.6;
+        }
+        .popup-modal-content .cancel-link {
+            display: inline-block; margin-top: 1.5rem; color: #9ca3af; 
+            text-decoration: none; font-size: 0.9rem; padding: 0.5rem 1rem;
+            border: 1px solid #4b5563; border-radius: 0.375rem;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .popup-modal-content .cancel-link:hover { background-color: #4b5563; color: #e5e7eb; }
 
     </style>
 </head>
 <body> 
     <div class="app-container">
-        <header class="text-center mb-4"> 
-            <h1 class="text-3xl font-bold text-sky-400">Perplexing Test</h1>
-            <p class="text-slate-400">Tarkir Dragonstorm Edition</p>
+        <header class="flex items-center w-full py-2 mb-4"> 
+            <div class="flex-grow text-center pr-4"> 
+                <h1 class="text-2xl font-bold text-sky-400">Perplexing Test</h1> 
+            </div>
+            <button id="hamburgerBtn" class="hamburger-menu-button p-2 flex-shrink-0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </header>
-
+        
         <main class="flex-grow flex flex-col items-center w-full">
             <div id="cardDisplay" class="mb-4 flex flex-col items-center"> 
                 <div class="card-image-container">
                     <img id="cardImage" 
-                         src="https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora" 
+                         src="https://placehold.co/300x419/1f2937/e2e8f0?text=Loading+Card...&font=lora" 
                          alt="Magic Card" 
                          class="card-image">
                 </div>
-                <p id="cardName" class="text-xl font-semibold text-slate-200 mt-2">Card Name</p>
             </div>
 
             <div id="gradeButtonsContainer" class="w-full max-w-xs sm:max-w-sm md:max-w-md"> 
-                </div>
+            </div>
         </main>
     </div>
 
     <div id="resultModal"> 
-        <div class="text-center mb-2"> <p id="userGuessText" class="text-md font-medium"></p>
+        <div class="text-center mb-2">
+            <p id="userGuessText" class="text-md font-medium"></p>
             <p id="trueGradeText" class="text-lg font-bold"></p> 
-            </div>
-        <div id="cardDetailsContainer" class="mt-2 pt-2 border-t border-slate-600"> <p id="proRatingDisplay" class="card-details-text hidden"></p> 
+        </div>
+        <div id="cardDetailsContainer" class="mt-2 pt-2 border-t border-slate-600"> 
+            <p id="proRatingDisplay" class="card-details-text hidden"></p> 
             <p id="aiRatingDisplay" class="card-details-text hidden"></p>
             <p id="gihWRDisplay" class="card-details-text"></p> 
             <p id="cardDescription" class="card-description"></p> 
         </div>
+    </div>
+
+    <div id="slideOutMenu">
+        <ul>
+            <li><a href="#" id="menuNewGame">Start a New Game</a></li>
+            <li><a href="#" id="menuResults">Results</a></li>
+            <li><a href="#" id="menuHowToPlay">How to Play</a></li>
+            <li><a href="#" id="menuAbout">About</a></li>
+        </ul>
+    </div>
+
+    <div id="newGameModal" class="popup-modal">
+        <div class="popup-modal-content">
+            <div>
+                <h2>Start a New Game</h2>
+                <div class="popup-text-content">
+                    <p>Are you sure you want to start a new game? This will reset your current session.</p>
+                </div>
+            </div>
+            <div>
+                 <a href="#" class="cancel-link mr-2" data-action="confirm-new-game">Start Game</a> 
+                 <a href="#" class="cancel-link" data-action="close-modal" data-modal-id="newGameModal">Cancel</a>
+            </div>
         </div>
+    </div>
+
+    <div id="resultsModalPopup" class="popup-modal">
+        <div class="popup-modal-content">
+             <div>
+                <h2>Results</h2>
+                <div class="popup-text-content">
+                    <p>Your game results will be shown here once implemented.</p>
+                </div>
+            </div>
+            <a href="#" class="cancel-link" data-action="close-modal" data-modal-id="resultsModalPopup">Cancel</a>
+        </div>
+    </div>
+
+    <div id="howToPlayModal" class="popup-modal">
+        <div class="popup-modal-content">
+            <div>
+                <h2>How to Play</h2>
+                <div class="popup-text-content">
+                    <p>Welcome to the Perplexing Test!</p>
+                    <p>1. A Magic: The Gathering card will be displayed.</p>
+                    <p>2. Evaluate its strength for limited play (draft/sealed).</p>
+                    <p>3. Select a grade (F to A+) using the buttons below the card.</p>
+                    <p>4. Your guess will be compared against an expert rating.</p>
+                    <p>5. Review the card's details, win rate, and commentary.</p>
+                    <p>Click anywhere on the screen to advance to the next card after seeing the results.</p>
+                    <p>Use the menu for options like starting a new game.</p>
+                </div>
+            </div>
+            <a href="#" class="cancel-link" data-action="close-modal" data-modal-id="howToPlayModal">Cancel</a>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="popup-modal">
+        <div class="popup-modal-content">
+            <div>
+                <h2>About</h2>
+                <div class="popup-text-content">
+                    <p><strong>Perplexing Test - Tarkir Dragonstorm Edition</strong></p>
+                    <p>This application is designed to help Magic: The Gathering players practice and improve their card evaluation skills for limited formats (like Draft and Sealed).</p>
+                    <p>Hone your "vibe check" instincts and get ready for your next event!</p>
+                    <p><em>Card data and ratings are for a custom Tarkir Dragonstorm set.</em></p>
+                </div>
+            </div>
+            <a href="#" class="cancel-link" data-action="close-modal" data-modal-id="aboutModal">Cancel</a>
+        </div>
+    </div>
 
     <script src="card-data.js"></script> 
 
     <script>
-        // Grade scale definitions
         const grades = ["F", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+"]; 
         const gradeValues = {}; 
         grades.forEach((grade, index) => gradeValues[grade] = index);
-        const loadingCardPlaceholder = "https://placehold.co/265x370/1f2937/e2e8f0?text=Loading+Card...&font=lora";
+        const loadingCardPlaceholderBase = "https://placehold.co/{width}x{height}/1f2937/e2e8f0?text=Loading+Card...&font=lora";
 
-        // DOM Element References
         const cardImageEl = document.getElementById('cardImage');
-        const cardNameEl = document.getElementById('cardName');
         const gradeButtonsContainerEl = document.getElementById('gradeButtonsContainer');
         
-        const resultModalEl = document.getElementById('resultModal');
+        const resultModalEl = document.getElementById('resultModal'); 
         const userGuessTextEl = document.getElementById('userGuessText');
         const trueGradeTextEl = document.getElementById('trueGradeText');
-        // const feedbackTextEl = document.getElementById('feedbackText'); // Removed
         
         const proRatingDisplayEl = document.getElementById('proRatingDisplay'); 
         const aiRatingDisplayEl = document.getElementById('aiRatingDisplay');   
@@ -198,155 +342,188 @@
         const cardDescriptionEl = document.getElementById('cardDescription'); 
         const cardDetailsContainerEl = document.getElementById('cardDetailsContainer');
 
+        const hamburgerBtnEl = document.getElementById('hamburgerBtn');
+        const slideOutMenuEl = document.getElementById('slideOutMenu');
+        
+        const menuNewGameLink = document.getElementById('menuNewGame');
+        const menuResultsLink = document.getElementById('menuResults');
+        const menuHowToPlayLink = document.getElementById('menuHowToPlay');
+        const menuAboutLink = document.getElementById('menuAbout');
+
+        const newGameModalEl = document.getElementById('newGameModal');
+        const resultsModalPopupEl = document.getElementById('resultsModalPopup');
+        const howToPlayModalEl = document.getElementById('howToPlayModal');
+        const aboutModalEl = document.getElementById('aboutModal');
+        
+        const allPopupModals = document.querySelectorAll('.popup-modal');
+        
         let currentCard = null; 
         let evaluatedCardIndices = []; 
         
         function createGradeButtons() {
             gradeButtonsContainerEl.innerHTML = ''; 
-
-            const gradeOrderForGrid = [
-                'D+', 'C+', 'B+', 'A+', 
-                'D',  'C',  'B',  'A',  
-                'D-', 'C-', 'B-', 'A-'  
-            ];
-
+            const gradeOrderForGrid = ['D+', 'C+', 'B+', 'A+', 'D',  'C',  'B',  'A', 'D-', 'C-', 'B-', 'A-'];
             const fButton = document.createElement('button');
             fButton.textContent = 'F';
             fButton.classList.add('grade-button', 'grade-button-f');
-            fButton.addEventListener('click', () => {
-                if (!currentCard) return;
-                handleSubmitGrade('F');
-            });
+            fButton.addEventListener('click', () => { if (!currentCard) return; handleSubmitGrade('F'); });
             gradeButtonsContainerEl.appendChild(fButton);
-
             gradeOrderForGrid.forEach(gradeKey => {
-                const gradeText = grades.includes(gradeKey) ? gradeKey : '?'; 
-                if (gradeText === '?') {
-                    console.warn(`Grade key "${gradeKey}" not found in main grades array.`);
-                }
-
                 const button = document.createElement('button');
-                button.textContent = gradeText;
+                button.textContent = gradeKey;
                 button.classList.add('grade-button');
-                button.addEventListener('click', () => {
-                    if (!currentCard) return; 
-                    handleSubmitGrade(gradeText);
-                });
+                button.addEventListener('click', () => { if (!currentCard) return; handleSubmitGrade(gradeKey); });
                 gradeButtonsContainerEl.appendChild(button);
             });
         }
 
+        function getLoadingCardPlaceholder() {
+            const w = 300; 
+            const h = 419;
+            return loadingCardPlaceholderBase.replace("{width}", w).replace("{height}", h);
+        }
+
         function loadRandomCard() {
-            cardImageEl.src = loadingCardPlaceholder;
-            cardNameEl.textContent = "Loading...";
+            cardImageEl.src = getLoadingCardPlaceholder();
             resultModalEl.classList.remove('visible'); 
-            gradeButtonsContainerEl.classList.add('hidden'); 
+            gradeButtonsContainerEl.classList.remove('hidden'); 
 
             if (typeof cardData === 'undefined' || !Array.isArray(cardData) || cardData.length === 0) {
                 console.error("Card data not loaded or empty!");
-                cardNameEl.textContent = "Error: Card data missing.";
-                cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Data+Error&font=lora";
+                cardImageEl.src = `https://placehold.co/300x419/FF0000/FFFFFF?text=Data+Error&font=lora`;
+                gradeButtonsContainerEl.classList.add('hidden');
                 return;
             }
             
-            gradeButtonsContainerEl.classList.remove('hidden'); 
-
-            if (evaluatedCardIndices.length === cardData.length) {
+            if (evaluatedCardIndices.length === cardData.length && cardData.length > 0) {
                  evaluatedCardIndices = []; 
+                 console.log("All cards seen, reshuffling.");
             }
 
             let randomIndex;
+            let attempts = 0; 
             do {
                 randomIndex = Math.floor(Math.random() * cardData.length);
-            } while (evaluatedCardIndices.includes(randomIndex) && cardData.length > evaluatedCardIndices.length);
+                attempts++;
+            } while (evaluatedCardIndices.includes(randomIndex) && cardData.length > evaluatedCardIndices.length && attempts < cardData.length * 2);
             
             currentCard = cardData[randomIndex];
             evaluatedCardIndices.push(randomIndex);
 
             cardImageEl.onerror = function() { 
                 this.onerror=null; 
-                this.src='https://placehold.co/265x370/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora';
+                this.src=`https://placehold.co/300x419/7F8C8D/FFFFFF?text=Image+Not+Found&font=lora`;
                 console.warn(`Failed to load image for: ${currentCard.name} from ${currentCard.imageUrl}. Using placeholder.`);
             };
             cardImageEl.src = currentCard.imageUrl; 
             cardImageEl.alt = currentCard.name; 
-            cardNameEl.textContent = currentCard.name; 
+
+            resultModalEl.classList.remove('visible');
+            gradeButtonsContainerEl.classList.remove('hidden');
+            allPopupModals.forEach(modal => modal.classList.remove('visible'));
+            slideOutMenuEl.classList.remove('open');
         }
 
         function handleSubmitGrade(userGrade) { 
             if (!currentCard) return; 
-
             const trueGrade = currentCard.trueGrade; 
-
             userGuessTextEl.textContent = `Your Guess: ${userGrade}`;
             trueGradeTextEl.textContent = `True Grade: ${trueGrade}`; 
-
             const userGradeVal = gradeValues[userGrade];
             const trueGradeVal = gradeValues[trueGrade];
-            // Feedback text logic removed
-            let feedbackBorderClass = ""; 
+            let feedbackBorderClass = "border-slate-500"; 
 
-            if (trueGrade === "N/A" || typeof trueGradeVal === 'undefined') { 
-                feedbackBorderClass = "border-slate-500"; 
-            } else if (userGradeVal === trueGradeVal) {
-                feedbackBorderClass = "modal-feedback-correct";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 2) { 
-                feedbackBorderClass = "modal-feedback-close";
-            } else if (Math.abs(userGradeVal - trueGradeVal) <= 4) { 
-                feedbackBorderClass = "modal-feedback-close"; 
-            } else {
-                feedbackBorderClass = "modal-feedback-off";
+            if (trueGrade !== "N/A" && typeof trueGradeVal !== 'undefined') {
+                if (userGradeVal === trueGradeVal) feedbackBorderClass = "modal-feedback-correct";
+                else if (Math.abs(userGradeVal - trueGradeVal) <= 2) feedbackBorderClass = "modal-feedback-close";
+                else if (Math.abs(userGradeVal - trueGradeVal) <= 4) feedbackBorderClass = "modal-feedback-close";
+                else feedbackBorderClass = "modal-feedback-off";
             }
-            // feedbackTextEl.textContent = feedback; // Removed
-
+            
             cardDescriptionEl.textContent = currentCard.description || "No comments available.";
             gihWRDisplayEl.textContent = currentCard.gihWR || "Win Rate: N/A";
-            proRatingDisplayEl.textContent = "";
-            proRatingDisplayEl.classList.add('hidden');
-            aiRatingDisplayEl.textContent = "";
+            proRatingDisplayEl.classList.add('hidden'); 
             aiRatingDisplayEl.classList.add('hidden');
-            gihWRDisplayEl.classList.toggle('hidden', !currentCard.gihWR);
-            cardDescriptionEl.classList.toggle('hidden', !currentCard.description);
-            const hasDetailsToShow = currentCard.gihWR || currentCard.description;
+            gihWRDisplayEl.classList.toggle('hidden', !currentCard.gihWR || currentCard.gihWR === "Win Rate: N/A");
+            cardDescriptionEl.classList.toggle('hidden', !currentCard.description || currentCard.description.includes("No comment available") || currentCard.description.includes("Comment not found"));
+            const hasDetailsToShow = (gihWRDisplayEl.textContent !== "Win Rate: N/A" && !gihWRDisplayEl.classList.contains('hidden')) || 
+                                   (cardDescriptionEl.textContent !== "No comments available." && !cardDescriptionEl.classList.contains('hidden'));
             cardDetailsContainerEl.classList.toggle('hidden', !hasDetailsToShow);
             
             resultModalEl.className = ''; 
-            resultModalEl.classList.add(feedbackBorderClass); 
-            resultModalEl.classList.add('visible'); 
-
+            resultModalEl.classList.add(feedbackBorderClass, 'visible'); 
             gradeButtonsContainerEl.classList.add('hidden'); 
         }
 
-        // Event listener for clicking anywhere to advance when modal is visible
         function handleAdvanceScreen(event) {
-            if (resultModalEl.classList.contains('visible')) {
-                // If the modal is visible, any click will advance.
+            if (resultModalEl.classList.contains('visible') && !event.target.closest('a, button')) {
                 resultModalEl.classList.remove('visible');
                 loadRandomCard();
             }
         }
-        // Add this listener to the document body
-        document.body.addEventListener('click', handleAdvanceScreen, true); // Use capture phase
-        
-        window.onload = async () => {
-            if (typeof grades === 'undefined' || grades.length === 0) {
-                console.error("Grades array not defined or empty. Cannot create buttons.");
-                gradeButtonsContainerEl.textContent = "Error: Grade data missing for buttons."; 
-                gradeButtonsContainerEl.classList.remove('hidden');
-                return;
-            }
-            createGradeButtons(); 
+        document.body.addEventListener('click', handleAdvanceScreen, true); 
 
+        hamburgerBtnEl.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            slideOutMenuEl.classList.toggle('open');
+            allPopupModals.forEach(modal => modal.classList.remove('visible')); 
+        });
+
+        document.addEventListener('click', (e) => {
+            if (slideOutMenuEl.classList.contains('open') && !slideOutMenuEl.contains(e.target) && e.target !== hamburgerBtnEl && !hamburgerBtnEl.contains(e.target)) {
+                slideOutMenuEl.classList.remove('open');
+            }
+        });
+        
+        function openPopupModal(modalElement) {
+            allPopupModals.forEach(m => m.classList.remove('visible')); 
+            if (modalElement) {
+                modalElement.classList.add('visible');
+                slideOutMenuEl.classList.remove('open'); 
+            }
+        }
+        
+        menuNewGameLink.addEventListener('click', (e) => { e.preventDefault(); openPopupModal(newGameModalEl); });
+        menuResultsLink.addEventListener('click', (e) => { e.preventDefault(); openPopupModal(resultsModalPopupEl); });
+        menuHowToPlayLink.addEventListener('click', (e) => { e.preventDefault(); openPopupModal(howToPlayModalEl); });
+        menuAboutLink.addEventListener('click', (e) => { e.preventDefault(); openPopupModal(aboutModalEl); });
+
+        allPopupModals.forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) { this.classList.remove('visible'); }
+                const targetLink = e.target.closest('.cancel-link');
+                if (targetLink) {
+                    e.preventDefault();
+                    const action = targetLink.dataset.action;
+                    const modalIdToClose = targetLink.dataset.modalId;
+                    if (action === 'confirm-new-game') {
+                        this.classList.remove('visible');
+                        evaluatedCardIndices = []; 
+                        loadRandomCard(); 
+                    } else if (action === 'close-modal' && modalIdToClose) {
+                        document.getElementById(modalIdToClose).classList.remove('visible');
+                    } else if (action === 'close-modal') { 
+                        this.classList.remove('visible');
+                    }
+                }
+            });
+        });
+
+        window.onload = async () => {
+            const initialPlaceholder = document.getElementById('cardImage');
+            if (initialPlaceholder) {
+                initialPlaceholder.src = getLoadingCardPlaceholder();
+            }
+
+            createGradeButtons(); 
             if (typeof initializeCardData === 'function') {
                 await initializeCardData(); 
             } else {
-                console.error("initializeCardData function not found. Ensure card-data.js is loaded correctly.");
-                cardNameEl.textContent = "Error: Script loading issue.";
-                cardImageEl.src = "https://placehold.co/265x370/FF0000/FFFFFF?text=Script+Error&font=lora";
-                gradeButtonsContainerEl.classList.add('hidden');
+                console.error("initializeCardData function not found.");
+                if (cardImageEl) cardImageEl.src = `https://placehold.co/300x419/FF0000/FFFFFF?text=Script+Error&font=lora`;
+                if (gradeButtonsContainerEl) gradeButtonsContainerEl.classList.add('hidden');
                 return;
             }
-            
             loadRandomCard(); 
         };
     </script>
