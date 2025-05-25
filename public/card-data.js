@@ -74,7 +74,7 @@ function convertProRatingToGrade(ratingString) {
 // =================================================================================
 async function initializeTdmCsvData() {
     console.log("Initializing card data from tdm_data.csv...");
-    const tdmDataPath = './assets/data/tdm_data.csv';
+    const tdmDataPath = './assets/data/tdm/tdm_data.csv';
 
     try {
         const response = await fetch(tdmDataPath);
