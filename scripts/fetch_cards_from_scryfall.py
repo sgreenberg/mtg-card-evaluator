@@ -2,7 +2,7 @@ import requests
 import csv
 import time
 import sys
-import os # Added for path manipulation and directory creation
+import os
 
 # Scryfall API base URL
 SCRYFALL_API_BASE_URL = "https://api.scryfall.com"
@@ -44,26 +44,26 @@ def fetch_cards_for_set(set_code):
 
             if e.response.status_code == 404:
                 if error_details.get("code") == "no_set" or "No set found for" in error_details.get("details", ""):
-                    print(f"\nError: The set code '{set_code.upper()}' was not found on Scryfall.")
+                    print(f"Error: The set code '{set_code.upper()}' was not found on Scryfall.")
                     print(f"Details: {error_details.get('details', 'Please check the set code and try again.')}")
                 elif error_details.get("code") == "bad_request" and "must contain at least 2 characters" in error_details.get("details", ""):
-                     print(f"\nError: The set code '{set_code}' is too short. Please use a valid set code.")
+                     print(f"Error: The set code '{set_code}' is too short. Please use a valid set code.")
                 else:
-                    print(f"\nError: API request failed with status {e.response.status_code} (Not Found).")
+                    print(f"Error: API request failed with status {e.response.status_code} (Not Found).")
                     print(f"URL: {next_page_url}")
                     print(f"Scryfall details: {error_details.get('details', 'Ensure the set code is correct.')}")
             else:
-                print(f"\nAn HTTP error occurred: {e}")
+                print(f"An HTTP error occurred: {e}")
                 print(f"URL: {next_page_url}")
                 if error_details:
                     print(f"Scryfall error details: {error_details}")
             return None
         except requests.exceptions.RequestException as e:
-            print(f"\nA network error occurred: {e}")
+            print(f"A network error occurred: {e}")
             print(f"URL: {next_page_url}")
             return None
         except ValueError as e:
-            print(f"\nError decoding JSON response from Scryfall: {e}")
+            print(f"Error decoding JSON response from Scryfall: {e}")
             print(f"Response text: {response.text if response else 'No response object'}")
             return None
 
@@ -126,22 +126,22 @@ def main():
         print("No set code entered. Exiting.")
         sys.exit(1)
     
-    if len(set_code) < 2:
-        print(f"The entered set code '{set_code}' is too short. Please enter a valid set code.")
+    if len(set_code) < 2: # Scryfall usually uses 3-letter codes, but some are longer (e.g., "pip"). A minimum of 2 seems a safe generic check.
+        print(f"The entered set code '{set_code}' seems too short. Please enter a valid set code.")
         sys.exit(1)
 
-    print(f"\nAttempting to fetch cards for set code: '{set_code.upper()}'...")
+    print(f"Attempting to fetch cards for set code: '{set_code.upper()}'...")
     cards = fetch_cards_for_set(set_code)
 
     if cards is None:
-        print("\nFailed to retrieve card data due to an API or network error.")
+        print("Failed to retrieve card data due to an API or network error.")
         sys.exit(1)
     
     if not cards:
-        print(f"\nNo cards were found for set '{set_code.upper()}'.")
+        print(f"No cards were found for set '{set_code.upper()}'.")
         sys.exit(0)
 
-    print(f"\nFetched a total of {len(cards)} cards for set '{set_code.upper()}'.")
+    print(f"Fetched a total of {len(cards)} cards for set '{set_code.upper()}'.")
 
     # (1) Filter out basic lands
     original_card_count = len(cards)
@@ -159,39 +159,42 @@ def main():
         print("The CSV file will not be created as there is no data to write.")
         sys.exit(0)
 
-    # (2) Define and create the output directory relative to the script's location
+    # (2) Define and create the output directory structure
+    set_specific_output_dir = "" # Initialize for use in error messages if path creation fails early
     try:
-        # Get the directory where the script itself is located
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        # Construct the target directory path: script_dir / ../public/assets/data
-        relative_target_dir = os.path.join("..", "public", "assets", "data")
-        # Create an absolute path for the output directory
-        output_dir = os.path.abspath(os.path.join(script_dir, relative_target_dir))
+        base_data_dir_relative = os.path.join("..", "public", "assets", "data")
+        base_data_dir_absolute = os.path.abspath(os.path.join(script_dir, base_data_dir_relative))
+        
+        # Create the set-specific subdirectory
+        set_specific_output_dir = os.path.join(base_data_dir_absolute, set_code.lower())
 
-        print(f"Output directory will be: {output_dir}")
-        os.makedirs(output_dir, exist_ok=True) # Create directory if it doesn't exist
+        print(f"Output directory will be: {set_specific_output_dir}")
+        os.makedirs(set_specific_output_dir, exist_ok=True)
     except OSError as e:
-        print(f"\nError creating output directory '{output_dir}': {e}")
+        print(f"Error creating output directory '{set_specific_output_dir}': {e}")
         sys.exit(1)
-    except Exception as e: # Catch other potential errors like __file__ not being defined in some contexts
-        print(f"\nError determining script path or creating output directory: {e}")
-        # Fallback to current working directory if script path is problematic
-        print("Defaulting to saving in current working directory's 'output_data' folder.")
-        output_dir = os.path.join(os.getcwd(), "output_data", "scryfall_exports") # A fallback path
-        os.makedirs(output_dir, exist_ok=True)
+    except Exception as e:
+        print(f"Error determining script path or creating output directory: {e}")
+        print("Defaulting to saving in current working directory's 'output_data/SET_CODE' folder.")
+        set_specific_output_dir = os.path.join(os.getcwd(), "output_data", set_code.lower())
+        try:
+            os.makedirs(set_specific_output_dir, exist_ok=True)
+        except OSError as fallback_e:
+            print(f"Error creating fallback output directory '{set_specific_output_dir}': {fallback_e}")
+            sys.exit(1)
 
+    output_filename = os.path.join(set_specific_output_dir, f"scryfall_export_{set_code.lower()}.csv")
 
-    output_filename = os.path.join(output_dir, f"scryfall_export_{set_code.lower()}.csv")
-
-    print(f"\nWriting data for {len(cards)} cards to '{output_filename}'...")
+    print(f"Writing data for {len(cards)} cards to '{output_filename}'...")
 
     try:
         write_cards_to_csv(cards, output_filename)
-        print(f"\nSuccessfully wrote card data to '{output_filename}'.")
+        print(f"Successfully wrote card data to '{output_filename}'.")
     except IOError as e:
-        print(f"\nError writing to file '{output_filename}': {e}")
+        print(f"Error writing to file '{output_filename}': {e}")
     except Exception as e:
-        print(f"\nAn unexpected error occurred during CSV writing: {e}")
+        print(f"An unexpected error occurred during CSV writing: {e}")
 
 if __name__ == "__main__":
     main()
