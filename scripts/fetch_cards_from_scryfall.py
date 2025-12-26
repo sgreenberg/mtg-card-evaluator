@@ -85,13 +85,14 @@ def fetch_cards_for_set(set_code):
 
 def write_cards_to_csv(cards_data, filename):
     """
-    Writes extracted card data (name, rarity, color identity) to a CSV file.
+    Writes extracted card data to a CSV file.
+    Includes: Name, Rarity, Color Identity, Mana Cost, Type Line, Card Text.
 
     Args:
         cards_data (list): A list of card objects (dictionaries) from Scryfall.
         filename (str): The name of the CSV file to write to.
     """
-    fieldnames = ['Name', 'Rarity', 'Color Identity']
+    fieldnames = ['Name', 'Rarity', 'Color Identity', 'Mana Cost', 'Type Line', 'Card Text']
     
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -101,16 +102,40 @@ def write_cards_to_csv(cards_data, filename):
         for card in cards_data:
             card_name = card.get('name', 'N/A')
             rarity = card.get('rarity', 'N/A').capitalize()
+            
             color_identity_list = card.get('color_identity', [])
             if color_identity_list:
                 color_identity_str = "".join(sorted(color_identity_list))
             else:
                 color_identity_str = "Colorless"
             
+            # Handle Mana Cost
+            mana_cost = card.get('mana_cost', '')
+            if not mana_cost and 'card_faces' in card:
+                # For dual-faced cards, mana cost might be on the faces
+                costs = [face.get('mana_cost', '') for face in card['card_faces'] if 'mana_cost' in face]
+                mana_cost = " // ".join(costs)
+
+            # Handle Type Line
+            type_line = card.get('type_line', '')
+            
+            # Handle Oracle Text (Card Text)
+            oracle_text = card.get('oracle_text', '')
+            if not oracle_text and 'card_faces' in card:
+                 # For dual-faced cards, text is on the faces
+                 texts = [face.get('oracle_text', '') for face in card['card_faces']]
+                 oracle_text = " // ".join(texts)
+            
+            # Clean up newlines in text fields for cleaner CSVs (optional but recommended)
+            oracle_text = oracle_text.replace('\n', ' ')
+
             writer.writerow({
                 'Name': card_name,
                 'Rarity': rarity,
-                'Color Identity': color_identity_str
+                'Color Identity': color_identity_str,
+                'Mana Cost': mana_cost,
+                'Type Line': type_line,
+                'Card Text': oracle_text
             })
             processed_count += 1
         print(f"Successfully prepared and wrote {processed_count} cards to the CSV.")
